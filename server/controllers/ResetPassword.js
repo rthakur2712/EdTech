@@ -23,7 +23,7 @@ exports.resetPasswordToken = async (req, res) => {
       });
     }
     // generate token
-    const token = crypty.randomUUID();
+    const token = crypto.randomUUID();
     // update user by adding token and expiry time
     const updatedDetails = await User.findOneAndUpdate(
       { email: email },
@@ -52,54 +52,58 @@ exports.resetPasswordToken = async (req, res) => {
   }
 };
 // reset password
-exports.resetPassword=async(req,res)=>{
-    try{
-        // data fetch 
-        const {token,password,confirmPassword}=req.body;
-        // validation
-        if(!token || !password || !confirmPassword){
-            return res.status(400).json({
-                success:false,
-                message:"Please fill all the fields"
-            })
-        }
-        // check user credentials from db using token
-        const user = await User.findOne({token:token});
-        // check user
-        if(!user){
-            return res.status(400).json({
-                success:false,
-                message:"Invalid token"
-            })
-        }
-        // check expiry time
-        if(user.resetPasswordExpires<Date.now()){
-            return res.status(400).json({
-                success:false,
-                message:"Token expired"
-            })
-        }
-        // check password and confirm password
-        if(password!==confirmPassword){
-            return res.status(400).json({
-                success:false,
-                message:"Password and confirm password does not match"
-            })
-        }
-        // hash password
-        const hashedPassword = await bcrypt.hash(password,10);
-        // update password
-        await User.findOneAndUpdate({token:token},{password:hashedPassword,token:null,resetPasswordExpires:null},{new:true});
-        // return response
-        return res.status(200).json({
-            success:true,
-            message:"Password updated successfully"
-        })
-    }catch(error){
-        console.log("Error occured while updating password",error);
-        return res.status(500).json({
-            success:false,
-            message:"Internal server error"
-        })
+exports.resetPassword = async (req, res) => {
+  try {
+    // data fetch
+    const { token, password, confirmPassword } = req.body;
+    // validation
+    if (!token || !password || !confirmPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "Please fill all the fields",
+      });
     }
-}
+    // check user credentials from db using token
+    const user = await User.findOne({ token: token });
+    // check user
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid token",
+      });
+    }
+    // check expiry time
+    if (user.resetPasswordExpires < Date.now()) {
+      return res.status(400).json({
+        success: false,
+        message: "Token expired",
+      });
+    }
+    // check password and confirm password
+    if (password !== confirmPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "Password and confirm password does not match",
+      });
+    }
+    // hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+    // update password
+    await User.findOneAndUpdate(
+      { token: token },
+      { password: hashedPassword, token: null, resetPasswordExpires: null },
+      { new: true }
+    );
+    // return response
+    return res.status(200).json({
+      success: true,
+      message: "Password updated successfully",
+    });
+  } catch (error) {
+    console.log("Error occured while updating password", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
