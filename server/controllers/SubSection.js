@@ -44,3 +44,33 @@ exports.createSubSection = async (req, res) => {
         })
     }
 }
+// update SubSection handler function
+exports.updateSubSection = async(req,res)=>{
+    try{
+        // data input
+        const {subSectionId,title,timeDuration,description} = req.body;
+        // data validation
+        if(!subSectionId || !title || !timeDuration || !description){
+            return res.status(400).json({
+                success:false,
+                message:"Please provide all details"
+            })
+        }
+        // update data
+        await SubSection.findByIdAndUpdate(
+            {_id:subSectionId},
+            {title,timeDuration,description},
+            {new:true}
+        );
+        return res.status(200).json({
+            success:true,
+            message:"SubSection updated successfully"
+        })
+    }catch(error){
+        console.log("Error occured while updating SubSection",error);
+        return res.status(500).json({
+            success:false,
+            message:"Internal server error"
+        })
+    }
+}
