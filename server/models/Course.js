@@ -20,7 +20,7 @@ const courseSchema = new mongoose.Schema({
     ref:"Section"
   }],
   tag: {
-    type: String,
+    type: [String],
     required: true,
   },
   // courseContent: [

@@ -98,19 +98,19 @@ exports.getAllCourses = async (req, res) => {
   try {
     const allCourses = await Course.find(
       {}
-    //   ,
-    //   {
-    //     courseName: true,
-    //     courseDescription: true,
-    //     price: true,
-    //     whatWillYouLearn: true,
-    //     category: true,
-    //     thumbnail: true,
-    //     instructor: true,
-    //   }
-    )
-    // ).populate("instructor")
-    // .exec();
+        ,
+        {
+          courseName: true,
+          // courseDescription: true,
+          // price: true,
+          // whatWillYouLearn: true,
+          // category: true,
+          // thumbnail: true,
+          instructor: true,
+        }
+    // );
+    ).populate("instructor")
+    .exec();
     return res.status(200).json({
       success: true,
       courses: allCourses,
@@ -124,3 +124,4 @@ exports.getAllCourses = async (req, res) => {
     });
   }
 };
+

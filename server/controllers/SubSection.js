@@ -74,3 +74,26 @@ exports.updateSubSection = async(req,res)=>{
         })
     }
 }
+// delete a subsection
+exports.deleteSubSection = async(req,res)=>{
+    try{
+        const {subSectionId} = req.params;
+        if(!subSectionId){
+            return res.status(400).json({
+                success:false,
+                message:"Please provide all details"
+            })
+        }
+        await SubSection.findByIdAndDelete({_id:subSectionId});
+        return res.status(200).json({
+            success:true,
+            message:"SubSection deleted successfully"
+        })
+    }catch(error){
+        console.log("Error occured while deleting SubSection",error);
+        return res.status(500).json({
+            success:false,
+            message:"Internal server error"
+        })
+    }
+}

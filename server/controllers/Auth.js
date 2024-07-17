@@ -2,7 +2,7 @@ const Users = require("../models/Users");
 const OTP = require("../models/OTP");
 const otpGenerator = require("otp-generator");
 const bcrypt = require("bcrypt");
-const profile = require("../models/Profile");
+const Profile = require("../models/Profile");
 const jwt = require("jsonwebtoken");
 const mailSender = require("../utils/mailSender");
 require("dotenv").config();
@@ -113,7 +113,7 @@ exports.signup = async (req, res) => {
     }
     // hash password
     const hashedPassword = await bcrypt.hash(password, 10);
-    const profileDetails = await profile.create({
+    const profileDetails = await Profile.create({
       gender: null,
       dateOfBirth: null,
       about: null,
