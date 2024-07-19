@@ -1,4 +1,4 @@
-const Users = require("../models/Users");
+const Users = require("../models/User");
 const OTP = require("../models/OTP");
 const otpGenerator = require("otp-generator");
 const bcrypt = require("bcrypt");
@@ -44,6 +44,7 @@ exports.sendOTP = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "OTP sent successfully",
+      otp: otp,
     });
   } catch (error) {
     console.log("Error occured while sending OTP", error);
@@ -74,7 +75,8 @@ exports.signup = async (req, res) => {
       !email ||
       !password ||
       !confirmPassword ||
-      !otp
+      !otp||
+      !contactNumber
     ) {
       return res.status(400).json({
         success: false,
@@ -89,7 +91,7 @@ exports.signup = async (req, res) => {
       });
     }
     // check if user already exists or not
-    const checkUser = await Users.fondOne({ email });
+    const checkUser = await Users.findOne({ email });
     if (checkUser) {
       return res.status(401).json({
         success: false,
@@ -100,7 +102,8 @@ exports.signup = async (req, res) => {
     const recentOtp = await OTP.findOne({ email })
       .sort({ createdAt: -1 })
       .limit(1);
-    if (recentOtp.length === 0) {
+      console.log("Recent OTP : ", recentOtp);
+    if (!recentOtp) {
       return res.status(400).json({
         success: false,
         message: "otp not found",
@@ -126,7 +129,7 @@ exports.signup = async (req, res) => {
       email,
       password: hashedPassword,
       accountType,
-      contactNumber,
+      contactNumber:contactNumber,
       additionalDetails: profileDetails._id,
       image: `https://api.dicebear.com/8.x/initials/svg?seed=${firstName}+${lastName}`,
     });
@@ -134,6 +137,7 @@ exports.signup = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "User registered successfully",
+      data: user
     });
   } catch (error) {
     console.log("Error occured while registering user", error);
@@ -156,22 +160,22 @@ exports.login = async (req, res) => {
       });
     }
     // check if user exists or not
-    const checkUser = await Users.findOne({ email }).populate(
+    const user = await Users.findOne({ email }).populate(
       "additionalDetails"
     );
-    if (!checkUser) {
+    if (!user) {
       return res.status(401).json({
         success: false,
         message: "User not registered , please signup",
       });
     }
     // compare password
-    if (await bcrypt.compare(password, checkUser.password)) {
+    if (await bcrypt.compare(password, user.password)) {
       const payload = {
         user: {
-          id: checkUser._id,
-          email: checkUser.email,
-          role: checkUser.accountType,
+          id: user._id,
+          email: user.email,
+          role: user.accountType,
         },
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET, {

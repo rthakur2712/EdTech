@@ -2,7 +2,7 @@ const { find, findById } = require("../models/OTP");
 const Profile = require("../models/Profile");
 const User = require("../models/User");
 const Course = require("../models/Course");
-const { uploadImageToCloudinary } = require("../utils/uploadImageToCloudinary");
+const { uploadImageToCloudinary } = require("../utils/imageUploader");
 
 // update profile details handler
 exports.updateProfile = async (req, res) => {
