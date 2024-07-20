@@ -20,8 +20,10 @@ exports.auth = async (req, res, next) => {
     // verify token
     try {
       const decode = jwt.verify(token, process.env.JWT_SECRET);
-      console.log(decode);
+      // console.log(decode);
       req.user = decode;
+      // console.log(req.user.id);
+      
     } catch (error) {
       return res.status(401).json({
         success: false,
@@ -58,7 +60,7 @@ exports.isStudent = async (req, res, next) => {
 // is instructor
 exports.isInstructor = async (req, res, next) => {
   try {
-    if (req.user.role !== "Instructor") {
+    if (req.user.user.role !== "Instructor") {
       return res.status(401).json({
         success: false,
         message: "Access denied",
@@ -76,7 +78,7 @@ exports.isInstructor = async (req, res, next) => {
 // is admin
 exports.isAdmin = async (req, res, next) => {
   try {
-    if (req.user.role !== "Admin") {
+    if (req.user.user.role !== "Admin") {
       return res.status(401).json({
         success: false,
         message: "Access denied",

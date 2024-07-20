@@ -9,7 +9,7 @@ exports.updateProfile = async (req, res) => {
     try{
         // fetch data from request body
         const {gender,dateOfBirth="",about="",contactNumber} = req.body;
-        const id = req.user._id;
+        const id = req.user.user.id;
         // validation
         if(!id || !gender || !dateOfBirth || !about || !contactNumber){
             return res.status(400).json({
@@ -88,8 +88,8 @@ exports.deleteAccount = async(req,res)=>{
 // get all users details
 exports.getAllUserDetails = async(req,res)=>{
     try{
-        const id = req.user._id;
-        const userDetails = await User.find(id).populate('additionalDetails').exec();
+        const id = req.user.user.id;
+        const userDetails = await User.findById(id).populate('additionalDetails').exec();
         return res.status(200).json({
             success:true,
             userDetails:userDetails
@@ -146,9 +146,11 @@ exports.getAllEnrolledCourses = async(req,res)=>{
 exports.updateDisplayPicture = async(req,res)=>{
     try{
         // fetch user id and display picture
-        const userId = req.user.id;
+        const userId = req.user.user.id;
         const displayPicture = req.files.displayPicture;
+        console.log(req.user)
         // validation
+        // console.log(displayPicture)
         if(!userId || !displayPicture){
             return res.status(400).json({
                 success:false,
@@ -158,13 +160,12 @@ exports.updateDisplayPicture = async(req,res)=>{
         const image = await uploadImageToCloudinary(displayPicture,process.env.FOLDER_NAME,1000,1000);
         console.log("image",image);
         // update profile image
-        const updateProfile = await Profile.findOneAndUpdate(
-            {user:userId},
-            {
-                image:image.secure_url
-            },
-            {new:true}
-        )
+ 
+            const updateProfile = await User.findByIdAndUpdate(
+                {_id:userId},
+                {image:image.url},
+                {new:true}
+            )
         // return response
         return res.status(200).json({
             success:true,

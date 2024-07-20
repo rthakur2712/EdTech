@@ -2,6 +2,7 @@ const Course = require("../models/Course");
 const User = require("../models/User");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
 const Category = require("../models/Category");
+const mongoose = require("mongoose");
 
 // create courses handler function
 exports.createCourse = async (req, res) => {
@@ -9,7 +10,7 @@ exports.createCourse = async (req, res) => {
     // fetch all details from request body
     const { courseName, courseDescription, price, whatWillYouLearn, category } =
       req.body;
-    const thumbnail = req.file.thumbnailImage;
+    const thumbnail = req.files.thumbnailImage;
     // validation
     if (
       !courseName ||
@@ -25,9 +26,9 @@ exports.createCourse = async (req, res) => {
       });
     }
     // role validation
-    const userId = req.user.id;
+    const userId = req.user.user.id;
     const instructorDetails = await User.findById(userId);
-    console.log("instructorDetails", instructorDetails);
+    // console.log("instructorDetails", instructorDetails);
     if (!instructorDetails) {
       return res.status(400).json({
         success: false,
@@ -58,8 +59,14 @@ exports.createCourse = async (req, res) => {
       thumbnail: thumbnailImage.secure_url,
     });
     // add course to user
+  
+  
+
+const instructorDetails_id = instructorDetails._id.toString();
+const categoryDetails_id = categoryDetails._id.toString();
+
     await User.findByIdAndUpdate(
-      { id: instructorDetails._id },
+      instructorDetails_id,
       {
         $push: {
           courses: newCourse._id,
@@ -68,18 +75,20 @@ exports.createCourse = async (req, res) => {
       { new: true }
     );
     // add course to category
-    await Category.findByIdAndUpdate(
-      { id: categoryDetails._id },
+
+   const categoryDetails2= await Category.findByIdAndUpdate(
+       categoryDetails_id ,
 
       {
         $push: {
-          courses: newCourse._id,
+          course: newCourse._id,
         },
       },
 
       { new: true }
     );
     // return response
+    console.log(categoryDetails2)
     return res.status(200).json({
       success: true,
       message: "Course created successfully",

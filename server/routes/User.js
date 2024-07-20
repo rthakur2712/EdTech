@@ -18,8 +18,8 @@ const {
 const { auth } = require('../middlewares/auth');
 
 // routes
-router.post("/login", login);
-router.post("/signup", signup);
+router.post("/login",auth, login);
+router.post("/signup",auth, signup);
 router.post("/sendOTP", sendOTP);
 router.post("/changePassword", changePassword);
 router.post("/reset-password-token", resetPasswordToken);
