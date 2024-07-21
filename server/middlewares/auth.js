@@ -42,7 +42,7 @@ exports.auth = async (req, res, next) => {
 // is student
 exports.isStudent = async (req, res, next) => {
   try {
-    if (req.user.role !== "Student") {
+    if (req.user.user.role !== "Student") {
       return res.status(401).json({
         success: false,
         message: "Access denied",

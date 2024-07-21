@@ -1,11 +1,13 @@
 const RatingAndReview = require("../models/RatingAndReview");
 const Course = require("../models/Course");
+const mongoose = require("mongoose");
 
 // create rating
 exports.createRating = async (req, res) => {
     try{
         // get user id and course id
-        const userId = req.user.id;
+        const userId = req.user.user.id;
+        console.log("userId",userId)
         // fetch data from request body
         const {rating,review,courseId} = req.body;
         // check if uesr is enrolled in the course
@@ -60,16 +62,17 @@ exports.averageRating = async(req,res)=>{
         // get course id 
         const courseId = req.body.courseId;
         // calculate average rating 
+        const courseObjectId =new mongoose.Types.ObjectId(courseId);
         const result = await RatingAndReview.aggregate([
             {
                 $match:{
-                    course:new mongoose.Types.ObjectId(courseId)
+                    course:courseObjectId
                 }
             },
             {
                 $group:{
                     _id:null,
-                    avarageRating:{$avg:"$rating"}
+                    averageRating:{$avg:"$rating"}
                 }
             }
            
@@ -88,7 +91,7 @@ exports.averageRating = async(req,res)=>{
         return res.status(200).json({
             success:true,
             message:"Average rating fetched successfully",
-            averageRating:result[0].avarageRating
+            averageRating:result[0].averageRating
         })
     }catch(error){
         console.log("Error occured while fetching average rating",error);

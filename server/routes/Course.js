@@ -18,18 +18,18 @@ const{auth,isStudent,isInstructor,isAdmin} = require('../middlewares/auth');
 // course can only be created by instructors
 router.post("/createCourse",auth,isInstructor,createCourse);
 router.post("/createSection",auth,isInstructor,createSection);
-router.post("/updateSection",auth,isInstructor,updateSection);
-router.post("/deleteSection",auth,isInstructor,deleteSection);
+router.put("/updateSection",auth,isInstructor,updateSection);
+router.delete("/deleteSection",auth,isInstructor,deleteSection);
 router.post("/createSubSection",auth,isInstructor,createSubSection);
-router.post("/updateSubSection",auth,isInstructor,updateSubSection);
-router.post("/deleteSubSection",auth,isInstructor,deleteSubSection);
+router.put("/updateSubSection",auth,isInstructor,updateSubSection);
+router.delete("/deleteSubSection",auth,isInstructor,deleteSubSection);
 router.get("/getAllCourses",auth,getAllCourses);
-router.get("/getCourseDetails/:id",auth,getCourseDetails);
+router.get("/getCourseDetails",auth,getCourseDetails);
 
 // category routes
 router.post("/createCategory",auth,isAdmin,createCategory);
 router.get("/showAllCategory",auth,showAllCategory);
-router.get("/categoryPageDetails/:id",auth,categoryPageDetails);
+router.get("/categoryPageDetails",auth,categoryPageDetails);
 
 // rating and review routes
 router.post("/createRating",auth,isStudent,createRating);
