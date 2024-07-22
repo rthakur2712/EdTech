@@ -1,1 +1,20 @@
 /* write your css here */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,body{
+    overflow-x: hidden;
+}
+.customDropShadow{
+    /* filter: drop-shadow(0 4px 6px rgba(255, 255, 255, 0.5)); */
+    box-shadow: 20px 20px 0px 0px #F5F5F5;
+}
+.gradient_color{
+    background: linear-gradient(118.19deg, #1FA2FF -3.62%, #12D8FA 50.44%, #A6FFCB 104.51%),
+    linear-gradient(0deg, #F1F2FF, #F1F2FF);
+    -webkit-background-clip: text;
+    background-clip:text;
+    color: transparent;
+
+}
