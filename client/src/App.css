@@ -3,18 +3,78 @@
 @tailwind components;
 @tailwind utilities;
 
-html,body{
-    overflow-x: hidden;
+html,
+body {
+  overflow-x: hidden;
 }
-.customDropShadow{
-    /* filter: drop-shadow(0 4px 6px rgba(255, 255, 255, 0.5)); */
-    box-shadow: 20px 20px 0px 0px #F5F5F5;
+.customDropShadow {
+  /* filter: drop-shadow(0 4px 6px rgba(255, 255, 255, 0.5)); */
+  box-shadow: 20px 20px 0px 0px #ffffff;
 }
-.gradient_color{
-    background: linear-gradient(118.19deg, #1FA2FF -3.62%, #12D8FA 50.44%, #A6FFCB 104.51%),
-    linear-gradient(0deg, #F1F2FF, #F1F2FF);
-    -webkit-background-clip: text;
-    background-clip:text;
-    color: transparent;
+.gradient_color {
+  background: linear-gradient(
+      118.19deg,
+      #1fa2ff -3.62%,
+      #12d8fa 50.44%,
+      #a6ffcb 104.51%
+    ),
+    linear-gradient(0deg, #f1f2ff, #f1f2ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.code-background {
+  background: linear-gradient(
+    111.93deg,
+    rgba(14, 26, 45, 0.24) -1.4%,
+    rgba(17, 30, 50, 0.38) 104.96%
+  );
+}
+.code-block1-grad {
+  position: absolute;
+  width: 372.95px;
+  height: 257.05px;
+  left: calc(50% - 372.95px / 2 -20px);
+  top: calc(50% - 257.05px / 2 - 17.47px);
 
+  background: linear-gradient(
+    123.77deg,
+    #8a2be2 -6.46%,
+    #ffa500 59.04%,
+    #f8f8ff 124.53%
+  );
+  opacity: 0.2;
+  filter: blur(34px);
+  transform: matrix(1, 0, -0.03, 1, 0, 0);
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  z-index: 0;
+}
+.code-block2-grad {
+  position: absolute;
+  width: 372.95px;
+  height: 257.05px;
+  left: calc(50% - 372.95px / 2 -20px);
+  top: calc(50% - 257.05px / 2 - 17.47px);
+
+  background: linear-gradient(
+    118.19deg,
+    #1fa2ff -3.62%,
+    #12d8fa 50.44%,
+    #a6ffcb 104.51%
+  );
+  opacity: 0.2;
+  filter: blur(34px);
+  transform: matrix(1, 0, -0.03, 1, 0, 0);
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  z-index: 0;
+}
+.section2_bg {
+  background: url("../src/assets/Images/bghome.svg");
+  width: 100vw;
 }
