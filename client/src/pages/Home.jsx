@@ -4,17 +4,17 @@ import Section2 from "../components/core/home/Section2";
 import Section3 from "../components/core/home/Section3";
 import Footer from "../components/common/Footer";
 
-import BgImage1 from "../assets/Images/random_bg_image/coding bg1.jpg";
-import BgImage2 from "../assets/Images/random_bg_image/coding bg2.jpg";
-import BgImage3 from "../assets/Images/random_bg_image/coding bg3.jpg";
-import BgImage4 from "../assets/Images/random_bg_image/coding bg4.jpg";
-import BgImage5 from "../assets/Images/random_bg_image/coding bg5.jpg";
-import BgImage6 from "../assets/Images/random_bg_image/coding bg6.jpeg";
-import BgImage7 from "../assets/Images/random_bg_image/coding bg7.jpg";
-import BgImage8 from "../assets/Images/random_bg_image/coding bg8.jpeg";
-import BgImage9 from "../assets/Images/random_bg_image/coding bg9.jpg";
-import BgImage10 from "../assets/Images/random_bg_image/coding bg10.jpg";
-import BgImage11 from "../assets/Images/random_bg_image/coding bg11.jpg";
+import BgImage1 from "../assets/random_bg_image/coding bg1.jpg";
+import BgImage2 from "../assets/random_bg_image/coding bg2.jpg";
+import BgImage3 from "../assets/random_bg_image/coding bg3.jpg";
+import BgImage4 from "../assets/random_bg_image/coding bg4.jpg";
+import BgImage5 from "../assets/random_bg_image/coding bg5.jpg";
+import BgImage6 from "../assets/random_bg_image/coding bg6.jpeg";
+import BgImage7 from "../assets/random_bg_image/coding bg7.jpg";
+import BgImage8 from "../assets/random_bg_image/coding bg8.jpeg";
+import BgImage9 from "../assets/random_bg_image/coding bg9.jpg";
+import BgImage10 from "../assets/random_bg_image/coding bg10.jpg";
+import BgImage11 from "../assets/random_bg_image/coding bg11.jpg";
 
 const bgImages=[
   BgImage1,

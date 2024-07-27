@@ -115,7 +115,7 @@ module.exports = {
         800: "#3D2A01",
         900: "#251400",
       },
-      "pure-greys": {
+      puregreys: {
         5: "#F9F9F9",
         25: "#E2E2E2",
         50: "#CCCCCC",
