@@ -36,7 +36,7 @@ const timeline = [
 ];
 export default function Section2() {
   return (
-    <div className="bg-pure-greys-5 text-richblack-700 py-[90px] flex flex-col gap-14">
+    <div className="bg-puregreys-5 text-richblack-700 py-[90px] flex flex-col gap-14">
       <div className="w-[11/12] mx-auto max-w-maxContent flex gap-3">
         <div className="w-[50%] font-bold text-4xl">
           Get the Skills you need for a{" "}
@@ -106,20 +106,38 @@ export default function Section2() {
       </div>
       <div className="px-[120px] py-[90px] flex flex-col gap-[52px]">
         <div className=" flex flex-col items-center gap-3 text-center px-[220px]">
-            <div className="font-semibold text-4xl">Your swiss knife for <HighlightText text={'learning any language'}/></div>
-            <p className="text-richblac-700">Using spin making learning multiple languages easy. with 20+ languages realistic voice-over, progress tracking, custom schedule and more.</p>
+          <div className="font-semibold text-4xl">
+            Your swiss knife for{" "}
+            <HighlightText text={"learning any language"} />
+          </div>
+          <p className="text-richblac-700">
+            Using spin making learning multiple languages easy. with 20+
+            languages realistic voice-over, progress tracking, custom schedule
+            and more.
+          </p>
         </div>
         <div className="flex justify-center items-center relative">
-            <img src={know_your_progress} alt="know_your_progress" className=" object-contain -mr-32"/>
-            <img src={compare_with_others} alt="compare_with_others" className="= object-contain "/>
-            <img src={plan_your_study} alt="plan_your_study" className=" object-contain -ml-36 "/>
+          <img
+            src={know_your_progress}
+            alt="know_your_progress"
+            className=" object-contain -mr-32"
+          />
+          <img
+            src={compare_with_others}
+            alt="compare_with_others"
+            className="= object-contain "
+          />
+          <img
+            src={plan_your_study}
+            alt="plan_your_study"
+            className=" object-contain -ml-36 "
+          />
         </div>
         <div className="flex justify-center">
-            <CTAbutton text={"Learn more"} linkto={"/signup"} active={true} />
+          <CTAbutton text={"Learn more"} linkto={"/signup"} active={true} />
         </div>
         <div></div>
       </div>
-      
     </div>
   );
 }
