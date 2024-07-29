@@ -26,11 +26,12 @@ export default function Section1() {
     <div>
       {" "}
       <div className="relative items-center  flex flex-col mx-auto text-white max-w-maxContent justify-between">
-        <Link to={"/signup"}>
+     
           <div
             className="group mt-40 p-1 mx-auto rounded-full bg-richblack-800 fond-bold text-richblack-200
             transition-all duration-200 hover:scale-95 hover:bg-richblack-900  cursor-pointer "
           >
+            <Link to={"/signup"}>
             <div
               className="flex items-center px-6 py-[5px] gap-2 
                 transition-all duration-200"
@@ -38,8 +39,9 @@ export default function Section1() {
               <p>Become an Instructor</p>
               <FaArrowRightLong />
             </div>
+            </Link>
           </div>
-        </Link>
+   
         <div className="w-[913px] mt-12">
           <motion.div
             variants={fadeIn("left", 0.1)}
