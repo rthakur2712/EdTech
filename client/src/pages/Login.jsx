@@ -4,7 +4,12 @@ import loginImg from "../assets/Images/login.webp";
 import ItalicText from "../components/core/login/ItalicText";
 import frameImg from "../assets/Images/frame.png";
 import { toast } from "react-hot-toast";
+import { login } from "../services/operationa/auth";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 export default function Login() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -25,6 +30,7 @@ export default function Login() {
       return;
     }
     console.log(formData);
+    dispatch(login(email,password,navigate));
     setFormData({
       email: "",
       password: "",

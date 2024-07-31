@@ -4,7 +4,6 @@ import { NavbarLinks } from "../../data/navbar-links";
 import { Link, matchPath, useLocation } from "react-router-dom";
 import { FaCartShopping } from "react-icons/fa6";
 import { IoIosArrowDown } from "react-icons/io";
-
 import { useSelector } from "react-redux";
 import ProfileMenu from "./ProfileMenu";
 import { apiConnector } from "../../services/apiConnector";
@@ -32,7 +31,7 @@ export default function Navbar() {
     try {
       const result = await apiConnector("get", categories.CATEGORIES_API);
       console.log("Sublinks result ", result);
-      setSubLinks(result);
+      setSubLinks(result.data.categories);
     } catch (error) {
       console.log("failed to fetch categories ", error);
     }
@@ -53,21 +52,29 @@ export default function Navbar() {
             return (
               <div key={index} className="">
                 {items.title === "Catalog" ? (
-                  <div className="group flex items-center cursor-pointer relative py-1 px-3 gap-1">
-                   
-                      <p>{items.title}</p>
-                      <IoIosArrowDown />
-                    
+                  <div
+                    className={`group flex items-center cursor-pointer relative py-1 px-3 gap-1 ${
+                      matchRoute("/catalog/:catalogName")
+                        ? "text-yellow-25"
+                        : "text-richblack-25"
+                    }`}
+                  >
+                    <p>{items.title}</p>
+                    <IoIosArrowDown />
+
                     <div
                       className="hidden absolute left-[50%] top-[50%] z-[1000]  w-[200px] translate-x-[-50%] translate-y-[3em] 
                                                     flex-col rounded-lg bg-richblack-5 p-4 text-richblack-900 opacity-0 transition-all duration-300 group-hover:flex 
                                                     group-hover:translate-y-[1.65em] group-hover:opacity-100 lg:w-[300px]"
                     >
                       <div className="absolute left-[50%] top-0 z-[100] h-6 w-6 translate-x-[80%] translate-y-[-40%] rotate-45  select-none rounded bg-richblack-5"></div>
-                      {subLink.map((item, index) => {
+                      {subLinks.map((item, index) => {
                         return (
-                          <Link to={item.link} className="rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-50">
-                            <p>{item.title}</p>
+                          <Link
+                            to={`/catalog/${item.name}`}
+                            className="rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-50"
+                          >
+                            <p>{item.name}</p>
                           </Link>
                         );
                       })}
