@@ -6,7 +6,7 @@ import frameImg from "../assets/Images/frame.png";
 import { toast } from "react-hot-toast";
 import { login } from "../services/operationa/auth";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -88,9 +88,11 @@ export default function Login() {
               >
                 {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
               </span>
+              <Link to="/forgot-password">
               <span className="flex justify-end text-xs text-blue-100">
                 Forgot password
               </span>
+              </Link>
             </div>
           </div>
         </div>

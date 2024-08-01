@@ -4,11 +4,17 @@ import signupImage from "../assets/Images/signup.webp";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import frameImg from "../assets/Images/frame.png";
 import { toast } from "react-hot-toast";
+import { setSignupData } from "../slices/authSlice";
+import { useDispatch } from "react-redux";
+import { sendOTP } from "../services/operationa/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const [currentTab, setCurrentTab] = useState("Student");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -40,6 +46,11 @@ export default function Signup() {
       currentTab,
     };
     console.log(signupData);
+    // setting signup data to state
+    // so that it can be used after otp verification
+    dispatch(setSignupData(signupData));
+    // calling the send otp function to send otp
+    dispatch(sendOTP(formData.email, navigate));
     setFormData({
       firstName: "",
       lastName: "",
@@ -48,7 +59,7 @@ export default function Signup() {
       confirmPassword: "",
     });
     setCurrentTab("Student");
-    toast.success("Sign up successful");
+  
   };
 
   return (
