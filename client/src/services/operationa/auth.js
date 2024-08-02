@@ -43,7 +43,7 @@ export function signup(
     email,
     password,
     confirmPassword,
-    currentTab,
+    accountType,
     otp,
     navigate
 ){
@@ -51,13 +51,13 @@ export function signup(
         const toastId = toast.loading("loading");
         dispatch(setLoading(true));
         try{
-            const response = await fetch(endpoints.SIGNUP_API,{
+            const response = await apiConnector("POST",endpoints.SIGNUP_API,{
                 firstName,
                 lastName,
                 email,
                 password,
                 confirmPassword,
-                currentTab,
+                accountType,
                 otp
             })
             console.log("api signup response : ",response);
@@ -78,7 +78,6 @@ export function signup(
 
 export function sendOTP(email,navigate){
     return async(dispatch)=>{
-        const toastId = toast.loading("loading");
         dispatch(setLoading(true));
         try{
             const response = await apiConnector("POST",endpoints.SEND_OTP_API,{
@@ -95,7 +94,6 @@ export function sendOTP(email,navigate){
             toast.error(error.response.data.message);
         }
         dispatch(setLoading(false));
-        toast.dismiss(toastId);
     }
 }
 

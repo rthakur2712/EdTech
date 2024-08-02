@@ -5,14 +5,15 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import frameImg from "../assets/Images/frame.png";
 import { toast } from "react-hot-toast";
 import { setSignupData } from "../slices/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { sendOTP } from "../services/operationa/auth";
 import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
-  const [currentTab, setCurrentTab] = useState("Student");
+  const [accountType, setAccountType] = useState("Student");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const {loading} = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -43,7 +44,7 @@ export default function Signup() {
     }
     const signupData = {
       ...formData,
-      currentTab,
+      accountType,
     };
     console.log(signupData);
     // setting signup data to state
@@ -58,12 +59,15 @@ export default function Signup() {
       password: "",
       confirmPassword: "",
     });
-    setCurrentTab("Student");
+    setAccountType("Student");
   
   };
 
   return (
-    <div className="flex mx-auto mt-20 items-center justify-around ">
+    <div className="flex justify-center items-center h-[80vh]">
+    {
+      loading?<div className='loader'></div>:
+      <div className="flex mx-auto mt-20 items-center justify-around ">
       <div className="flex flex-col gap-9 text-white w-[30%] ">
         <div className="flex flex-col gap-3">
           <h2 className="text-3xl font-semibold text-white">
@@ -78,18 +82,18 @@ export default function Signup() {
           <button
             type="radio"
             className={`py-[6px] px-[18px] rounded-full ${
-              currentTab === "Student" ? "bg-richblack-900 text-white" : ""
+              accountType === "Student" ? "bg-richblack-900 text-white" : ""
             }`}
-            onClick={() => setCurrentTab("Student")}
+            onClick={() => setAccountType("Student")}
           >
             Student
           </button>
           <button
             type="radio"
             className={`1py-[6px] px-[18px] rounded-full ${
-              currentTab === "Instructor" ? "bg-richblack-900 text-white" : ""
+              accountType === "Instructor" ? "bg-richblack-900 text-white" : ""
             }`}
-            onClick={() => setCurrentTab("Instructor")}
+            onClick={() => setAccountType("Instructor")}
           >
             Instructors
           </button>
@@ -217,5 +221,8 @@ export default function Signup() {
         <img src={frameImg} alt="frame" />
       </div>
     </div>
+    }
+    </div>
+   
   );
 }
