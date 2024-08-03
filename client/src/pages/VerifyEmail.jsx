@@ -4,7 +4,7 @@ import OtpInput from 'react-otp-input';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaArrowLeftLong } from 'react-icons/fa6';
 import { IoMdTime } from 'react-icons/io';
-import { signup } from '../services/operationa/auth';
+import { sendOTP, signup } from '../services/operationa/auth';
 
 
 export default function VerifyEmail() {
@@ -22,17 +22,20 @@ export default function VerifyEmail() {
         e.preventDefault();
         dispatch(signup(firstName,lastName,email,password,confirmPassword,accountType,otp,navigate));
     }
+    const resendHandler = ()=>{
+        dispatch(sendOTP(email,navigate));
+    }
     useEffect(() => {
         if(!signupData){
             navigate('/signup')
         }
     },[])
   return (
-    <div>
+    <div className='flex justify-center items-center h-[70vh]'>
         {
             loading?<div className='loader'></div>:
             <div className='text-white flex justify-center items-center h-[70vh]'>
-                <div className='flex flex-col w-[25%] gap-6'>
+                <div className='flex flex-col w-[75%] gap-6'>
                 <h1 className='text-3xl'>Verify email</h1>
                 <p className='text-richblack-100'>A verification code has been sent to you. Enter the code below</p>
                 <form
@@ -70,7 +73,9 @@ export default function VerifyEmail() {
                 </div>
                 </Link>
                 
-                <div className='flex items-center gap-1 text-blue-100 cursor-pointer'>
+                <div className='flex items-center gap-1 text-blue-100 cursor-pointer'
+                onClick={resendHandler}
+                >
                 <IoMdTime />
                 Resend it
                 </div>

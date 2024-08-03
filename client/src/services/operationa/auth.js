@@ -139,3 +139,20 @@ export function resetPassword(password,confirmPassword,token,navigate){
         dispatch(setLoading(false));
     }
 }
+export function logout(navigate){
+    return async(dispatch)=>{
+        dispatch(setLoading(true));
+        try{
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            dispatch(setToken(null));
+            dispatch(setUser(null));
+            navigate('/login');
+            toast.success('Logout successful');
+        }catch(error){
+            console.log("api logout error : ", error);
+            toast.error("Logout failed");
+        }
+        dispatch(setLoading(false));
+    }
+}

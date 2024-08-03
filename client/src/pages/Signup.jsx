@@ -103,7 +103,7 @@ export default function Signup() {
             <div className="flex justify-between ">
               <label className="flex flex-col gap-[6px]">
                 <p className="text-sm">
-                  First Name <span>*</span>
+                  First Name <span className="text-pink-200">*</span>
                 </p>
                 <input
                   className="rounded-md px-3 py-2 bg-richblack-800"
@@ -118,7 +118,7 @@ export default function Signup() {
               </label>
               <label className="flex flex-col gap-[6px]">
                 <p className="text-sm">
-                  Last Name <span>*</span>
+                  Last Name <span className="text-pink-200">*</span>
                 </p>
                 <input
                   className="rounded-md p-3 py-2 bg-richblack-800"
@@ -134,7 +134,7 @@ export default function Signup() {
             </div>
             <label className="flex flex-col gap-[6px]">
               <p className="text-sm">
-                Email Adrress <span>*</span>
+                Email Adrress <span className="text-pink-200">*</span>
               </p>
               <input
                 className="rounded-md w-full bg-richblack-800 p-3 py-2"
@@ -148,10 +148,10 @@ export default function Signup() {
               />
             </label>
             <div className="flex justify-between ">
-              <div className="relative">
+              <div className="relative flex flex-col gap-[6px]">
                 <label className="flex flex-col gap-[6px] ">
                   <p className="text-sm">
-                    Password <span>*</span>
+                    Password <span className="text-pink-200">*</span>
                   </p>
                 </label>
                 <input
@@ -173,10 +173,10 @@ export default function Signup() {
                 </span>
               </div>
 
-              <div className="relative">
+              <div className="relative flex flex-col gap-[6px]">
                 <label className="flex flex-col gap-[6px] ">
                   <p className="text-sm">
-                    Confirm Password <span>*</span>
+                    Confirm Password <span className="text-pink-200">*</span>
                   </p>
                 </label>
                 <input

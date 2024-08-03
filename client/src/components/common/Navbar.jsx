@@ -11,19 +11,9 @@ import { categories } from "../../services/apis";
 export default function Navbar() {
   const location = useLocation();
   const [subLinks, setSubLinks] = useState([]);
-  const subLink = [
-    {
-      title: "Development",
-      link: "/catalog/development",
-    },
-    {
-      title: "DSA",
-      link: "/catalog/dsa",
-    },
-  ];
   const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
-  const { totalItems } = useSelector((state) => state.cart);
+  // const { totalItems } = useSelector((state) => state.cart);
   const matchRoute = (route) => {
     return matchPath(route, location.pathname);
   };
@@ -98,7 +88,7 @@ export default function Navbar() {
             );
           })}
         </div>
-        <div>
+        <div className="flex flex-row-reverse items-center gap-5">
           {token === null ? (
             <div className="flex gap-4 ">
               <Link to={"login"}>
