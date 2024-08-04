@@ -57,7 +57,7 @@ export default function InnovationSection() {
           </div>
         </div>
       </div>
-      <div className="text-white  px-[120px] py-[90px] text-4xl text-center font-bold">
+      <div className="text-white  px-[120px] py-[90px] text-4xl text-center font-bold border-b border-richblack-700">
         We are passionate about revolutionizing the way we learn. Our innovative
         platform <HighlightText text={"combines technology"} />{" "}
         <span className="bg-gradient-to-b from-[#FF512F] to-[#F09819] text-transparent bg-clip-text">
