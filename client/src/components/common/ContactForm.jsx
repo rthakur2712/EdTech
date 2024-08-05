@@ -35,9 +35,7 @@ export default function ContactForm() {
       // )
       const res ={status:'ok'}
       console.log("Email Res - ", res)
-      if (res.status === "ok") {
-        console.log("Email Sent Successfully")
-      }
+     toast.success("Email sent successfully")
       
     } catch (error) {
       console.log("ERROR WHILE CONATACT US  - ", error.message)
@@ -96,7 +94,7 @@ export default function ContactForm() {
       <div className="flex flex-col gap-[6px]">
         <label>Phone Number</label>
         <div className="flex justify-between items-center">
-          <div className="flex flex-col w-[76px]">
+          <div className="flex flex-col w-[81px]">
             <select
               type="text"
               name="countryCode"
