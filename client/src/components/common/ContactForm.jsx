@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import CountryCode from "../../data/countrycode.json";
 import {toast} from 'react-hot-toast'
@@ -35,7 +35,7 @@ export default function ContactForm() {
       // )
       const res ={status:'ok'}
       console.log("Email Res - ", res)
-     toast.success("Email sent successfully")
+     toast.success("Message sent successfully")
       
     } catch (error) {
       console.log("ERROR WHILE CONATACT US  - ", error.message)
@@ -43,9 +43,11 @@ export default function ContactForm() {
      
     }
   }
+  const [selectedCode, setSelectedCode] = useState('+91');
   return (
-    <form className="text-richblack-5 p-8 flex flex-col gap-5"
-    onSubmit={handleSubmit(submitHandler)}
+    <form
+      className="text-richblack-5 p-8 flex flex-col gap-5"
+      onSubmit={handleSubmit(submitHandler)}
     >
       <div className="flex gap-5">
         <div className="flex flex-col w-full gap-[6px]">
@@ -53,7 +55,7 @@ export default function ContactForm() {
           <input
             type="text"
             name="firstName"
-            placeholder="First Name"
+            placeholder="Enter Your First Name"
             {...register("firstName", { required: true })}
             className="bg-richblack-800 p-3 rounded-md"
             style={{
@@ -67,7 +69,7 @@ export default function ContactForm() {
           <input
             type="text"
             name="lasttName"
-            placeholder="First Name"
+            placeholder="Enter Your Last Name"
             {...register("lastName")}
             className="bg-richblack-800 p-3 rounded-md"
             style={{
@@ -82,7 +84,7 @@ export default function ContactForm() {
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="Enter Your Email Address"
           {...register("email", { required: true })}
           className="bg-richblack-800 p-3 rounded-md"
           style={{
@@ -93,8 +95,8 @@ export default function ContactForm() {
       </div>
       <div className="flex flex-col gap-[6px]">
         <label>Phone Number</label>
-        <div className="flex justify-between items-center">
-          <div className="flex flex-col w-[81px]">
+        <div className="flex justify-between ">
+          <div className="flex flex-col w-[96px]">
             <select
               type="text"
               name="countryCode"
@@ -103,19 +105,21 @@ export default function ContactForm() {
                 boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
               }}
               {...register("countryCode", { required: true })}
+              onChange={(e) => setSelectedCode(e.target.value)}
+            value={selectedCode}
             >
-              {CountryCode.map((data,i) => (
+              {CountryCode.map((data, i) => (
                 <option key={i} value={data.code}>
-                  {data.code}{"   "}-{data.country}
+                {selectedCode === data.code ? data.code : `${data.code} (${data.country})`}
                 </option>
               ))}
             </select>
           </div>
-          <div className="w-[80%]" >
+          <div className="w-[80%]">
             <input
-              type="number"
+              type="text"
               name="phoneNo"
-              placeholder="Phone Number"
+              placeholder="Enter Your Phone Number Without 0"
               {...register("phoneNo", { required: true })}
               className="bg-richblack-800 p-3 rounded-md w-full "
               style={{
@@ -132,7 +136,7 @@ export default function ContactForm() {
           name="message"
           cols={30}
           rows={6}
-          placeholder="Message"
+          placeholder="Enter Your Message"
           {...register("message", { required: true })}
           className="bg-richblack-800 p-3 rounded-md"
           style={{

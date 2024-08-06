@@ -50,7 +50,7 @@ export default function Section2() {
           <CTAbutton text={"Learn more"} linkto={"/signup"} active={true} />
         </div>
       </div>
-      <div className="w-[1200px] mx-auto max-w-maxContent flex gap-20">
+      <div className="w-[1200px] mx-auto max-w-maxContent flex gap-20 justify-around">
         <motion.div
           variants={fadeIn("right", 0.1)}
           initial="hidden"
