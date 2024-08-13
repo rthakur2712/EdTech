@@ -20,7 +20,7 @@ export default function Navbar() {
   const fetchSubLinks = async () => {
     try {
       const result = await apiConnector("get", categories.CATEGORIES_API);
-      console.log("Sublinks result ", result);
+      // console.log("Sublinks result ", result);
       setSubLinks(result.data.categories);
     } catch (error) {
       console.log("failed to fetch categories ", error);

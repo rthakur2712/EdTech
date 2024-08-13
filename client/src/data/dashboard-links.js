@@ -1,4 +1,15 @@
-import { ACCOUNT_TYPE } from "../utils/constants";
+// import { ACCOUNT_TYPE } from "../utils/constants";
+
+export const ACCOUNT_TYPE = {
+  STUDENT: "Student",
+  INSTRUCTOR: "Instructor",
+  ADMIN: "Admin",
+}
+
+export const COURSE_STATUS = {
+  DRAFT: "Draft",
+  PUBLISHED: "Published",
+}
 export const sidebarLinks = [
   {
     id: 1,
@@ -40,5 +51,26 @@ export const sidebarLinks = [
     path: "/dashboard/purchase-history",
     type: ACCOUNT_TYPE.STUDENT,
     icon: "VscHistory",
+  },
+  {
+    id: 7,
+    name: "Create Category",
+    path: "/dashboard/create-category",
+    type: ACCOUNT_TYPE.ADMIN,
+    icon: "VscNewFolder",
+  },
+  {
+    id: 8,
+    name: "All Students",
+    path: "/dashboard/all-students",
+    type: ACCOUNT_TYPE.ADMIN,
+    icon: "VscBook",
+  },
+  {
+    id: 9,
+    name: "All Instructors",
+    path: "/dashboard/all-instructors",
+    type: ACCOUNT_TYPE.ADMIN,
+    icon: "VscNotebook",
   },
 ];
