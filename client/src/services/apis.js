@@ -6,6 +6,7 @@ export const endpoints = {
     SEND_OTP_API : `${BASE_URL}/auth/sendOTP`,
     RESETPASSTOKEN_API : `${BASE_URL}/auth/reset-password-token`,
     RESETPASSWORD_API : `${BASE_URL}/auth/reset-password`,
+    TOKEN_LOGIN_API : `${BASE_URL}/auth/login-token`,
 }
 
 export const categories ={

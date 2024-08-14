@@ -66,7 +66,7 @@ exports.signup = async (req, res) => {
       confirmPassword,
       accountType,
       otp,
-      contactNumber,
+
     } = req.body;
     // validate user data
     if (
@@ -75,8 +75,8 @@ exports.signup = async (req, res) => {
       !email ||
       !password ||
       !confirmPassword ||
-      !otp||
-      !contactNumber
+      !otp
+      
     ) {
       return res.status(400).json({
         success: false,
@@ -129,7 +129,6 @@ exports.signup = async (req, res) => {
       email,
       password: hashedPassword,
       accountType,
-      contactNumber:contactNumber,
       additionalDetails: profileDetails._id,
       image: `https://api.dicebear.com/8.x/initials/svg?seed=${firstName}+${lastName}`,
     });
@@ -258,6 +257,35 @@ exports.changePassword = async (req, res) => {
     }
   } catch (error) {
     console.log("Error occured while changing password", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+exports.tokenLogin = async (req, res) => {
+  try {
+    //fetch email and password from the request body
+    console.log(req.user.user.id);
+    // check if user exists or not
+    const user = await Users.findById(req.user.user.id).populate(
+      "additionalDetails"
+    );
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "User not registered , please signup",
+      });
+    }
+    // compare password
+    
+      res.status(200).json({
+        success: true,
+        message: "User logged in successfully",
+        user,
+      });
+    }  catch (error) {
+    console.log("Error occured while logging in", error);
     return res.status(500).json({
       success: false,
       message: "Internal server error",

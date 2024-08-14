@@ -28,7 +28,7 @@ router.get("/getCourseDetails",auth,getCourseDetails);
 
 // category routes
 router.post("/createCategory",auth,isAdmin,createCategory);
-router.get("/showAllCategory",auth,showAllCategory);
+router.get("/showAllCategory",showAllCategory);
 router.get("/categoryPageDetails",auth,categoryPageDetails);
 
 // rating and review routes

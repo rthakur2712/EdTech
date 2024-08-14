@@ -7,10 +7,11 @@ const {updateProfile, deleteAccount ,getAllUserDetails,getAllEnrolledCourses,upd
 const {auth} = require('../middlewares/auth');
 
 // routes
-router.post("/updateProfile",auth,updateProfile);
-router.post("/deleteAccount",auth,deleteAccount);
-router.get("/getAllUserDetails",auth,getAllUserDetails);
-router.get("/getAllEnrolledCourses",auth,getAllEnrolledCourses);
-router.post("/updateDisplayPicture",auth,updateDisplayPicture);
+router.use(auth);
+router.post("/updateProfile",updateProfile);
+router.post("/deleteAccount",deleteAccount);
+router.get("/getAllUserDetails",getAllUserDetails);
+router.get("/getAllEnrolledCourses",getAllEnrolledCourses);
+router.post("/updateDisplayPicture",updateDisplayPicture);
 
 module.exports = router;

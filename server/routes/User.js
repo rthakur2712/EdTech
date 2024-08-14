@@ -6,7 +6,8 @@ const {
     login,
     signup,
     sendOTP,
-    changePassword
+    changePassword,
+    tokenLogin
 } = require('../controllers/Auth');
 
 const {
@@ -19,6 +20,7 @@ const { auth } = require('../middlewares/auth');
 
 // routes
 router.post("/login",login);
+router.post("/login-token",auth,tokenLogin);
 router.post("/signup",signup);
 router.post("/sendOTP", sendOTP);
 router.post("/changePassword", changePassword);
