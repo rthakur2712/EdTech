@@ -8,7 +8,7 @@ export default function Dashboard() {
     const {loading:profileLoading} = useSelector((state)=>state.profile)
 
     if(authLoading || profileLoading){
-        return <div className='loader'></div>
+        return <div className='loader h-[80vh] flex justify-center items-center'></div>
     }
 
   return (

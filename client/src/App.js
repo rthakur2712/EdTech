@@ -13,12 +13,15 @@ import Dashboard from "./pages/Dashboard";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { tokenLogin } from "./services/operationa/auth";
+import MyProfile from "./components/core/dashboard/MyProfile";
+import EnrolledCourses from "./components/core/dashboard/EnrolledCourses";
+import PurchaseHistory from "./components/core/dashboard/PurchaseHistory";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      dispatch(tokenLogin(localStorage.getItem("token")));
+      dispatch(tokenLogin());
     }
   }, []);
   return (
@@ -33,7 +36,19 @@ function App() {
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/dashboard/my-profile" element={<Dashboard />} />
+        <Route element={<Dashboard />}>
+          <Route
+            path="/dashboard/enrolled-courses"
+            element={<EnrolledCourses />}
+          />
+          <Route path="/dashboard/my-profile" 
+                 element={<MyProfile />} />
+          <Route
+            path="/dashboard/purchase-history"
+            element={<PurchaseHistory />}
+          />
+          {/* <Route path="/dashboard/cart" element={<Cart/>}/> */}
+        </Route>
       </Routes>
     </div>
   );
