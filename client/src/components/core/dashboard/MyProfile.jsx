@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import EditBTN from '../profile/EditBTN'
+import { Link } from 'react-router-dom'
 
 export default function MyProfile() {
     const {user}=useSelector((state)=>state.profile)
@@ -25,14 +26,18 @@ export default function MyProfile() {
                     <p className='text-sm text-richblack-300'>{user.email}</p>
                 </div>
                 </div>
-               
-                <EditBTN/>
+               <Link to={'/dashboard/settings'}>
+               <EditBTN/>
+               </Link>
+                
             </div>
             {/* section 2 details containing email id and phone number */}
             <div className='p-6 bg-richblack-800 flex flex-col gap-5 rounded-lg text-richblack-5'>
                 <div className='flex justify-between items-center'>
                     <h1 className='text-lg'>Personal Details</h1>
-                    <EditBTN/>
+                    <Link to={'/dashboard/settings'}>
+               <EditBTN/>
+               </Link>
                 </div>
                 <div className='flex gap-10 '>
                     <div className='w-[50%]'>

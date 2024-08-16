@@ -16,6 +16,8 @@ import { tokenLogin } from "./services/operationa/auth";
 import MyProfile from "./components/core/dashboard/MyProfile";
 import EnrolledCourses from "./components/core/dashboard/EnrolledCourses";
 import PurchaseHistory from "./components/core/dashboard/PurchaseHistory";
+import Settings from "./components/core/dashboard/Settings";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -47,6 +49,7 @@ function App() {
             path="/dashboard/purchase-history"
             element={<PurchaseHistory />}
           />
+          <Route path="/dashboard/settings" element={<Settings/>}/>
           {/* <Route path="/dashboard/cart" element={<Cart/>}/> */}
         </Route>
       </Routes>

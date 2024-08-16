@@ -23,7 +23,7 @@ export default function Sidebar() {
   }
 
   return (
-    <div className="w-[222px] h-[95vh] py-[30px] bg-richblack-800">
+    <div className="w-[222px] h-[92vh] py-[30px] bg-richblack-800">
       <div className="border border-b-[#424854] pb-5">
         {sidebarLinks.map((link, index) => {
           if (link.type && link.type !== user.accountType) {
@@ -45,9 +45,11 @@ export default function Sidebar() {
         })}
       </div>
       <div className="mt-5">
+        <Link to="/dashboard/settings">
         <div className="px-6 py-2 text-richblack-300 flex items-center gap-3 text-sm">
           <IoIosSettings /> Settings
         </div>
+        </Link>
         <div
           className="px-6 py-2 text-richblack-300 flex items-center gap-3 text-sm cursor-pointer"
           onClick={()=>setComformModal(prev=>!prev)}
