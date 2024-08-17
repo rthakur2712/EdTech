@@ -1,9 +1,13 @@
 import toast from "react-hot-toast"
 import {apiConnector} from "../apiConnector";
 import { settingsEndpoints } from "../apis";
+import { tokenLogin } from "./auth";
+import { setUser } from "../../slices/profileSlice";
+import { useSelector } from "react-redux";
 
 // update display picture
-export function updateDisplayPicture(formdata,token){
+export function updateDisplayPicture(formdata,token,navigate){
+    // const {user}= useSelector((state)=>state.profile);
     return async(dispatch)=>{
         const toastId=toast.loading('Updating Profile Picture')
         try{
@@ -12,16 +16,24 @@ export function updateDisplayPicture(formdata,token){
                 Authorization:`Bearer ${token}`
             });
             console.log("Response of update display picture",response);
+            dispatch(setUser( response.data.data));
+
              toast.success('Profile Picture Updated');
+            //  dispatch(tokenLogin());
+             navigate('/dashboard/my-profile')
+
         }catch(error){
             console.log("Error occured while updating profile picture",error);
             toast.error('Error occured while updating profile picture');
         }
+       
+            
+        
         toast.dismiss(toastId);
     }
 }
 // update profile
-export function updateProfile(formdata,token,navigate){
+export function updateProfile(formdata,token,navigate,user){
     return async(dispatch)=>{
         const toastId=toast.loading('Updating Profile')
         try{
@@ -30,8 +42,12 @@ export function updateProfile(formdata,token,navigate){
                 Authorization:`Bearer ${token}`
             });
             console.log("Response of update profile",response);
+            // dispatch(setUser({ ...user, response.data.updateProfile}));
+            // dispatch(setUser({ ...user, contactNumber:response.data.updateProfile.contactNumber,about:response.data.updateProfile.about,gender:response.data.updateProfile }));
+            // console.log("user",user);
+            // dispatch(tokenLogin());
             toast.success('Profile Updated');
-             navigate('/dashboard/my-profile')
+            //  navigate('/dashboard/my-profile')
         }catch(error){
             console.log("Error occured while updating profile",error);
             toast.error('Error occured while updating profile');

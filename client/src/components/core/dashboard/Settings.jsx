@@ -24,7 +24,7 @@ export default function Settings() {
     const file = event.target.files[0];
     const formData = new FormData()
     formData.append("displayPicture", file)
-    dispatch(updateDisplayPicture(formData, token));
+    dispatch(updateDisplayPicture(formData, token,navigate));
     }
   return (
     <div>
@@ -33,7 +33,7 @@ export default function Settings() {
       <div className="w-[800px] mt-1 ml-36 flex flex-col gap-5">
         {/* change profile pic section */}
         <div className="bg-richblack-800 flex rounded-lg gap-8 p-4 items-center">
-          <img src={user.image} alt={user.name} className="w-20 rounded-full" />
+          <img src={user.image} alt={user.name} className="w-20 h-20 rounded-full object-cover" />
           <div className="flex flex-col gap-3">
             <h1 className="text-richblack-25">Change Profile Picture</h1>
             <div className="flex gap-3">
@@ -95,7 +95,7 @@ export default function Settings() {
               <p className="text-richblack-5 text-sm">Date of birth</p>
               <input
                 type="date"
-                value={user.additionalDetails.dateOfBirth}
+                defaultValue={user.additionalDetails.dateOfBirth}
                 className="bg-richblack-700 p-2 rounded-md text-richblack-200 w-full"
                 style={{
                   boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
@@ -119,7 +119,7 @@ export default function Settings() {
                   boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                 }}
                 {...register("gender", { required: true })}
-                // defaultValue={user?.additionalDetails?.gender}
+                defaultValue={user?.additionalDetails?.gender}
               >
                 {genders.map((ele, i) => {
                   return (
