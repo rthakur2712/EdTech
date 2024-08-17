@@ -11,7 +11,7 @@ exports.updateProfile = async (req, res) => {
         const {gender,dateOfBirth="",about="",contactNumber} = req.body;
         const id = req.user.user.id;
         // validation
-        if(!id || !gender || !dateOfBirth || !about || !contactNumber){
+        if(!id || !gender || !dateOfBirth || !contactNumber){
             return res.status(400).json({
                 success:false,
                 message:"Please provide all details"

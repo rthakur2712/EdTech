@@ -24,7 +24,7 @@ export default function Sidebar() {
 
   return (
     <div className="w-[222px] h-[92vh] py-[30px] bg-richblack-800">
-      <div className="border border-b-[#424854] pb-5">
+      <div className="border-b-[#424854] pb-5">
         {sidebarLinks.map((link, index) => {
           if (link.type && link.type !== user.accountType) {
             return null;
@@ -46,8 +46,10 @@ export default function Sidebar() {
       </div>
       <div className="mt-5">
         <Link to="/dashboard/settings">
-        <div className="px-6 py-2 text-richblack-300 flex items-center gap-3 text-sm">
-          <IoIosSettings /> Settings
+        <div  className={`px-6 py-2 text-richblack-300 flex items-center gap-3 text-sm ${
+                  matchRoute("/dashboard/settings") ? "text-yellow-50 bg-yellow-800" : ""
+                } `}>
+          <IoIosSettings /> Edit Profile
         </div>
         </Link>
         <div

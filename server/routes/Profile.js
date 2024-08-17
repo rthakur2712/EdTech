@@ -8,10 +8,10 @@ const {auth} = require('../middlewares/auth');
 
 // routes
 router.use(auth);
-router.post("/updateProfile",updateProfile);
-router.post("/deleteAccount",deleteAccount);
+router.put("/updateProfile",updateProfile);
+router.delete("/deleteAccount",deleteAccount);
 router.get("/getAllUserDetails",getAllUserDetails);
 router.get("/getAllEnrolledCourses",getAllEnrolledCourses);
-router.post("/updateDisplayPicture",updateDisplayPicture);
+router.put("/updateDisplayPicture",updateDisplayPicture);
 
 module.exports = router;
