@@ -13,7 +13,7 @@ export default function Sidebar() {
   );
   const [conformModal,setComformModal] = useState(false);
 
-  console.log(user);
+  // console.log(user);
   const location = useLocation();
   const matchRoute = (route) => {
     return matchPath(route, location.pathname);

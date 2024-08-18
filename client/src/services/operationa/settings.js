@@ -3,7 +3,7 @@ import {apiConnector} from "../apiConnector";
 import { settingsEndpoints } from "../apis";
 import { tokenLogin } from "./auth";
 import { setUser } from "../../slices/profileSlice";
-import { useSelector } from "react-redux";
+import { setToken } from "../../slices/authSlice";
 
 // update display picture
 export function updateDisplayPicture(formdata,token,navigate){
@@ -33,7 +33,8 @@ export function updateDisplayPicture(formdata,token,navigate){
     }
 }
 // update profile
-export function updateProfile(formdata,token,navigate,user){
+export function updateProfile(formdata,token,navigate){
+    // console.log("token",token)
     return async(dispatch)=>{
         const toastId=toast.loading('Updating Profile')
         try{
@@ -45,9 +46,9 @@ export function updateProfile(formdata,token,navigate,user){
             // dispatch(setUser({ ...user, response.data.updateProfile}));
             // dispatch(setUser({ ...user, contactNumber:response.data.updateProfile.contactNumber,about:response.data.updateProfile.about,gender:response.data.updateProfile }));
             // console.log("user",user);
-            // dispatch(tokenLogin());
+            dispatch(tokenLogin());
             toast.success('Profile Updated');
-            //  navigate('/dashboard/my-profile')
+             navigate('/dashboard/my-profile')
         }catch(error){
             console.log("Error occured while updating profile",error);
             toast.error('Error occured while updating profile');
@@ -59,13 +60,20 @@ export function updateProfile(formdata,token,navigate,user){
 export function deleteAccount(token,navigate){
     return async(dispatch)=>{
         const toastId=toast.loading('Deleting Account')
+        console.log("token",token);
         try{
             const response = await apiConnector('DELETE',settingsEndpoints.DELETE_ACCOUNT_API,null,{
                 // "Content-Type":"application/json",
-                Authorization:`Bearer ${token}`
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             });
             console.log("Response of delete account",response);
             toast.success('Account Deleted');
+            localStorage.removeItem("token");
+            dispatch(setToken(null));
+            dispatch(setUser(null));
+            dispatch(tokenLogin());
             navigate('/');
         }catch(error){
             console.log("Error occured while deleting account",error);

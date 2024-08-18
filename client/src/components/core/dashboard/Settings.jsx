@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 import { useForm } from "react-hook-form";
-import { updateDisplayPicture, updateProfile } from "../../../services/operationa/settings";
+import { deleteAccount, updateDisplayPicture, updateProfile } from "../../../services/operationa/settings";
 import { useNavigate } from "react-router-dom";
 
 export default function Settings() {
@@ -12,7 +12,7 @@ export default function Settings() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm()
-  const { token } = useSelector((state) => state.auth);
+  const { token } = useSelector((state) => state.auth) || localStorage.getItem("token");
   const { user } = useSelector((state) => state.profile);
   if (!user) {
     return <div className="loader"></div>;
@@ -25,6 +25,9 @@ export default function Settings() {
     const formData = new FormData()
     formData.append("displayPicture", file)
     dispatch(updateDisplayPicture(formData, token,navigate));
+    }
+    const handleDelete = () => {
+      dispatch(deleteAccount(token,navigate));
     }
   return (
     <div>
@@ -80,7 +83,7 @@ export default function Settings() {
             <label className="flex flex-col w-[50%] gap-[6px]">
               <p className="text-richblack-5 text-sm">Proffesion</p>
               <select
-                className="bg-richblack-700 p-2 rounded-md text-richblack-200"
+                className="bg-richblack-700 p-2 rounded-md text-richblack-5"
                 style={{
                   boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                 }}
@@ -96,7 +99,7 @@ export default function Settings() {
               <input
                 type="date"
                 defaultValue={user.additionalDetails.dateOfBirth}
-                className="bg-richblack-700 p-2 rounded-md text-richblack-200 w-full"
+                className="bg-richblack-700 p-2 rounded-md text-richblack-5 w-full"
                 style={{
                   boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                 }}
@@ -114,7 +117,7 @@ export default function Settings() {
                 type="text"
                 name="gender"
                 id="gender"
-                className="bg-richblack-700 p-2 rounded-md text-richblack-200"
+                className="bg-richblack-700 p-2 rounded-md text-richblack-5"
                 style={{
                   boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                 }}
@@ -137,8 +140,8 @@ export default function Settings() {
 
               <input
                 type="text"
-                value={user.additionalDetails.contactNumber}
-                className="bg-richblack-700 p-2 rounded-md text-richblack-200 w-full"
+                defaultValue={user.additionalDetails.contactNumber}
+                className="bg-richblack-700 p-2 rounded-md text-richblack-5 w-full"
                 style={{
                   boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                 }}
@@ -157,8 +160,8 @@ export default function Settings() {
               <p className="text-richblack-5 text-sm">About</p>
               <input
                 type="text"
-                value={user.additionalDetails.about}
-                className="bg-richblack-700 p-2 rounded-md text-richblack-200 w-full"
+                defaultValue={user.additionalDetails.about}
+                className="bg-richblack-700 p-2 rounded-md text-richblack-5 w-full"
                 style={{
                   boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                 }}
@@ -191,7 +194,9 @@ export default function Settings() {
               Paid Courses.This account contains Paid Courses. Deleting your
               account will remove all the contain associated with it.
             </p>
-            <div className="text-pink-300 italic cursor-pointer">
+            <div className="text-pink-300 italic cursor-pointer"
+            onClick={handleDelete}
+            >
               I want to delete my account
             </div>
           </div>

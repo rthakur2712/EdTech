@@ -38,7 +38,7 @@ export function login(email, password, navigate) {
 export function tokenLogin() {
   return async (dispatch) => {
     // const toastId = toast.loading("loading");
-    console.log("hello")
+    // console.log("hello")
     dispatch(setLoading(true));
     try {
       const response = await apiConnector("POST", endpoints.TOKEN_LOGIN_API);
@@ -49,7 +49,7 @@ export function tokenLogin() {
       }
 
       // toast.success("Login Successful");
-      dispatch(setToken(response.data.token));
+      // dispatch(setToken(response.data.token));
       const userImage = response.data?.user?.image
         ? response.data.user.image
         : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`;
