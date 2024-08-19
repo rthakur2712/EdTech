@@ -1,8 +1,9 @@
-const { find, findById } = require("../models/OTP");
+const { find, findById, populate } = require("../models/OTP");
 const Profile = require("../models/Profile");
 const User = require("../models/User");
 const Course = require("../models/Course");
-const { uploadImageToCloudinary } = require("../utils/imageUploader");
+const { uploadImageToCloudinary, deleteResourcesFromCloudinary } = require("../utils/imageUploader");
+const {convertSecondsToDuration} = require("../utils/SecToDuration");
 
 // update profile details handler
 exports.updateProfile = async (req, res) => {
@@ -61,6 +62,8 @@ exports.deleteAccount = async(req,res)=>{
                 message:"User not found"
               })
        }
+       console.log("userDetails",userDetails.image);
+       await deleteResourcesFromCloudinary(userDetails.image);
         // delete user from all courses
         await Course.updateMany(
             {
@@ -106,7 +109,8 @@ exports.getAllUserDetails = async(req,res)=>{
 // get all enrolled courses
 exports.getAllEnrolledCourses = async(req,res)=>{
     try{
-        const userId = req.user._id;
+        // console.log("request",req);
+        const userId = req.user.user.id;
         // validation
         if(!userId){
             return res.status(400).json({
@@ -115,20 +119,56 @@ exports.getAllEnrolledCourses = async(req,res)=>{
             })
         }
         // find user 
-        const userDetails = await User.findById(userId).populate("enrolledCourses").exec();
+        const userDetails = await User.findById(userId)
+        .populate({
+            path:"courses",
+            populate:{
+                path:"sections",
+                populate:{
+                    path:"subSection",
+                }
+            }
+        }).exec();
         if(!userDetails){
             return res.status(400).json({
                 success:false,
                 message:"User not found"
             })
         }
-        const allEnrolledCourses = userDetails.enrolledCourses;
+        const allEnrolledCourses = userDetails.courses;
+        // console.log("all enrolled courses",allEnrolledCourses);
         if(allEnrolledCourses.length === 0){
             return res.status(400).json({
                 success:false,
                 message:"No courses found"
             })
         }
+        const courseDurations = [];
+        allEnrolledCourses.forEach(course => {
+            let courseDuration = 0;
+            course.sections.forEach(section => {
+            section.subSection.forEach(subSection => {
+                const duration = subSection.timeDuration.split(':'); // split duration into minutes and seconds
+                const minutes = parseInt(duration[0]);
+                const seconds = parseInt(duration[1]);
+                const durationInSeconds = (minutes * 60) + seconds; // convert duration to seconds
+                courseDuration += durationInSeconds;
+            });
+            });
+            courseDurations.push({ courseId: course._id, duration: courseDuration });
+        });
+
+        const finalDurations = courseDurations.map(courseDuration => {
+            return {
+            updateOne: {
+                filter: { _id: courseDuration.courseId },
+                update: { duration: convertSecondsToDuration(courseDuration.duration) }
+            }
+            };
+        });
+
+        // update duration in course schema
+        await Course.bulkWrite(finalDurations);
         // return response
         return res.status(200).json({
             success:true,

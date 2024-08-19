@@ -20,3 +20,10 @@ export const settingsEndpoints = {
     GET_ENROLLED_COURSES_API : `${BASE_URL}/profile/getAllEnrolledCourses`,
     UPDATE_DISPLAY_PICTURE_API : `${BASE_URL}/profile/updateDisplayPicture`,
 }
+
+export const profileEndpoints = {
+ 
+        GET_USER_DETAILS_API: BASE_URL + "/profile/getAllUserDetails",
+        GET_ALl_ENROLLED_COURSES_API: BASE_URL + "/profile/getAllEnrolledCourses",
+        // GET_INSTRUCTOR_DATA_API: BASE_URL + "/profile/instructorDashboard",
+      }

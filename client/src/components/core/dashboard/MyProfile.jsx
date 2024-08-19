@@ -56,22 +56,22 @@ export default function MyProfile() {
                     </div>
                     <div>
                         <p className='text-sm text-richblack-600'>Phone Number</p>
-                        <p className='text-sm '>{user.additionalDetails.contactNumber?user.additionalDetails.contactNumber:"Add Contact Number"}</p>
+                        <p className='text-sm '>{user.additionalDetails.contactNumber?user.additionalDetails.contactNumber:"Add Contact Number..."}</p>
                     </div>
                 </div>
                 <div className='flex gap-10'>
                     <div className='w-[50%]'>
                         <p className='text-sm text-richblack-600'>Date Of Birth</p>
-                        <p className='text-sm'>{user.additionalDetails.dateOfBirth?user.additionalDetails.dateOfBirth:"Add your dob"}</p>
+                        <p className='text-sm'>{user.additionalDetails.dateOfBirth?user.additionalDetails.dateOfBirth:"Add your dob..."}</p>
                     </div>
                     <div>
                         <p className='text-sm text-richblack-600'>Gender</p>
-                        <p className='text-sm '>{user.additionalDetails.gender?user.additionalDetails.gender:"Gender"}</p>
+                        <p className='text-sm '>{user.additionalDetails.gender?user.additionalDetails.gender:"Gender..."}</p>
                     </div>
                 </div>
                 <div>
                     <p className='text-sm text-richblack-600'>About</p>
-                    <p className='text-sm'>{user.additionalDetails.about?user.additionalDetails.about:"Write something about you"}</p>
+                    <p className='text-sm'>{user.additionalDetails.about?user.additionalDetails.about:"Write something about you..."}</p>
                 </div>
                 
             </div>

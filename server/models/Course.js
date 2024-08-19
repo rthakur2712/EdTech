@@ -54,7 +54,12 @@ const courseSchema = new mongoose.Schema({
       required:true,
       ref: "User",
     },
+   
   ],
+  duration:{
+    type:String
+    
+  }
 });
 
 module.exports = mongoose.model("Course",courseSchema);

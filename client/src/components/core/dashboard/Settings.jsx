@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import { deleteAccount, updateDisplayPicture, updateProfile } from "../../../services/operationa/settings";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Settings() {
   const genders=[
@@ -11,6 +11,7 @@ export default function Settings() {
   ]
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // const [formData, setFormData] = useState({});
   const { register, handleSubmit } = useForm()
   const { token } = useSelector((state) => state.auth) || localStorage.getItem("token");
   const { user } = useSelector((state) => state.profile);
@@ -176,9 +177,11 @@ export default function Settings() {
             >
               Save
             </button>
+            <Link to="/dashboard/my-profile">
             <button className="py-[6px] px-[18px] bg-richblack-700 text-richblack-50 rounded-md text-sm">
               Cancel
             </button>
+            </Link>
           </div>
         </form>
         {/* delete account section */}
