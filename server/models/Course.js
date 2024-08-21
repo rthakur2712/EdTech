@@ -59,7 +59,9 @@ const courseSchema = new mongoose.Schema({
   duration:{
     type:String
     
-  }
-});
+  },
+},
+{ timestamps: true }
+);
 
 module.exports = mongoose.model("Course",courseSchema);

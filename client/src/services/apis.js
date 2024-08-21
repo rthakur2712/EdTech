@@ -27,3 +27,8 @@ export const profileEndpoints = {
         GET_ALl_ENROLLED_COURSES_API: BASE_URL + "/profile/getAllEnrolledCourses",
         // GET_INSTRUCTOR_DATA_API: BASE_URL + "/profile/instructorDashboard",
       }
+
+export const courseEndpoints = {
+    GET_ALL_COURSE_DETAILS_API: `${BASE_URL}/course/getAllCourses`,
+    GET_ALL_INSTRUCTOR_COURSE_DETAILS_API: `${BASE_URL}/course/getAllInstructorCourses`,
+}

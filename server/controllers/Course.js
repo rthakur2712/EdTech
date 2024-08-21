@@ -181,3 +181,21 @@ exports.getCourseDetails = async (req, res) => {
     })
   }
 }
+
+exports.getAllInstructorCourses = async (req, res) => {
+  try {
+    const userId = req.user.user.id;
+    const instructorCourses = await Course.find({ instructor: userId });
+    return res.status(200).json({
+      success: true,
+      courses: instructorCourses,
+      message: "Instructor courses fetched successfully",
+    });
+  } catch (error) {
+    console.log("Error occured while fetching instructor courses", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+}
