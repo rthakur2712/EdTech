@@ -1,19 +1,21 @@
-import { createSlice } from "@reduxjs/toolkit";
+// import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-   totalItems : localStorage.getItem('totalItems')?JSON.parse(localStorage.getItem('totalItems')):0,
-};
+// const initialState = {
+//     cart: localStorage.getItem('cart')?JSON.parse(localStorage.getItem('cart')):[],
+//     total: localStorage.getItem('total')?JSON.parse(localStorage.getItem('total')):0,
+//    totalItems : localStorage.getItem('totalItems')?JSON.parse(localStorage.getItem('totalItems')):0,
+// };
 
-export const cartSlice = createSlice({
-    name: "cart",
-    initialState,
-    reducers: {
-        setTotalItems: (state, action) => {
-            state.token = action.payload;
-        },
+// export const cartSlice = createSlice({
+//     name: "cart",
+//     initialState,
+//     reducers: {
+//        addToCart:(state,action)=>{
+
+//        }
      
-    },
-});
+//     },
+// });
 
-export const { setTotalItems } = cartSlice.actions;
-export default cartSlice.reducer;
+// export const { setTotalItems } = cartSlice.actions;
+// export default cartSlice.reducer;

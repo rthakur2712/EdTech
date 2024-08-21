@@ -21,7 +21,8 @@ export default function EnrolledCourses() {
   },[])
   // console.log("enrolled courses",enrolledCourses);
   if(!enrolledCourses){
-    return <div className='loader flex justify-between w-full '></div>
+    return <div className='flex justify-center items-center h-[80vh] w-[100%]'> <div className='loader '></div></div>
+   
   }
   if(enrolledCourses.length===0){
     return <div className='text-richblack-5 font-bold mx-auto mt-20'>You are not enrolled in any course</div>
@@ -60,7 +61,7 @@ export default function EnrolledCourses() {
               />:
               <>
               <ProgressBar
-              completed={100}
+              completed={10}
               height='8px'
               width='200px'
               isLabelVisible={false}

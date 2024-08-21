@@ -177,6 +177,7 @@ export function logout(navigate) {
     try {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
+      localStorage.clear();
       dispatch(setToken(null));
       dispatch(setUser(null));
       navigate("/login");
