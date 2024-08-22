@@ -1,8 +1,13 @@
 import React from 'react'
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
-export default function CoursesList({course}) {
+export default function CoursesList({course,loading}) {
     console.log(course)
+    if(loading){
+        return <div className='flex justify-center items-center h-[60vh]'>
+            <div className='loader'></div>
+        </div>
+    }
   return (
     <div className='flex flex-col gap-5'>
        {
@@ -18,7 +23,7 @@ export default function CoursesList({course}) {
                     </div>
                     </div>
                     <div className='flex w-[40%] text-richblack-100 justify-between'>
-                        <p>{item.duration}</p>
+                        <p>{item.duration?item.duration:<div>00m{" "}00s</div>}</p>
                         <p>{"$"}{item.price}</p>
                         <p className='flex gap-3 text-2xl'><MdEdit /><MdDelete /></p>
                     </div>

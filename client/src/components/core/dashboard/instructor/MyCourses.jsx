@@ -35,7 +35,7 @@ export default function MyCourses() {
             </div>
        </div>
        <div>
-            <CoursesList course={course} />
+            <CoursesList course={course} loading={loading} />
        </div>
        </div>
       
