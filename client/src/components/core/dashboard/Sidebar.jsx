@@ -23,7 +23,7 @@ export default function Sidebar() {
   }
 
   return (
-    <div className="w-[222px] h-[92vh] py-[30px] bg-richblack-800">
+    <div className="w-[222px]  py-[30px] bg-richblack-800">
       <div className="border-b-[#424854] pb-5">
         {sidebarLinks.map((link, index) => {
           if (link.type && link.type !== user.accountType) {

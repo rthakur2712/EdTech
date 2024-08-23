@@ -19,7 +19,8 @@ import PurchaseHistory from "./components/core/dashboard/PurchaseHistory";
 import Settings from "./components/core/dashboard/Settings";
 import Cart from "./components/core/dashboard/Cart";
 import MyCourses from "./components/core/dashboard/instructor/MyCourses";
-// import AddCourse from "./components/core/dashboard/instructor/AddCourse";
+import AddCourse from "./components/core/dashboard/instructor/AddCourse/AddCourse";
+
 
 
 function App() {
@@ -56,8 +57,8 @@ function App() {
             path="/dashboard/my-courses"
             element={<MyCourses/>}
             />
-            {/* <Route path="/dashboard/add-course" element={<AddCourse/>}/>
-          <Route path="/dashboard/settings" element={<Settings/>}/> */}
+            <Route path="/dashboard/add-course" element={<AddCourse/>}/>
+          <Route path="/dashboard/settings" element={<Settings/>}/>
           <Route path="/dashboard/cart" element={<Cart/>}/>
         </Route>
       </Routes>

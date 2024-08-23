@@ -22,7 +22,7 @@ const viewCourseSlice = createSlice({
         },
         updateCompleteLectures:(state,action)=>{
             state.completeLectures=[...state.completeLectures,action.payload]
-        }
+        },
     }
 })
 export const {
