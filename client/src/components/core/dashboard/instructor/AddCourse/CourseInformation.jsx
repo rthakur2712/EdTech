@@ -7,9 +7,14 @@ import { HiOutlineCurrencyRupee } from "react-icons/hi";
 import ChipInput from "./ChipInput";
 import Upload from "./Upload";
 import { MdKeyboardArrowRight } from "react-icons/md";
+import { addCourse, editCourseDetails } from "../../../../../services/operationa/course";
+import {setStep,setCourse} from"../../../../../slices/courseSlice"
+import toast from "react-hot-toast";
 
 export default function CourseInformation() {
     const {course, editCourse } = useSelector((state) => state.course);
+    const { token } = useSelector((state) => state.auth);
+
   const {
     handleSubmit,
     register,
@@ -30,10 +35,90 @@ export default function CourseInformation() {
   };
   useEffect(() => {
     fetchSubLinks();
+    if(editCourse){
+        setValue("courseTitle",course?.courseName)
+        setValue("courseDescripton",course?.courseDescription)
+        setValue("price",course?.price)
+        setValue("category",course?.category)
+        setValue("whatWillYouLearn",course?.whatWillYouLearn)
+        setValue("tag",course?.tag)
+        setValue("thumbnail",course?.thumbnail)
+    }
   }, []);
+  const isFormUpdated=()=>{
+    const currentValues=getValues();
+    if(
+        currentValues.courseTitle===course?.courseName&&
+        currentValues.courseDescription===course?.courseDescription&&
+        currentValues.price===course?.price&&
+        currentValues.category===course?.category&&
+        currentValues.whatWillYouLearn===course?.whatWillYouLearn&&
+        currentValues.tag===course?.tag&&
+        currentValues.thumbnail===course?.thumbnail
+    ){
+        return false
+    }
+    return true
+  }
+  const onSubmit = async(data) => {
+    if(editCourse){
+        if(isFormUpdated()){
+           const currentValues=getValues();
+           const formData=new FormData();
+           formData.append("courseId",course._id)
+           if (currentValues.courseTitle !== course.courseName) {
+            formData.append("courseName", data.courseTitle)
+          }
+          if (currentValues.courseShortDesc !== course.courseDescription) {
+            formData.append("courseDescription", data.courseShortDesc)
+          }
+          if (currentValues.coursePrice !== course.price) {
+            formData.append("price", data.coursePrice)
+          }
+          if (currentValues.courseTags.toString() !== course.tag.toString()) {
+            formData.append("tag", JSON.stringify(data.courseTags))
+            // formData.append("tag", data.courseTags)
+          }
+          if (currentValues.courseBenefits !== course.whatYouWillLearn) {
+            formData.append("whatYouWillLearn", data.courseBenefits)
+          }
+          if (currentValues.courseCategory._id !== course.category._id) {
+            formData.append("category", data.courseCategory)
+          }
+          if (currentValues.courseImage !== course.thumbnail) {
+            formData.append("thumbnailImage", data.courseImage)
+          }
+          const result = await editCourseDetails(formData, token)
+          if(result){
+            dispatch(setStep(2));
+            dispatch(setCourse(result));
+          }
+        }else{
+            toast.error("No changes made to the Course Details")
+        }
+        return
+    }
+    const formData= new FormData();
+    formData.append("courseName",data.courseTitle)
+    formData.append("courseDescription",data.courseDescription)
+    formData.append("price",data.price)
+    formData.append("category",data.category)
+    formData.append("tag",JSON.stringify(data.tag))
+    formData.append("whatWillYouLearn",data.whatWillYouLearn)
+    formData.append("thumbnailImage",data.thumbnail)
+    const result=await addCourse(formData,token)
+    console.log("result",result)
+    if(result){
+        dispatch(setStep(2));
+        dispatch(setCourse(result));
+    }
+
+  }
   return (
     <div className="bg-richblack-800 rounded-md p-6">
-      <form className="flex flex-col gap-4">
+      <form className="flex flex-col gap-4"
+      onSubmit={handleSubmit(onSubmit)}
+      >
         <label className="flex flex-col gap-1 text-richblack-5 text-sm">
           <p>Course Title <sup className="text-pink-200">*</sup></p>
           <input

@@ -31,4 +31,6 @@ export const profileEndpoints = {
 export const courseEndpoints = {
     GET_ALL_COURSE_DETAILS_API: `${BASE_URL}/course/getAllCourses`,
     GET_ALL_INSTRUCTOR_COURSE_DETAILS_API: `${BASE_URL}/course/getAllInstructorCourses`,
+    EDIT_COURSE_API: BASE_URL + "/course/editCourse",
+    CREATE_COURSE_API: BASE_URL + "/course/createCourse",
 }
