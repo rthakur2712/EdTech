@@ -6,11 +6,15 @@ export default function ChipInput({label, name, placeholder, register, errors, s
     const { editCourse, course } = useSelector((state) => state.course)
     const [chips, setChips] = useState([])
     useEffect(()=>{
+        console.log(course)
         if(editCourse){
             setChips(course?.tag)
         }
-        register(name, { required: true, validate: (value) => value.length > 0 }, chips);
+       
     },[])
+    useEffect(() => {
+        register(name, { required: true }, chips);
+    },[register])
      // "Updates value whenever 'chips' is modified
   useEffect(() => {
     setValue(name, chips)
@@ -46,7 +50,7 @@ const handleDeleteChip =(chipIndex)=>{
                     <button
                     onClick={(event)=>{
                         event.preventDefault();
-                        if(event.key!="Enter"||event.key!=","){
+                        if(event.key!=="Enter"||event.key!==","){
                         handleDeleteChip(index)}}}
                     >
                     <MdClose className="text-sm" />

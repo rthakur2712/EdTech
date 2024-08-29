@@ -1,29 +1,32 @@
-import React from 'react'
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { logout } from '../../services/operationa/auth';
+import IconBtn from "./IconBtn"
 
+export default function ConfirmationModal({ modalData }) {
+    return (
+        <div className="fixed inset-0 z-[1000] !mt-0 grid place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm">
+            <div className="w-10/12 max-w-[350px] rounded-lg border border-richblack-400 bg-richblack-800 p-6">
+                <p className="text-2xl font-semibold text-richblack-5">
+                    {modalData?.text1}
+                </p>
 
+                <p className="mt-3 mb-5 leading-6 text-richblack-200">
+                    {modalData?.text2}
+                </p>
 
-export default function ConformationModal({ConformationModal,setComformModal}) {
-  const dispatch = useDispatch();
-  const navigate=useNavigate();
+                <div className="flex items-center gap-x-4">
+                    <IconBtn
+                        onclick={modalData?.btn1Handler}
+                        text={modalData?.btn1Text}
+                    />
+                    <button
+                        className="cursor-pointer rounded-md bg-richblack-200 text-richblack-900 hover:bg-richblack-900 hover:text-richblack-200
+                                   py-[8px] px-[20px] font-semibold duration-300"
+                        onClick={modalData?.btn2Handler}
+                    >
+                        {modalData?.btn2Text}
+                    </button>
+                </div>
 
-const logoutHandler = () => {
-  dispatch(logout(navigate));
-}
-  return (
-    <div className='text-white bg-richblack-900 w-[80%] flex flex-col gap-2 text-center mx-auto rounded-lg mt-2 px-4 py-2'>
-      <div>Are you sure</div>
-      <div className='text-xs text-richblack-300'>You will be logged out</div>
-      <div className='flex gap-2'>
-        <div className='text-center text-sm px-3 py-1 rounded-md font-bold bg-yellow-25 text-black cursor-pointer'
-        onClick={logoutHandler}
-        >Logout</div>
-        <div className='text-center text-sm px-3 py-1 rounded-md font-bold bg-richblack-500 text-black cursor-pointer'
-        onClick={()=>setComformModal(false)}
-        >Cancel</div>
-      </div>
-    </div>
-  )
+            </div>
+        </div>
+    )
 }

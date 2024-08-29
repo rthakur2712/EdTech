@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 exports.createCourse = async (req, res) => {
   try {
     // fetch all details from request body
-    const { courseName, courseDescription, price, whatWillYouLearn, category } =
+    const { courseName, courseDescription, price, whatWillYouLearn, category ,tag} =
       req.body;
     const thumbnail = req.files.thumbnailImage;
     // validation
@@ -18,7 +18,8 @@ exports.createCourse = async (req, res) => {
       !price ||
       !whatWillYouLearn ||
       !category ||
-      !thumbnail
+      !thumbnail ||
+      !tag
     ) {
       return res.status(400).json({
         success: false,
@@ -57,6 +58,7 @@ exports.createCourse = async (req, res) => {
       price,
       category: categoryDetails._id,
       thumbnail: thumbnailImage.secure_url,
+      tag: JSON.parse(tag),
     });
     // add course to user
   
@@ -249,7 +251,7 @@ exports.editCourse = async (req, res) => {
            .populate("category")
            .populate("ratingAndReviews")
            .populate({
-               path: "courseContent",
+               path: "sections",
                populate: {
                    path: "subSection",
                },

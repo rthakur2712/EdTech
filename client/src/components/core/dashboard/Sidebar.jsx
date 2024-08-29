@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { sidebarLinks } from "../../../data/dashboard-links";
-import {  useSelector } from "react-redux";
-import { Link, matchPath, useLocation } from "react-router-dom";
+import {  useDispatch, useSelector } from "react-redux";
+import { Link, matchPath, useLocation, useNavigate } from "react-router-dom";
 import * as Icons from "react-icons/vsc";
 import { IoIosSettings } from "react-icons/io";
 import { VscSignOut } from "react-icons/vsc";
 import ConformationModal from "../../common/ConformationModal";
+import { logout } from "../../../services/operationa/auth";
 
 export default function Sidebar() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { user } = useSelector(
     (state) => state.profile
   );
-  const [conformModal,setComformModal] = useState(false);
+  const [confirmationModal, setConfirmationModal] = useState(null)
 
   // console.log(user);
   const location = useLocation();
@@ -31,7 +34,7 @@ export default function Sidebar() {
           }
           const Icon = Icons[link.icon];
           return (
-            <Link to={link.path}>
+            <Link to={link.path} key={index}>
               <div
                 className={`px-6 py-2 text-richblack-300 flex items-center gap-3 text-sm ${
                   matchRoute(link.path) ? "text-yellow-50 bg-yellow-800" : ""
@@ -56,12 +59,20 @@ export default function Sidebar() {
         </Link>
         <div
           className="px-6 py-2 text-richblack-300 flex items-center gap-3 text-sm cursor-pointer"
-          onClick={() => setComformModal(prev => !prev)}
+          onClick={() => setConfirmationModal({
+            text1: "Are you sure ?",
+            text2: "You will be logged out of your account.",
+            btn1Text: "Logout",
+            btn2Text: "Cancel",
+            btn1Handler: () => dispatch(logout(navigate)),
+            btn2Handler: () => setConfirmationModal(null),
+          })
+        }
         >
           <VscSignOut /> Logout
         </div>
       </div>
-      {conformModal && <ConformationModal conformModal={conformModal} setComformModal={setComformModal} />}
+      {confirmationModal && <ConformationModal modalData={confirmationModal} />}
     </div>
   );
 }

@@ -37,7 +37,7 @@ export default function CourseInformation() {
     fetchSubLinks();
     if(editCourse){
         setValue("courseTitle",course?.courseName)
-        setValue("courseDescripton",course?.courseDescription)
+        setValue("courseDescription",course?.courseDescription)
         setValue("price",course?.price)
         setValue("category",course?.category)
         setValue("whatWillYouLearn",course?.whatWillYouLearn)
@@ -61,7 +61,9 @@ export default function CourseInformation() {
     return true
   }
   const onSubmit = async(data) => {
+    console.log("first")
     if(editCourse){
+      console.log("second")
         if(isFormUpdated()){
            const currentValues=getValues();
            const formData=new FormData();
@@ -69,24 +71,24 @@ export default function CourseInformation() {
            if (currentValues.courseTitle !== course.courseName) {
             formData.append("courseName", data.courseTitle)
           }
-          if (currentValues.courseShortDesc !== course.courseDescription) {
-            formData.append("courseDescription", data.courseShortDesc)
+          if (currentValues.courseDescription !== course.courseDescription) {
+            formData.append("courseDescription", data.courseDescription)
           }
-          if (currentValues.coursePrice !== course.price) {
-            formData.append("price", data.coursePrice)
+          if (currentValues.price !== course.price) {
+            formData.append("price", data.price)
           }
-          if (currentValues.courseTags.toString() !== course.tag.toString()) {
-            formData.append("tag", JSON.stringify(data.courseTags))
+          if (currentValues.tag.toString() !== course.tag.toString()) {
+            formData.append("tag", JSON.stringify(data.tag))
             // formData.append("tag", data.courseTags)
           }
-          if (currentValues.courseBenefits !== course.whatYouWillLearn) {
-            formData.append("whatYouWillLearn", data.courseBenefits)
+          if (currentValues.whatWillYouLearn !== course.whatWillYouLearn) {
+            formData.append("whatWillYouLearn", data.whatWillYouLearn)
           }
-          if (currentValues.courseCategory._id !== course.category._id) {
-            formData.append("category", data.courseCategory)
+          if (currentValues.category._id !== course.category._id) {
+            formData.append("category", data.category)
           }
-          if (currentValues.courseImage !== course.thumbnail) {
-            formData.append("thumbnailImage", data.courseImage)
+          if (currentValues.thumbnail !== course.thumbnail) {
+            formData.append("thumbnailImage", data.thumbnail)
           }
           const result = await editCourseDetails(formData, token)
           if(result){
@@ -210,7 +212,9 @@ export default function CourseInformation() {
               }}
             {...register("whatWillYouLearn", { required: true })} />
          </label>
-        <button className="bg-yellow-50 w-fit px-6 py-3 rounded-md flex items-center gap-2">Next<MdKeyboardArrowRight /></button>
+        <button className="bg-yellow-50 w-fit px-6 py-3 rounded-md flex items-center gap-2"
+        type="submit"
+        >Next<MdKeyboardArrowRight /></button>
       </form>
     </div>
   );
