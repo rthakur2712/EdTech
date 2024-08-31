@@ -6,9 +6,9 @@ import CourseBuilder from './CourseBuilder'
 import Publish from './Publish'
 
 export default function RenderComponents() {
-    console.log("hello")
+    // console.log("hello")
     const { step } = useSelector((state) => state.course)
-    console.log("step",step)
+    // console.log("step",step)
     const steps=[
         {
             id:1,

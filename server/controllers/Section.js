@@ -32,7 +32,8 @@ exports.createSection = async (req, res) => {
                 {sections:newSection._id}
             },
             {new:true}
-        );
+        ).populate({path:"sections",populate:{path:"subSection"}});
+        ;
         return res.status(200).json({
             success:true,
             message:"Section created successfully",

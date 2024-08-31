@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 // import IconBtn from "../../../../common/IconBtn";
 import { CiCirclePlus } from "react-icons/ci";
-import { MdKeyboardArrowRight } from "react-icons/md";
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { setCourse, setEditCourse, setStep } from "../../../../../slices/courseSlice";
 import toast from "react-hot-toast";
 import { createSection, updateSection } from "../../../../../services/operationa/course";
@@ -74,33 +74,36 @@ export default function CourseBuilder() {
 
   }
   return (
-    <div className="text-richblack-5">
-      <p>Course Builder</p>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>Section Name</label>
+    <div className="text-richblack-5 bg-richblack-800 p-6 rounded-lg flex flex-col gap-6 ">
+      <p className="text-3xl">Course Builder</p>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <div className="flex flex-col gap-4">
+          {/* <label className="text-2xl">Section Name</label> */}
           <input
             type="text"
             placeholder="Add a Section to build your Course"
-            className="w-full"
+            className="bg-richblack-700 p-3 rounded-md"
+            style={{
+              boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+            }}
             {...register("sectionName", { required: true })}
           />
           {errors.sectioinName && <span>Sectioin Name is Required</span>}
         </div>
         <div>
-        <button type="submit">{!editSectionName?<div><CiCirclePlus /><span>Create Section</span>
-          </div>:<div><CiCirclePlus/>Edit Section Name</div>}</button>
+        <button type="submit" className="py-3 px-4 outline rounded-lg text-yellow-50 outline-yellow-50 ">{!editSectionName?<div className="flex items-center gap-2"><CiCirclePlus /><span>Create Section</span>
+          </div>:<div className="flex items-cente gap-2"><CiCirclePlus/>Edit Section Name</div>}</button>
           {editSectionName && <div onClick={cancelEdit}>Cancel Edit</div>}
         </div>
       </form>
       {course.sections.length>0 && <NestedView handleChangeEditSectionName={handleChangeEditSectionName}/>}
-      <div>
-      <button className="bg-yellow-50 w-fit px-6 py-3 rounded-md flex items-center gap-2"
+      <div className="flex flex-row-reverse justify-start gap-4">
+      <button className="bg-yellow-50 w-fit px-6 py-3 rounded-md flex items-center gap-1 text-richblack-900"
       onClick={goNext}
       >Next<MdKeyboardArrowRight /></button>
-      <button className="bg-richblack-50 w-fit px-6 py-3 rounded-md flex items-center gap-2"
+      <button className="bg-richblack-800 outline outline-richblack-700 w-fit px-6 py-3 rounded-md flex items-center gap-1 text-richblack-100"
       onClick={goBack}
-      >Back<MdKeyboardArrowRight /></button>
+      ><MdKeyboardArrowLeft />Back</button>
       </div>
     </div>
   );

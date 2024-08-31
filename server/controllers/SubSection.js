@@ -11,7 +11,7 @@ exports.createSubSection = async (req, res) => {
         const video = req.files.videoFile;
         // console.log("video",video);
         // validation
-        if(!sectionId || !title || !timeDuration || !description || !video){
+        if(!sectionId || !title || !description || !video){
             return res.status(400).json({
                 success:false,
                 message:"Please provide all details"
@@ -30,7 +30,7 @@ exports.createSubSection = async (req, res) => {
                 }
             },
             {new:true}
-            )
+            ).populate('subSection');
         // return response
         return res.status(200).json({
             success:true,
@@ -51,7 +51,7 @@ exports.createSubSection = async (req, res) => {
 exports.updateSubSection = async(req,res)=>{
     try{
         // data input
-        const {subSectionId,title,timeDuration,description} = req.body;
+        const {subSectionId,title,timeDuration,description,sectionId} = req.body;
         // data validation
         // if(!subSectionId || !title || !timeDuration || !description){
         //     return res.status(400).json({
@@ -65,9 +65,11 @@ exports.updateSubSection = async(req,res)=>{
             {title,timeDuration,description},
             {new:true}
         );
+        const updatedSection = await Section.findById({_id:sectionId}).populate('subSection');
         return res.status(200).json({
             success:true,
-            message:"SubSection updated successfully"
+            message:"SubSection updated successfully",
+            updatedSection:updatedSection
         })
     }catch(error){
         console.log("Error occured while updating SubSection",error);
@@ -81,7 +83,7 @@ exports.updateSubSection = async(req,res)=>{
 exports.deleteSubSection = async(req,res)=>{
     try{
         const {subSectionId,sectionId} = req.body;
-        if(!subSectionId){
+        if(!subSectionId || !sectionId){
             return res.status(400).json({
                 success:false,
                 message:"Please provide all details"
@@ -93,9 +95,11 @@ exports.deleteSubSection = async(req,res)=>{
                 subSection:subSectionId
             }
         })
+        const updatedSection = await Section.findById({_id:sectionId}).populate('subSection');
         return res.status(200).json({
             success:true,
-            message:"SubSection deleted successfully"
+            message:"SubSection deleted successfully",
+            updatedSection:updatedSection
         })
         // update section
        
