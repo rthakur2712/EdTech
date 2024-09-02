@@ -8,12 +8,14 @@ import ChipInput from "./ChipInput";
 import Upload from "./Upload";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { addCourse, editCourseDetails } from "../../../../../services/operationa/course";
-import {setStep,setCourse} from"../../../../../slices/courseSlice"
+import {setStep,setCourse, setEditCourse} from"../../../../../slices/courseSlice"
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function CourseInformation() {
     const {course, editCourse } = useSelector((state) => state.course);
     const { token } = useSelector((state) => state.auth);
+    const navigate=useNavigate()
 
   const {
     handleSubmit,
@@ -116,10 +118,17 @@ export default function CourseInformation() {
     }
 
   }
+  const handleCancel=(e)=>{
+    e.preventDefault();
+    dispatch(setCourse(null))
+    dispatch(setEditCourse(false))
+    navigate("/dashboard/my-courses")
+
+  }
   return (
     <div className="bg-richblack-800 rounded-md p-6">
       <form className="flex flex-col gap-4"
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={()=>handleSubmit(onSubmit)}
       >
         <label className="flex flex-col gap-1 text-richblack-5 text-sm">
           <p>Course Title <sup className="text-pink-200">*</sup></p>
@@ -212,9 +221,15 @@ export default function CourseInformation() {
               }}
             {...register("whatWillYouLearn", { required: true })} />
          </label>
-        <button className="bg-yellow-50 w-fit px-6 py-3 rounded-md flex items-center gap-2"
+         <div className="flex gap-3">
+         <button className="bg-yellow-50 w-fit px-6 py-3 rounded-md flex items-center gap-2"
         type="submit"
         >Next<MdKeyboardArrowRight /></button>
+        <button className="bg-richblack-700 text-richblack-50 w-fit px-6 py-3 rounded-md flex items-center gap-2"
+        onClick={(e)=>handleCancel(e)}
+        >Cancel</button>
+         </div>
+       
       </form>
     </div>
   );
