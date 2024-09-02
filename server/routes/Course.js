@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // import controllers
-const {createCourse , getAllCourses , getCourseDetails,getAllInstructorCourses, editCourse} = require('../controllers/Course');
+const {createCourse , getAllCourses , getCourseDetails,getAllInstructorCourses, editCourse, deleteCourse} = require('../controllers/Course');
 // category controllers
 const {createCategory,showAllCategory,categoryPageDetails} = require('../controllers/Category');
 // section controllers
@@ -18,6 +18,7 @@ const{auth,isStudent,isInstructor,isAdmin} = require('../middlewares/auth');
 // course can only be created by instructors
 router.post("/createCourse",auth,isInstructor,createCourse);
 router.post("/editCourse",auth,isInstructor,editCourse);
+router.delete("/deleteCourse",auth,isInstructor,deleteCourse);
 router.post("/createSection",auth,isInstructor,createSection);
 router.put("/updateSection",auth,isInstructor,updateSection);
 router.delete("/deleteSection",auth,isInstructor,deleteSection);
@@ -32,6 +33,7 @@ router.get("/getAllInstructorCourses",auth,isInstructor,getAllInstructorCourses)
 router.post("/createCategory",auth,isAdmin,createCategory);
 router.get("/showAllCategory",showAllCategory);
 router.get("/categoryPageDetails",auth,categoryPageDetails);
+
 
 // rating and review routes
 router.post("/createRating",auth,isStudent,createRating);

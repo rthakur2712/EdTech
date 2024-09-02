@@ -48,20 +48,25 @@ export default function CourseBuilder() {
         courseId:course._id,
         sectionId:editSectionName
       },token)
+      if (result) {
+       dispatch(setCourse(result))
+      }
     }
     else{
       result = await createSection({
         sectionName:data.sectionName,
         courseId:course._id
       },token)
+      if(result){
+        // console.log("result",result)
+        // toast.success("Section Created")
+        dispatch(setCourse(result))
+        dispatch(setEditCourse(true))
+        setValue("sectionName","")
+        setEditSectionName(null)
+      }
     }
-    if(result){
-      // toast.success("Section Created")
-      dispatch(setCourse(result))
-      dispatch(setEditCourse(true))
-      setValue("sectionName","")
-      setEditSectionName(null)
-    }
+   
 
   }
   const handleChangeEditSectionName=(sectionId,sectionName)=>{
@@ -90,10 +95,10 @@ export default function CourseBuilder() {
           />
           {errors.sectioinName && <span>Sectioin Name is Required</span>}
         </div>
-        <div>
-        <button type="submit" className="py-3 px-4 outline rounded-lg text-yellow-50 outline-yellow-50 ">{!editSectionName?<div className="flex items-center gap-2"><CiCirclePlus /><span>Create Section</span>
-          </div>:<div className="flex items-cente gap-2"><CiCirclePlus/>Edit Section Name</div>}</button>
-          {editSectionName && <div onClick={cancelEdit}>Cancel Edit</div>}
+        <div className="flex items-center gap-4 text-richblack-50">
+        <button type="submit" className="py-3 px-4 outline rounded-lg text-yellow-50 outline-yellow-50  ">{!editSectionName?<div className="flex items-center gap-2"><CiCirclePlus /><span>Create Section</span>
+          </div>:<div className="flex items-center gap-2"><CiCirclePlus/>Edit Section Name</div>}</button>
+          {editSectionName && <div className="underline" onClick={cancelEdit}>Cancel Edit</div>}
         </div>
       </form>
       {course.sections.length>0 && <NestedView handleChangeEditSectionName={handleChangeEditSectionName}/>}

@@ -1,4 +1,5 @@
 const Course = require("../models/Course");
+const SubSection = require("../models/SubSection");
 const User = require("../models/User");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
 const Category = require("../models/Category");
@@ -59,6 +60,7 @@ exports.createCourse = async (req, res) => {
       category: categoryDetails._id,
       thumbnail: thumbnailImage.secure_url,
       tag: JSON.parse(tag),
+      status: "Draft",
     });
     // add course to user
   
@@ -233,7 +235,7 @@ exports.editCourse = async (req, res) => {
               }
           }
       }
-
+ 
       // updatedAt
       course.updatedAt = Date.now();
        //   save data
@@ -273,3 +275,35 @@ exports.editCourse = async (req, res) => {
        })
    }
 }
+// delete course
+exports.deleteCourse = async (req, res) => {
+  try {
+    const { courseId } = req.body;
+    // validation
+    if (!courseId) {
+      return res.status(400).json({
+        success: false,
+        message: "Please provide courseId",
+      });
+    }
+    // delete sections and subsections
+    // await Promise.all(
+    //   Course.sections.map(async (section) => {
+    //     await SubSection.deleteMany({ _id: { $in: section.subSection } });
+    //   })
+    // );
+    const course = await Course.findById(courseId);
+    course.deleteSections();
+    await Course.findByIdAndDelete(courseId);
+    return res.status(200).json({
+      success: true,
+      message: "Course deleted successfully",
+    });
+  } catch (error) {
+    console.log("Error occured while deleting course", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};

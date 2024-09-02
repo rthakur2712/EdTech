@@ -37,10 +37,13 @@ export default function RenderComponents() {
           ) : (
             item.id
           )}
+          
         </div>
+      
         <div className='text-center'>
           {item.title}
         </div>
+        
       </div>
     ))}
   </div>

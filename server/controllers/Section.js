@@ -51,9 +51,9 @@ exports.createSection = async (req, res) => {
 exports.updateSection = async(req,res)=>{
     try{
         // data input
-        const {sectionId,sectionName} = req.body;
+        const {sectionId,sectionName,courseId} = req.body;
         // data validation
-        if(!sectionId || !sectionName){
+        if(!sectionId || !sectionName || !courseId){
             return res.status(400).json({
                 success:false,
                 message:"Please provide all details"
@@ -61,20 +61,24 @@ exports.updateSection = async(req,res)=>{
         }
         // update data
         await Section.findByIdAndUpdate(
-            {_id:sectionId},
+            // console.log("merisectionId",sectionId),
+            {_id:sectionId.sectionId},
             {sectionName:sectionName},
             {new:true}
         )
+        const updatedCourseDetails=await Course.findByIdAndUpdate(courseId).populate({path:"sections",populate:{path:"subSection"}});
         // return response
         return res.status(200).json({
             success:true,
-            message:"Section updated successfully"
+            message:"Section updated successfully",
+            updatedCourseDetails:updatedCourseDetails
         })
     }catch(error){
         console.log("Error occured while updating section",error);
         return res.status(500).json({
             success:false,
-            message:"Internal server error"
+            message:"Internal server error",
+            
         })
     }
 }
@@ -98,10 +102,10 @@ exports.deleteSection = async(req,res)=>{
             });
         }
         // delete subsection
-        await SubSection.deleteMany({_id:{$in:section.subSection}});
-        // delete section
+        // await SubSection.deleteMany({_id:{$in:section.subSection}});
+        // // delete section
+        section.deleteSubSections();
         await Section.findByIdAndDelete({_id:sectionId});
-        // await Course.findByIdAndDelete({_id:sectionId});
        
         // return response
         // update course

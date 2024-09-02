@@ -77,7 +77,9 @@ export default function NestedView({ handleChangeEditSectionName }) {
               </div>
               <div className="flex gap-3 items-center">
                 <div className="flex gap-1">
-                  <div className="text-xl">
+                  <div className="text-xl"
+                  onClick={()=> handleChangeEditSectionName({sectionId:section._id, sectionName:section.sectionName})}
+                  >
                     <MdModeEdit />
                   </div>
                   <div
@@ -105,13 +107,16 @@ export default function NestedView({ handleChangeEditSectionName }) {
               return (
                 <div key={data._id} 
                 className="flex justify-between  pl-6 text-base items-center border-b border-richblack-600 py-2"
+               
                 >
                   <div className="flex gap-2 items-center cursor-pointer" onClick={() => setViewSubSection(data)}>
                     <IoIosList />
                     <p>{data.title}</p>
                   </div>
                   <div>
-                    <div className="flex gap-1">
+                    <div className="flex gap-1"
+                    onClick={(e)=>e.stopPropagation()}
+                    >
                       <div
                         className="text-base"
                         onClick={() =>
