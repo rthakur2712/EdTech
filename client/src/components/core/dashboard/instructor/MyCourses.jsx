@@ -10,6 +10,7 @@ import { setCourse, setEditCourse } from "../../../../slices/courseSlice";
 import { useNavigate } from "react-router-dom";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import { GoPlusCircle } from "react-icons/go";
 
 
 // import CoursesList from './CoursesList';
@@ -57,7 +58,15 @@ export default function MyCourses() {
          }
   return (
     <div className="mx-10 my-5 space-y-10">
+      <div className="flex justify-between">
       <h1 className="text-richblack-5 text-3xl">My Courses</h1>
+      <div className="bg-yellow-50 w-fit px-4 py-2 rounded-md flex items-center gap-1 cursor-pointer"
+      onClick={()=>navigate("/dashboard/add-course")}
+      >
+      <span ><GoPlusCircle /></span>  Add Course
+      </div>
+      </div>
+      
       <Table className="rounded-lg border border-richblack-800 ">
         <Thead>
           <Tr className="flex gap-x-10 rounded-t-3xl border-b border-b-richblack-800 px-6 py-2">
