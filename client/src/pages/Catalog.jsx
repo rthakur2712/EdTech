@@ -75,7 +75,7 @@ export default function Catalog() {
       <div className="px-[120px] py-11 ml-10 flex flex-col gap-5">
         <div className="flex flex-col gap-2">
           <div className="text-3xl text-richblack-5">
-            Courses to get you started
+            Courses to get you started on {catalogPageData.categoryCourses.name}
           </div>
           <div className="flex border-b border-richblack-600 gap-1">
             <div
@@ -98,23 +98,25 @@ export default function Catalog() {
         </div>
         <div>
           {active === 1 ? (
-            <CourseSlider courses={catalogPageData.mostSellingCourses} />
+            <CourseSlider courses={catalogPageData.mostSellingCourses} delay={2500} />
           ) : (
-            <CourseSlider courses={catalogPageData.newCourses} />
+            <CourseSlider courses={catalogPageData.newCourses} delay={2500} />
           )}
         </div>
       </div>
-      {/* section 2 */}
+       {/* section 2 */}
+       <div className="px-[120px] py-11 ml-10 flex flex-col gap-5">
+        <p className="text-3xl text-richblack-5">Frequently bought {catalogPageData.categoryCourses.name} courses</p>
+        <div><CourseSlider courses={catalogPageData.mostSellingCourses} delay={2000} /></div>
+      </div>
+      {/* section 3 */}
       <div className="px-[120px] py-11 ml-10 flex flex-col gap-5">
         <p className="text-3xl text-richblack-5">Other Courses</p>
         <div>
         <CourseSlider courses={catalogPageData.differentCourses} />
         </div>
       </div>
-      {/* section 3 */}
-      <div>
-        <p>Frequently bought together</p>
-      </div>
+     
       <Foooter />
     </div>
   );

@@ -7,7 +7,7 @@ import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import {FreeMode,Pagination,Navigation,Autoplay} from 'swiper/modules'
 
-export default function CourseSlider({courses}) {
+export default function CourseSlider({courses,delay}) {
   courses && console.log("courses",courses)
   return (
     <Swiper
@@ -16,8 +16,8 @@ export default function CourseSlider({courses}) {
     // navigation={true}
     // spaceBetween={10}
     autoplay={{
-      delay: 2500,
-      disableOnInteraction: true,
+      delay:delay,
+      disableOnInteraction: false,
     }}
     modules={[Navigation,Autoplay]}
     className="mySwiper"
