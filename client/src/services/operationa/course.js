@@ -231,3 +231,26 @@ export const deleteCourse = async (data, token) => {
     toast.dismiss(toastId)
     return result
   }
+
+  // catalog page details
+export const getCatalogPageDetails = async (categoryId) => {
+    let result = null
+    // const toastId = toast.loading("Loading...")
+  
+    try {
+      // console.log("data",data)
+      const response = await apiConnector("POST", courseEndpoints.CATALOG_PAGE_DETAILS_API, {categoryId:categoryId})
+      console.log("CATALOG PAGE DETAILS API RESPONSE............", response)
+  
+      if (!response?.data?.success) {
+        throw new Error("Could Not Fetch Catalog Page Details")
+      }
+  
+      result = response?.data?.data
+    } catch (error) {
+      console.log("CATALOG PAGE DETAILS API ERROR............", error)
+      toast.error(error.message)
+    }
+    // toast.dismiss(toastId)
+    return result
+  }

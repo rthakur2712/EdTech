@@ -32,7 +32,7 @@ router.get("/getAllInstructorCourses",auth,isInstructor,getAllInstructorCourses)
 // category routes
 router.post("/createCategory",auth,isAdmin,createCategory);
 router.get("/showAllCategory",showAllCategory);
-router.get("/categoryPageDetails",auth,categoryPageDetails);
+router.post("/categoryPageDetails",categoryPageDetails);
 
 
 // rating and review routes

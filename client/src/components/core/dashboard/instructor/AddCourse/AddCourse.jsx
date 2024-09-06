@@ -10,8 +10,7 @@ export default function AddCourse() {
         <h1 className="text-3xl text-richblack-5">{editCourse?"Edit Course":"Add Course"}</h1>
         <RenderComponents />
       </div>
-      {
-        !editCourse &&  <div className=" sticky top-10 self-start max-w-[350px] bg-richblack-800 p-6 flex gap-5 flex-col rounded-md h-fit ">
+      <div className=" sticky top-10 self-start max-w-[350px] bg-richblack-800 p-6 flex gap-5 flex-col rounded-md h-fit ">
         <h2 className="text-lg text-richblack-5">Course Upload Tips</h2>
         <ul className=" list-item list-disc space-y-4 text-xs text-richblack-5">
           <li>Set the Course Price option or make it free.</li>
@@ -30,7 +29,7 @@ export default function AddCourse() {
           <li>Notes to all enrolled students at once.</li>
         </ul>
       </div>
-      }
+      
      
     </div>
   );

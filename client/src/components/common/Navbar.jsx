@@ -61,7 +61,10 @@ export default function Navbar() {
                       {subLinks.map((item, index) => {
                         return (
                           <Link
-                            to={`/catalog/${item.name}`}
+                             to={`/catalog/${item.name
+                              .split(" ")
+                              .join("-")
+                              .toLowerCase()}`}
                             className="rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-50"
                           >
                             <p>{item.name}</p>

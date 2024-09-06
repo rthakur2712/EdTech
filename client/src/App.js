@@ -20,6 +20,7 @@ import Settings from "./components/core/dashboard/Settings";
 import Cart from "./components/core/dashboard/Cart";
 import MyCourses from "./components/core/dashboard/instructor/MyCourses";
 import AddCourse from "./components/core/dashboard/instructor/AddCourse/AddCourse";
+import Catalog from "./pages/Catalog";
 
 
 
@@ -42,6 +43,7 @@ function App() {
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/catalog/:catalogName" element={<Catalog/>}/>
         <Route element={<Dashboard />}>
           <Route
             path="/dashboard/enrolled-courses"

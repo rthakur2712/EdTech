@@ -45,12 +45,19 @@ exports.showAllCategory = async(req,res) =>{
 exports.categoryPageDetails = async (req,res) =>{
     try{
         // get category 
+        console.log("request",req.body)
         const {categoryId}= req.body;
+        console.log("category id ",categoryId);
         // get courses for specified category
         const selectedCategory = await Category.findById(categoryId)
-        .populate('course')
+        .populate({
+            path: 'course',
+            populate: {
+            path: 'instructor'
+            }
+        })
         .exec();
-        console.log(selectedCategory);
+        // console.log(selectedCategory);
         if(!selectedCategory){
             return res.status(400).json({
                 success:false,
@@ -64,19 +71,45 @@ exports.categoryPageDetails = async (req,res) =>{
                 message:"No courses found for this category"
             })
         }
-        const categoryCourses = selectedCategory.course;
+        const categoryCourses = selectedCategory
         // get courses from other categories
         const otherCategories = await Category.find({_id:{$ne:categoryId}})
-        .populate('course');
+        .populate({
+            path: 'course',
+            populate: {
+            path: 'instructor'
+            }
+        })
         console.log(otherCategories);
         let differentCourses = [];
         for(const category of otherCategories){
             differentCourses.push(...category.course);
         }
+          // Get top-selling courses across all categories
+        //   const allCategories = await Category.find()
+        //   .populate({
+        //       path: "course",
+        //       match: { status: "Published" },
+        //       populate: {
+        //           path: "instructor",
+        //       },
+        //   })
+        //   .exec()
+
+    //   const allCourses = allCategories.flatMap((category) => category.course)
+      const mostSellingCourses = categoryCourses.course
+          .sort((a, b) => b.sold - a.sold)
+          .slice(0, 10)
+        const newCourses = categoryCourses.course.sort((a, b) => b.createdAt - a.createdAt);
+        
         res.status(200).json({
             success:true,
-            categoryCourses:categoryCourses,
-            differentCourses:differentCourses
+            data:{
+                categoryCourses:categoryCourses,
+                differentCourses:differentCourses,
+                mostSellingCourses:mostSellingCourses,
+                newCourses:newCourses
+            }
         })
     }catch(error){
         console.log("Error occured while fetching category page details",error);
