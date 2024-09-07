@@ -52,9 +52,14 @@ exports.categoryPageDetails = async (req,res) =>{
         const selectedCategory = await Category.findById(categoryId)
         .populate({
             path: 'course',
-            populate: {
-            path: 'instructor'
+            populate: [
+            {
+                path: 'instructor'
+            },
+            {
+                path: 'ratingAndReviews'
             }
+            ]
         })
         .exec();
         // console.log(selectedCategory);
