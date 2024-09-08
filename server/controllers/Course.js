@@ -292,7 +292,22 @@ exports.deleteCourse = async (req, res) => {
     //     await SubSection.deleteMany({ _id: { $in: section.subSection } });
     //   })
     // );
-    const course = await Course.findById(courseId);
+   
+    await Category.updateMany(
+      {
+          $pull:{
+              course:courseId
+          }
+      }
+  )
+  await User.updateMany(
+    {
+        $pull:{
+            courses:courseId
+        }
+    }
+  )
+  const course = await Course.findById(courseId);
     course.deleteSections();
     await Course.findByIdAndDelete(courseId);
     return res.status(200).json({

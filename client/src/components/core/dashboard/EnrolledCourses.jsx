@@ -34,8 +34,8 @@ export default function EnrolledCourses() {
       <div className='w-[1100px] ml-6 border rounded-lg border-richblack-700'>
         <div className='flex  bg-richblack-700 rounded-t-lg text-richblack-50 text-sm'>
           <div className='p-4 w-[500px]'>Course Name</div>
-          <div className='flex w-[600px]'>
-          <div className='p-4 w-[300px]'>Duration</div>
+          <div className='flex w-[600px] justify-center'>
+          {/* <div className='p-4 w-[300px]'>Duration</div> */}
           <div className='p-4'>Progress</div>
           </div>
          
@@ -44,16 +44,16 @@ export default function EnrolledCourses() {
           {enrolledCourses.map((course,index)=>(
             <div key={index} className='flex items-center border-t border-richblack-700'>
               <div className='flex items-center p-4 w-[500px] gap-5'>
-                <img src={course.thumbnail} alt='thumbnail' className='w-12 h-12 object-cover rounded-lg'/>
-                <div className='flex flex-col '>
+                <img src={course.thumbnail} alt='thumbnail' className='w-24 h-24 object-cover rounded-lg'/>
+                <div className='flex flex-col  '>
                 <p className='text-richblack-5'>{course.courseName}</p>
                 <p className='text-richblack-300 text-sm'>{course.courseDescription}</p>
                 </div>
                 
               </div>
-              <div className='w-[600px] flex items-center'>
-              <div className='p-4 w-[300px] text-richblack-50'>{course.duration}</div>
-              <div className='p-4 w-[300px]'>{course.progress? <ProgressBar
+              <div className='w-[600px] flex items-center justify-center'>
+              {/* <div className='p-4 w-[300px] text-richblack-50'>{course.duration}</div> */}
+              <div className='py-4 px-10 w-[300px]'>{course.progress? <ProgressBar
               completed={course.progress}
               height='8px'
               width='200px'

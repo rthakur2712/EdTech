@@ -8,6 +8,11 @@ export const endpoints = {
     RESETPASSWORD_API : `${BASE_URL}/auth/reset-password`,
     TOKEN_LOGIN_API : `${BASE_URL}/auth/login-token`,
 }
+export const studentEndpoints = {
+    COURSE_PAYMENT_API : `${BASE_URL}/payments/capturePayment`,
+    VERIFY_PAYMENT_API : `${BASE_URL}/payments/verifySignature`,
+    SEND_PAYMENT_SUCCESS_EMAIL_API : `${BASE_URL}/payments/sendPaymentSuccessEmail`,
+}
 
 export const categories ={
     CATEGORIES_API:`${BASE_URL}/course/showAllCategory`,

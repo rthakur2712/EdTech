@@ -47,11 +47,11 @@ export const cartSlice = createSlice({
         localStorage.removeItem('cart');
         localStorage.removeItem('total');
         localStorage.removeItem('totalItems');
-        toast.success("Cart reset successful");
+        // toast.success("Cart reset successful");
        }
      
     },
 });
 
-export const { setTotalItems } = cartSlice.actions;
+export const { setTotalItems,resetCart,addToCart,removeFromCart } = cartSlice.actions;
 export default cartSlice.reducer;

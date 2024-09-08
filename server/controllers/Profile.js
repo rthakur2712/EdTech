@@ -143,32 +143,32 @@ exports.getAllEnrolledCourses = async(req,res)=>{
                 message:"No courses found"
             })
         }
-        const courseDurations = [];
-        allEnrolledCourses.forEach(course => {
-            let courseDuration = 0;
-            course.sections.forEach(section => {
-            section.subSection.forEach(subSection => {
-                const duration = subSection.timeDuration.split(':'); // split duration into minutes and seconds
-                const minutes = parseInt(duration[0]);
-                const seconds = parseInt(duration[1]);
-                const durationInSeconds = (minutes * 60) + seconds; // convert duration to seconds
-                courseDuration += durationInSeconds;
-            });
-            });
-            courseDurations.push({ courseId: course._id, duration: courseDuration });
-        });
+        // const courseDurations = [];
+        // allEnrolledCourses.forEach(course => {
+        //     let courseDuration = 0;
+        //     course.sections.forEach(section => {
+        //     section.subSection.forEach(subSection => {
+        //         const duration = subSection.timeDuration.split(':'); // split duration into minutes and seconds
+        //         const minutes = parseInt(duration[0]);
+        //         const seconds = parseInt(duration[1]);
+        //         const durationInSeconds = (minutes * 60) + seconds; // convert duration to seconds
+        //         courseDuration += durationInSeconds;
+        //     });
+        //     });
+        //     courseDurations.push({ courseId: course._id, duration: courseDuration });
+        // });
 
-        const finalDurations = courseDurations.map(courseDuration => {
-            return {
-            updateOne: {
-                filter: { _id: courseDuration.courseId },
-                update: { duration: convertSecondsToDuration(courseDuration.duration) }
-            }
-            };
-        });
+        // const finalDurations = courseDurations.map(courseDuration => {
+        //     return {
+        //     updateOne: {
+        //         filter: { _id: courseDuration.courseId },
+        //         update: { duration: convertSecondsToDuration(courseDuration.duration) }
+        //     }
+        //     };
+        // });
 
-        // update duration in course schema
-        await Course.bulkWrite(finalDurations);
+        // // update duration in course schema
+        // await Course.bulkWrite(finalDurations);
         // return response
         return res.status(200).json({
             success:true,
