@@ -11,27 +11,28 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { HomePageExplore } from "../../../data/homepage-explore";
 
 export default function Section1() {
-    const [currentTab,setCurrentTab] = useState(HomePageExplore[0].tag);
-    const [course,setCourse] = useState(HomePageExplore[0].courses);
-    const [currentCard , setCurrentCard] = useState(HomePageExplore[0].courses[0].heading);
-    const setMyCourses = (value)=>{
-        setCurrentTab(value.tag);
-        setCourse(value.courses);
-        setCurrentCard(value.courses[0].heading);
-    }
-    const setMyCard = (value)=>{
-        setCurrentCard(value.heading);
-    }
+  const [currentTab, setCurrentTab] = useState(HomePageExplore[0].tag);
+  const [course, setCourse] = useState(HomePageExplore[0].courses);
+  const [currentCard, setCurrentCard] = useState(
+    HomePageExplore[0].courses[0].heading
+  );
+  const setMyCourses = (value) => {
+    setCurrentTab(value.tag);
+    setCourse(value.courses);
+    setCurrentCard(value.courses[0].heading);
+  };
+  const setMyCard = (value) => {
+    setCurrentCard(value.heading);
+  };
   return (
     <div>
       {" "}
       <div className="relative items-center  flex flex-col mx-auto text-white max-w-maxContent justify-between">
-     
-          <div
-            className="group mt-40 p-1 mx-auto rounded-full bg-richblack-800 fond-bold text-richblack-200
+        <div
+          className="group mt-40 p-1 mx-auto rounded-full bg-richblack-800 fond-bold text-richblack-200
             transition-all duration-200 hover:scale-95 hover:bg-richblack-900  cursor-pointer "
-          >
-            <Link to={"/signup"}>
+        >
+          <Link to={"/signup"}>
             <div
               className="flex items-center px-6 py-[5px] gap-2 
                 transition-all duration-200"
@@ -39,9 +40,9 @@ export default function Section1() {
               <p>Become an Instructor</p>
               <FaArrowRightLong />
             </div>
-            </Link>
-          </div>
-   
+          </Link>
+        </div>
+
         <div className="w-[913px] mt-12">
           <motion.div
             variants={fadeIn("left", 0.1)}
@@ -130,60 +131,86 @@ export default function Section1() {
           />
           <div className="flex flex-col gap-9 px-[120px] py-[90px] relative mb-[200px]">
             <div className="flex flex-col gap-3">
-            <div className="text-4xl text-center">
-              Unlock the <HighlightText text={"Power of Code"} />
+              <div className="text-4xl text-center">
+                Unlock the <HighlightText text={"Power of Code"} />
+              </div>
+              <div className="text-center text-richblack-300 text-sm">
+                Learn to Build Anything You Can Imagine
+              </div>
             </div>
-            <div className="text-center text-richblack-300 text-sm">
-              Learn to Build Anything You Can Imagine
-            </div>
-            </div>
-            
+
             <div className="flex bg-richblack-800 p-1 mt-5 gap-5 text-lg rounded-full mx-auto text-richblack-200">
-                {
-                    HomePageExplore.map((item,index)=>{
-                        return(
-                            <div key={index} className={`px-[28px] py-[7px] hover:bg-richblack-900 rounded-full cursor-pointer hover:text-white ${currentTab===item.tag?"bg-richblack-900 text-white":"bg-richblack-800"} `}
-                            onClick={()=>setMyCourses(item)} >
-                            
-                                {item.tag}
-                            </div>
-                        )
-                    })
-                }
+              {HomePageExplore.map((item, index) => {
+                return (
+                  <div
+                    key={index}
+                    className={`px-[28px] py-[7px] hover:bg-richblack-900 rounded-full cursor-pointer hover:text-white ${
+                      currentTab === item.tag
+                        ? "bg-richblack-900 text-white"
+                        : "bg-richblack-800"
+                    } `}
+                    onClick={() => setMyCourses(item)}
+                  >
+                    {item.tag}
+                  </div>
+                );
+              })}
             </div>
             <div className="flex px-[52px] gap-9 absolute bottom-[-265px] left-6">
-                {
-                    course.map((item,index)=>{
-                        return (
-                            <div key={index} className= {`flex flex-col w-[30%] ${currentCard===item.heading?"bg-white text-richblack-500":"bg-richblack-800"} cursor-pointer transition-all duration-300 hover:scale-95`}
-                            onClick={()=>setMyCard(item)}>
-                                <div className="px-[24px] pt-[32px] pb-[52px] flex flex-col gap-2">
-                                <h2 className={` text-lg ${currentCard===item.heading?"text-black":"text-richblack-25"}`}>{item.heading}</h2>
-                                <p className="text-richblack-400 leading-6 text-sm">{item.description}</p>
-                                </div>    
-                           
-                            <div className={`flex justify-between py-[16px] px-[24px] ${currentCard===item.heading?"text-blue-500":"text-richblack-300"} border-t border-dashed border-richblack-600`}>
-                                <div>{item.level}</div>
-                                <div>{item.lessonNumber}<span> Lessons</span></div>
-                            </div>
-                            </div>
-                        )
-                    })
-                }
+              {course.map((item, index) => {
+                return (
+                  <div
+                    key={index}
+                    className={`flex flex-col w-[30%] ${
+                      currentCard === item.heading
+                        ? "bg-white text-richblack-500"
+                        : "bg-richblack-800"
+                    } cursor-pointer transition-all duration-300 hover:scale-95`}
+                    onClick={() => setMyCard(item)}
+                  >
+                    <div className="px-[24px] pt-[32px] pb-[52px] flex flex-col gap-2">
+                      <h2
+                        className={` text-lg ${
+                          currentCard === item.heading
+                            ? "text-black"
+                            : "text-richblack-25"
+                        }`}
+                      >
+                        {item.heading}
+                      </h2>
+                      <p className="text-richblack-400 leading-6 text-sm">
+                        {item.description}
+                      </p>
+                    </div>
+
+                    <div
+                      className={`flex justify-between py-[16px] px-[24px] ${
+                        currentCard === item.heading
+                          ? "text-blue-500"
+                          : "text-richblack-300"
+                      } border-t border-dashed border-richblack-600`}
+                    >
+                      <div>{item.level}</div>
+                      <div>
+                        {item.lessonNumber}
+                        <span> Lessons</span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-         
           </div>
           <div className="section2_bg h-[320px] bg-white text-white flex justify-center items-center gap-6">
-          <CTAbutton
-            text={"Explore Full catalog"}
-            linkto={"/signup"}
-            active={true}
-          />
-          <CTAbutton text={"Lear more"} linkto={"/login"} active={false} />
-        </div>
+            <CTAbutton
+              text={"Explore Full catalog"}
+              linkto={"/signup"}
+              active={true}
+            />
+            <CTAbutton text={"Lear more"} linkto={"/login"} active={false} />
+          </div>
         </div>
       </div>
-     
     </div>
   );
 }

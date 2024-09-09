@@ -136,8 +136,8 @@ export default function CourseInformation() {
       <form
         className="flex flex-col gap-4"
         onSubmit={
-          // e.preventDefault() 
-          
+          // e.preventDefault()
+
           handleSubmit(onSubmit)
         }
       >

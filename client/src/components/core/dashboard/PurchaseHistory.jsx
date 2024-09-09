@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react";
 
 export default function PurchaseHistory() {
-  return (
-    <div>PurchaseHistory</div>
-  )
+  return <div>PurchaseHistory</div>;
 }

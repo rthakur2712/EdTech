@@ -23,8 +23,6 @@ import AddCourse from "./components/core/dashboard/instructor/AddCourse/AddCours
 import Catalog from "./pages/Catalog";
 import CourseDetails from "./pages/CourseDetails";
 
-
-
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -44,26 +42,22 @@ function App() {
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/catalog/:catalogName" element={<Catalog/>}/>
-        <Route path="/courses/:courseId" element={<CourseDetails/>}/>
+        <Route path="/catalog/:catalogName" element={<Catalog />} />
+        <Route path="/courses/:courseId" element={<CourseDetails />} />
         <Route element={<Dashboard />}>
           <Route
             path="/dashboard/enrolled-courses"
             element={<EnrolledCourses />}
           />
-          <Route path="/dashboard/my-profile" 
-                 element={<MyProfile />} />
+          <Route path="/dashboard/my-profile" element={<MyProfile />} />
           <Route
             path="/dashboard/purchase-history"
             element={<PurchaseHistory />}
           />
-          <Route 
-            path="/dashboard/my-courses"
-            element={<MyCourses/>}
-            />
-            <Route path="/dashboard/add-course" element={<AddCourse/>}/>
-          <Route path="/dashboard/settings" element={<Settings/>}/>
-          <Route path="/dashboard/cart" element={<Cart/>}/>
+          <Route path="/dashboard/my-courses" element={<MyCourses />} />
+          <Route path="/dashboard/add-course" element={<AddCourse />} />
+          <Route path="/dashboard/settings" element={<Settings />} />
+          <Route path="/dashboard/cart" element={<Cart />} />
         </Route>
       </Routes>
     </div>

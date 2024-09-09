@@ -32,11 +32,13 @@ const courseSchema = new mongoose.Schema(
     //     type: mongoose.Schema.Types.ObjectId,
     //   },
     // ],
-    ratingAndReviews: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "RatingAndReview",
-      required: true,
-    }],
+    ratingAndReviews: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "RatingAndReview",
+        required: true,
+      },
+    ],
     price: {
       type: Number,
       required: true,
@@ -66,8 +68,6 @@ const courseSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
-
 
 courseSchema.methods.deleteSections = async function () {
   try {

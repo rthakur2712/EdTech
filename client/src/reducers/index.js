@@ -7,11 +7,11 @@ import courseSlice from "../slices/courseSlice";
 import viewCourseSlice from "../slices/viewCourseSlice";
 
 const rootReducer = combineReducers({
-    auth: authReducer,
-    profile: profileReducer,
-    cart: cartReducer,
-    course:courseSlice,
-    viewCourse:viewCourseSlice
-})
+  auth: authReducer,
+  profile: profileReducer,
+  cart: cartReducer,
+  course: courseSlice,
+  viewCourse: viewCourseSlice,
+});
 
 export default rootReducer;

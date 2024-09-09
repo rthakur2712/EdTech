@@ -5,16 +5,14 @@ import Section3 from "../components/core/about/Section3";
 import Footer from "../components/common/Footer";
 import GetInTouch from "../components/core/about/GetInTouch";
 
-
-
 export default function About() {
   return (
     <div>
       <InnovationSection />
-      <OurSection/>
-      <Section3/>
-      <GetInTouch/>
-      <Footer/>
+      <OurSection />
+      <Section3 />
+      <GetInTouch />
+      <Footer />
     </div>
   );
 }

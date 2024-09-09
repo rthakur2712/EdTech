@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import CountryCode from "../../data/countrycode.json";
-import {toast} from 'react-hot-toast'
+import { toast } from "react-hot-toast";
 
 export default function ContactForm() {
   const {
@@ -25,25 +25,22 @@ export default function ContactForm() {
     }
   });
   const submitHandler = async (data) => {
-    console.log("Form Data - ", data)
+    console.log("Form Data - ", data);
     try {
-     
       // const res = await apiConnector(
       //   "POST",
       //   contactusEndpoint.CONTACT_US_API,
       //   data
       // )
-      const res ={status:'ok'}
-      console.log("Email Res - ", res)
-     toast.success("Message sent successfully")
-      
+      const res = { status: "ok" };
+      console.log("Email Res - ", res);
+      toast.success("Message sent successfully");
     } catch (error) {
-      console.log("ERROR WHILE CONATACT US  - ", error.message)
-      toast.error("Error while sending email")
-     
+      console.log("ERROR WHILE CONATACT US  - ", error.message);
+      toast.error("Error while sending email");
     }
-  }
-  const [selectedCode, setSelectedCode] = useState('+91');
+  };
+  const [selectedCode, setSelectedCode] = useState("+91");
   return (
     <form
       className="text-richblack-5 p-8 flex flex-col gap-5"
@@ -106,11 +103,13 @@ export default function ContactForm() {
               }}
               {...register("countryCode", { required: true })}
               onChange={(e) => setSelectedCode(e.target.value)}
-            value={selectedCode}
+              value={selectedCode}
             >
               {CountryCode.map((data, i) => (
                 <option key={i} value={data.code}>
-                {selectedCode === data.code ? data.code : `${data.code} (${data.country})`}
+                  {selectedCode === data.code
+                    ? data.code
+                    : `${data.code} (${data.country})`}
                 </option>
               ))}
             </select>

@@ -2,34 +2,37 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 import { useForm } from "react-hook-form";
-import { deleteAccount, updateDisplayPicture, updateProfile } from "../../../services/operationa/settings";
+import {
+  deleteAccount,
+  updateDisplayPicture,
+  updateProfile,
+} from "../../../services/operationa/settings";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Settings() {
-  const genders=[
-    "Male","Female","Other"
-  ]
+  const genders = ["Male", "Female", "Other"];
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // const [formData, setFormData] = useState({});
-  const { register, handleSubmit } = useForm()
-  const { token } = useSelector((state) => state.auth) || localStorage.getItem("token");
+  const { register, handleSubmit } = useForm();
+  const { token } =
+    useSelector((state) => state.auth) || localStorage.getItem("token");
   const { user } = useSelector((state) => state.profile);
   if (!user) {
     return <div className="loader"></div>;
   }
   const submitProfileForm = (data) => {
-    dispatch(updateProfile(data, token,navigate));
-  }
+    dispatch(updateProfile(data, token, navigate));
+  };
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    const formData = new FormData()
-    formData.append("displayPicture", file)
-    dispatch(updateDisplayPicture(formData, token,navigate));
-    }
-    const handleDelete = () => {
-      dispatch(deleteAccount(token,navigate));
-    }
+    const formData = new FormData();
+    formData.append("displayPicture", file);
+    dispatch(updateDisplayPicture(formData, token, navigate));
+  };
+  const handleDelete = () => {
+    dispatch(deleteAccount(token, navigate));
+  };
   return (
     <div>
       <h1 className="p-4 text-3xl text-richblack-5">Edit Profile</h1>
@@ -37,7 +40,11 @@ export default function Settings() {
       <div className="w-[800px] mt-1 ml-36 flex flex-col gap-5">
         {/* change profile pic section */}
         <div className="bg-richblack-800 flex rounded-lg gap-8 p-4 items-center">
-          <img src={user.image} alt={user.name} className="w-20 h-20 rounded-full object-cover" />
+          <img
+            src={user.image}
+            alt={user.name}
+            className="w-20 h-20 rounded-full object-cover"
+          />
           <div className="flex flex-col gap-3">
             <h1 className="text-richblack-25">Change Profile Picture</h1>
             <div className="flex gap-3">
@@ -64,8 +71,9 @@ export default function Settings() {
           </div>
         </div>
         {/* profile information form section */}
-        <form className="bg-richblack-800 flex flex-col rounded-lg gap-3 p-4"
-        onSubmit={handleSubmit(submitProfileForm)}
+        <form
+          className="bg-richblack-800 flex flex-col rounded-lg gap-3 p-4"
+          onSubmit={handleSubmit(submitProfileForm)}
         >
           <h1 className="text-lg text-richblack-5">Profile Information</h1>
           <div className="flex gap-6 items-center">
@@ -104,12 +112,13 @@ export default function Settings() {
                 style={{
                   boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                 }}
-                {...register("dateOfBirth", { required: {value:true },
+                {...register("dateOfBirth", {
+                  required: { value: true },
                   max: {
                     value: new Date().toISOString().split("T")[0],
                     message: "Date of Birth cannot be in the future.",
-                  }}
-                )}
+                  },
+                })}
               />
             </label>
             <div className="w-[50%] flex flex-col gap-[6px]">
@@ -130,10 +139,10 @@ export default function Settings() {
                     <option key={i} value={ele}>
                       {ele}
                     </option>
-                  )
+                  );
                 })}
               </select>
-              </div>
+            </div>
           </div>
           <div className="flex gap-6 items-center">
             <label className="w-[50%] flex flex-col gap-[6px]">
@@ -172,15 +181,16 @@ export default function Settings() {
             </label>
           </div>
           <div className="flex gap-5">
-            <button className="py-[6px] px-[18px] bg-yellow-50 rounded-md text-sm"
-            type="submit"
+            <button
+              className="py-[6px] px-[18px] bg-yellow-50 rounded-md text-sm"
+              type="submit"
             >
               Save
             </button>
             <Link to="/dashboard/my-profile">
-            <button className="py-[6px] px-[18px] bg-richblack-700 text-richblack-50 rounded-md text-sm">
-              Cancel
-            </button>
+              <button className="py-[6px] px-[18px] bg-richblack-700 text-richblack-50 rounded-md text-sm">
+                Cancel
+              </button>
             </Link>
           </div>
         </form>
@@ -197,8 +207,9 @@ export default function Settings() {
               Paid Courses.This account contains Paid Courses. Deleting your
               account will remove all the contain associated with it.
             </p>
-            <div className="text-pink-300 italic cursor-pointer"
-            onClick={handleDelete}
+            <div
+              className="text-pink-300 italic cursor-pointer"
+              onClick={handleDelete}
             >
               I want to delete my account
             </div>

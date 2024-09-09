@@ -30,7 +30,7 @@ export default function Login() {
       return;
     }
     console.log(formData);
-    dispatch(login(email,password,navigate));
+    dispatch(login(email, password, navigate));
     setFormData({
       email: "",
       password: "",
@@ -89,9 +89,9 @@ export default function Login() {
                 {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
               </span>
               <Link to="/forgot-password">
-              <span className="flex justify-end text-xs text-blue-100">
-                Forgot password
-              </span>
+                <span className="flex justify-end text-xs text-blue-100">
+                  Forgot password
+                </span>
               </Link>
             </div>
           </div>

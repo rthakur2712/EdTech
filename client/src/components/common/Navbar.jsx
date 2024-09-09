@@ -61,7 +61,7 @@ export default function Navbar() {
                       {subLinks.map((item, index) => {
                         return (
                           <Link
-                             to={`/catalog/${item.name
+                            to={`/catalog/${item.name
                               .split(" ")
                               .join("-")
                               .toLowerCase()}`}

@@ -16,7 +16,7 @@ import BgImage9 from "../assets/random_bg_image/coding bg9.jpg";
 import BgImage10 from "../assets/random_bg_image/coding bg10.jpg";
 import BgImage11 from "../assets/random_bg_image/coding bg11.jpg";
 
-const bgImages=[
+const bgImages = [
   BgImage1,
   BgImage2,
   BgImage3,
@@ -28,17 +28,15 @@ const bgImages=[
   BgImage9,
   BgImage10,
   BgImage11,
-
-]
-
+];
 
 export default function Home() {
   const [backgroundImage, setBgImage] = useState(null);
 
-  useEffect(()=>{
-    const bg = bgImages[Math.floor(Math.random()*bgImages.length)];
+  useEffect(() => {
+    const bg = bgImages[Math.floor(Math.random() * bgImages.length)];
     setBgImage(bg);
-  },[]);
+  }, []);
   return (
     <div>
       {/* background image */}
@@ -62,7 +60,7 @@ export default function Home() {
       {/* section 3 */}
       <Section3 />
       {/* footer */}
-      <Footer/>
+      <Footer />
     </div>
   );
 }

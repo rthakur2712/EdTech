@@ -38,22 +38,17 @@ export default function NestedView({ handleChangeEditSectionName }) {
     const result = await deleteSubSection({ subSectionId, sectionId, token });
     // console.log("subsection deleting result", result);
     if (result) {
-      const updatedCourseContent = course.sections.map((section) =>{
-          // console.log("section._id",section._id)
-          // console.log("modalData",modalData.sectionId)
-          return(
-              section._id === sectionId ? result : section
-          )
-         
-      }
-         
-        )
-        // console.log("updatedSections",updatedCourseContent)
-        const updatedCourse = { ...course, sections: updatedCourseContent }
-        // console.log("updatedCourse", updatedCourse)   
-        dispatch(setCourse(updatedCourse))
+      const updatedCourseContent = course.sections.map((section) => {
+        // console.log("section._id",section._id)
+        // console.log("modalData",modalData.sectionId)
+        return section._id === sectionId ? result : section;
+      });
+      // console.log("updatedSections",updatedCourseContent)
+      const updatedCourse = { ...course, sections: updatedCourseContent };
+      // console.log("updatedCourse", updatedCourse)
+      dispatch(setCourse(updatedCourse));
     }
-    // console.log("updatedCourse", course); 
+    // console.log("updatedCourse", course);
     setConformationModal(null);
   };
   return (
@@ -65,11 +60,7 @@ export default function NestedView({ handleChangeEditSectionName }) {
     >
       {course?.sections?.map((section) => {
         return (
-          <details
-            key={section._id}
-            open
-            className=" "
-          >
+          <details key={section._id} open className=" ">
             <summary className="flex justify-between py-3 border-b border-richblack-600">
               <div className="flex gap-2 items-center">
                 <IoIosList />
@@ -77,8 +68,14 @@ export default function NestedView({ handleChangeEditSectionName }) {
               </div>
               <div className="flex gap-3 items-center">
                 <div className="flex gap-1">
-                  <div className="text-xl"
-                  onClick={()=> handleChangeEditSectionName({sectionId:section._id, sectionName:section.sectionName})}
+                  <div
+                    className="text-xl"
+                    onClick={() =>
+                      handleChangeEditSectionName({
+                        sectionId: section._id,
+                        sectionName: section.sectionName,
+                      })
+                    }
                   >
                     <MdModeEdit />
                   </div>
@@ -105,17 +102,21 @@ export default function NestedView({ handleChangeEditSectionName }) {
             </summary>
             {section.subSection.map((data) => {
               return (
-                <div key={data._id} 
-                className="flex justify-between  pl-6 text-base items-center border-b border-richblack-600 py-2"
-               
+                <div
+                  key={data._id}
+                  className="flex justify-between  pl-6 text-base items-center border-b border-richblack-600 py-2"
                 >
-                  <div className="flex gap-2 items-center cursor-pointer" onClick={() => setViewSubSection(data)}>
+                  <div
+                    className="flex gap-2 items-center cursor-pointer"
+                    onClick={() => setViewSubSection(data)}
+                  >
                     <IoIosList />
                     <p>{data.title}</p>
                   </div>
                   <div>
-                    <div className="flex gap-1"
-                    onClick={(e)=>e.stopPropagation()}
+                    <div
+                      className="flex gap-1"
+                      onClick={(e) => e.stopPropagation()}
                     >
                       <div
                         className="text-base"
@@ -149,7 +150,7 @@ export default function NestedView({ handleChangeEditSectionName }) {
             })}
             <button
               className="flex items-center gap-2 text-yellow-50 py-2"
-              onClick={() => setAddSubSection({sectionId:section._id})}
+              onClick={() => setAddSubSection({ sectionId: section._id })}
             >
               <FaPlus />
               <p>Add Lecture</p>

@@ -25,7 +25,6 @@ exports.auth = async (req, res, next) => {
       // console.log(decode);
       req.user = decode;
       // console.log(req.user.id);
-      
     } catch (error) {
       return res.status(401).json({
         success: false,

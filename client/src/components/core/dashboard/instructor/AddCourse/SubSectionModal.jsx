@@ -60,15 +60,12 @@ export default function SubSectionModal({
     }
     const result = await updateSubSection(formData, token);
     if (result) {
-        const updatedCourseContent = course.sections.map((section) =>{
-            return(
-                section._id === modalData.sectionId ? result : section
-            )    
-        }  
-          )
-          const updatedCourse = { ...course, sections: updatedCourseContent }   
-          dispatch(setCourse(updatedCourse))
-      }
+      const updatedCourseContent = course.sections.map((section) => {
+        return section._id === modalData.sectionId ? result : section;
+      });
+      const updatedCourse = { ...course, sections: updatedCourseContent };
+      dispatch(setCourse(updatedCourse));
+    }
     setModalData(null);
   };
   const onSubmit = async (data) => {
@@ -92,22 +89,17 @@ export default function SubSectionModal({
       formData.append("videoFile", data.lectureVideo);
       const result = await createSubSection(formData, token);
       if (result) {
-        const updatedCourseContent = course.sections.map((section) =>{
-            // console.log("section._id",section._id)
-            // console.log("modalData",modalData.sectionId)
-            return(
-                section._id === modalData.sectionId ? result : section
-            )
-           
-        }
-           
-          )
+        const updatedCourseContent = course.sections.map((section) => {
+          // console.log("section._id",section._id)
+          // console.log("modalData",modalData.sectionId)
+          return section._id === modalData.sectionId ? result : section;
+        });
         //   console.log("updatedSections",updatedCourseContent)
-          const updatedCourse = { ...course, sections: updatedCourseContent }
-        //   console.log("updatedCourse", updatedCourse)   
-          dispatch(setCourse(updatedCourse))
+        const updatedCourse = { ...course, sections: updatedCourseContent };
+        //   console.log("updatedCourse", updatedCourse)
+        dispatch(setCourse(updatedCourse));
       }
-      console.log("course",course)
+      console.log("course", course);
       setModalData(null);
     }
   };
@@ -175,13 +167,15 @@ export default function SubSectionModal({
             )}
           </label>
           <div className="flex flex-row-reverse gap-4">
-           { (add||edit)&&<button
-              type="submit"
-              className="py-2 px-4 bg-yellow-50 text-richblack-900 rounded-lg"
-            >
-              {add && "Save"}
-              {edit && "Save Changes"}
-            </button>}
+            {(add || edit) && (
+              <button
+                type="submit"
+                className="py-2 px-4 bg-yellow-50 text-richblack-900 rounded-lg"
+              >
+                {add && "Save"}
+                {edit && "Save Changes"}
+              </button>
+            )}
             <button
               onClick={cancelHandler}
               className="py-2 px-4 bg-richblack-700 text-richblack-5 rounded-lg"

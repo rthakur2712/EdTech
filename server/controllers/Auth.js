@@ -66,7 +66,6 @@ exports.signup = async (req, res) => {
       confirmPassword,
       accountType,
       otp,
-
     } = req.body;
     // validate user data
     if (
@@ -76,7 +75,6 @@ exports.signup = async (req, res) => {
       !password ||
       !confirmPassword ||
       !otp
-      
     ) {
       return res.status(400).json({
         success: false,
@@ -102,7 +100,7 @@ exports.signup = async (req, res) => {
     const recentOtp = await OTP.findOne({ email })
       .sort({ createdAt: -1 })
       .limit(1);
-      console.log("Recent OTP : ", recentOtp);
+    console.log("Recent OTP : ", recentOtp);
     if (!recentOtp) {
       return res.status(400).json({
         success: false,
@@ -136,7 +134,7 @@ exports.signup = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "User registered successfully",
-      data: user
+      data: user,
     });
   } catch (error) {
     console.log("Error occured while registering user", error);
@@ -159,9 +157,7 @@ exports.login = async (req, res) => {
       });
     }
     // check if user exists or not
-    const user = await Users.findOne({ email }).populate(
-      "additionalDetails"
-    );
+    const user = await Users.findOne({ email }).populate("additionalDetails");
     if (!user) {
       return res.status(401).json({
         success: false,
@@ -278,13 +274,13 @@ exports.tokenLogin = async (req, res) => {
       });
     }
     // compare password
-    
-      res.status(200).json({
-        success: true,
-        message: "User logged in successfully",
-        user,
-      });
-    }  catch (error) {
+
+    res.status(200).json({
+      success: true,
+      message: "User logged in successfully",
+      user,
+    });
+  } catch (error) {
     console.log("Error occured while logging in", error);
     return res.status(500).json({
       success: false,

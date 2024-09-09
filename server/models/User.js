@@ -45,7 +45,7 @@ const userSchema = new mongoose.Schema({
     // required:true
   },
   resetPasswordExpires: {
-    type:Date
+    type: Date,
   },
   courseProgress: [
     {

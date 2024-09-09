@@ -20,28 +20,28 @@ export const fadeIn = (direction, delay) => {
   };
 };
 export const bounce = {
-    hidden: { y: -10, opacity: 0 },
-    show: {
-        y: 0,
-        opacity: 1,
-        transition: {
-            type: 'spring',
-            damping: 10,
-            stiffness: 100,
-            duration: 0.5,
-        }
-    }
+  hidden: { y: -10, opacity: 0 },
+  show: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      damping: 10,
+      stiffness: 100,
+      duration: 0.5,
+    },
+  },
 };
 export const scaleUp = {
-    hidden: { scale: 0.1, opacity: 0 },
-    show: {
-        scale: 1,
-        opacity: 1,
-        transition: {
-            type: 'spring',
-            damping: 10,
-            stiffness: 100,
-            duration: 0.5,
-        }
-    }
+  hidden: { scale: 0.1, opacity: 0 },
+  show: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      damping: 10,
+      stiffness: 100,
+      duration: 0.5,
+    },
+  },
 };

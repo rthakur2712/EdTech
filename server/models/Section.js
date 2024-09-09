@@ -16,14 +16,14 @@ const sectionSchema = new mongoose.Schema({
 });
 
 sectionSchema.methods.deleteSubSections = async function () {
-    try {
-        // const section = await this.findById(sectionId);
-        console.log("this", this);
-        await SubSection.deleteMany({ _id: { $in: this.subSection } });
-      } catch (error) {
-        console.log("Error occured while deleting sub-sections", error);
-        throw error;
-      }
+  try {
+    // const section = await this.findById(sectionId);
+    console.log("this", this);
+    await SubSection.deleteMany({ _id: { $in: this.subSection } });
+  } catch (error) {
+    console.log("Error occured while deleting sub-sections", error);
+    throw error;
+  }
 };
 
 module.exports = mongoose.model("Section", sectionSchema);

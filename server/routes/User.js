@@ -1,27 +1,27 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 // import controllers
 const {
-    login,
-    signup,
-    sendOTP,
-    changePassword,
-    tokenLogin
-} = require('../controllers/Auth');
+  login,
+  signup,
+  sendOTP,
+  changePassword,
+  tokenLogin,
+} = require("../controllers/Auth");
 
 const {
-    resetPasswordToken,
-    resetPassword
-} = require('../controllers/ResetPassword');
+  resetPasswordToken,
+  resetPassword,
+} = require("../controllers/ResetPassword");
 
 // import middlewares
-const { auth } = require('../middlewares/auth');
+const { auth } = require("../middlewares/auth");
 
 // routes
-router.post("/login",login);
-router.post("/login-token",auth,tokenLogin);
-router.post("/signup",signup);
+router.post("/login", login);
+router.post("/login-token", auth, tokenLogin);
+router.post("/signup", signup);
 router.post("/sendOTP", sendOTP);
 router.post("/changePassword", changePassword);
 router.post("/reset-password-token", resetPasswordToken);
