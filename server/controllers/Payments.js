@@ -14,7 +14,7 @@ const crypto = require("crypto");
 //     // validation
 //     // valid course id
 //     if (!courseId) {
-//       return res.status(400).json({ msg: "CourseId is required" });
+//       return res.status(400).json({: "CourseId is required" });
 //     }
 //     // valid coursedetails
 //     const course = await Course.findById(courseId);
@@ -29,7 +29,7 @@ const crypto = require("crypto");
 //     // create order
 //     const amount = course.price;
 //     const currency = "INR";
-//     const options = {
+//     const options = { 
 //       amount: amount * 100,
 //       currency,
 //       receipt: `receipt_${userId}_${courseId}`,
@@ -129,23 +129,23 @@ exports.capturePayment = async (req, res) => {
   const userId = req.user.user.id;
 
   if (coursesId.length === 0) {
-    return res.status(400).json({ msg: "Please provide Course ID" });
+    return res.status(400).json({ message: "Please provide Course ID" });
   }
   let totalAmount = 0;
   for (const course_id of coursesId) {
     try {
       const course = await Course.findById(course_id);
       if (!course) {
-        return res.status(400).json({ msg: "Invalid Course ID" });
+        return res.status(400).json({ message: "Invalid Course ID" });
       }
       const uid = new mongoose.Types.ObjectId(userId);
       if (course.studentsEnrolled.includes(uid)) {
-        return res.status(400).json({ msg: "Course already bought" });
+        return res.status(400).json({ message: "Course already bought" });
       }
       totalAmount += course.price;
     } catch (error) {
       console.log(error);
-      return res.status(500).json({ msg: "Internal Server Error" });
+      return res.status(500).json({ message: "Internal Server Error" });
     }
   }
   const options = {
@@ -164,7 +164,7 @@ exports.capturePayment = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ msg: "Could not initiate order" });
+    return res.status(500).json({ message: "Could not initiate order" });
   }
 };
 
@@ -189,7 +189,7 @@ exports.verifySignature = async (req, res) => {
   ) {
     return res
       .status(400)
-      .json({ msg: "Payment failed due to invalid details" });
+      .json({ message: "Payment failed due to invalid details" });
   }
   let body = razorpay_order_id + "|" + razorpay_payment_id;
   const expectedSignature = crypto
@@ -199,15 +199,15 @@ exports.verifySignature = async (req, res) => {
   if (expectedSignature === razorpay_signature) {
     //  enroll user in the coursesId
     await enrolledStudents(coursesId, userId, res);
-    return res.status(200).json({ msg: "Payment successful" });
+    return res.status(200).json({ message: "Payment successful" });
   }
   return res
     .status(400)
-    .json({ msg: "Payment failed due to invalid signature" });
+    .json({ message: "Payment failed due to invalid signature" });
 };
 const enrolledStudents = async (coursesId, userId, res) => {
   if (!coursesId || !userId) {
-    return res.status(400).json({ msg: "Please provide coursesId and userId" });
+    return res.status(400).json({ message: "Please provide coursesId and userId" });
   }
   for (const course_id of coursesId) {
     try {
@@ -218,7 +218,7 @@ const enrolledStudents = async (coursesId, userId, res) => {
         { new: true }
       );
       if (!enrolledCourse) {
-        return res.status(400).json({ msg: "Invalid Course ID" });
+        return res.status(400).json({ message: "Invalid Course ID" });
       }
       const enrolledUser = await User.findByIdAndUpdate(
         userId,
@@ -239,7 +239,7 @@ const enrolledStudents = async (coursesId, userId, res) => {
       );
     } catch (error) {
       console.log(error);
-      return res.status(500).json({ msg: "Internal Server Error" });
+      return res.status(500).json({message: "Internal Server Error" });
     }
   }
 };

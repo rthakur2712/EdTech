@@ -54,7 +54,7 @@ router.post("/createSubSection", auth, isInstructor, createSubSection);
 router.put("/updateSubSection", auth, isInstructor, updateSubSection);
 router.delete("/deleteSubSection", auth, isInstructor, deleteSubSection);
 router.get("/getAllCourses", auth, getAllCourses);
-router.get("/getCourseDetails", auth, getCourseDetails);
+router.post("/getCourseDetails", auth, getCourseDetails);
 router.get(
   "/getAllInstructorCourses",
   auth,

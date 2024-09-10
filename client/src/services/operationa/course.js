@@ -306,3 +306,28 @@ export const getCatalogPageDetails = async (categoryId) => {
   // toast.dismiss(toastId)
   return result;
 };
+// get all details of course
+export const getCourseDetails = async (courseId) => {
+  let result = null;
+  // const toastId = toast.loading("Loading...");
+
+  try {
+    const response = await apiConnector(
+      "POST",
+      courseEndpoints.GET_COURSE_DETAILS_API,
+      { courseId: courseId }
+    );
+    console.log("GET COURSE DETAILS API RESPONSE............", response);
+
+    if (!response?.data?.success) {
+      throw new Error("Could Not Fetch Course Details");
+    }
+
+    result = response?.data?.course;
+  } catch (error) {
+    console.log("GET COURSE DETAILS API ERROR............", error);
+    toast.error(error.message);
+  }
+  // toast.dismiss(toastId);
+  return result;
+};

@@ -76,7 +76,7 @@ export async function buyCourse(
     });
   } catch (error) {
     console.log("Error while buying course", error);
-    toast.error(error.response.data.msg);
+    toast.error(error.response.data.message);
   }
   toast.dismiss(toastId);
 }
