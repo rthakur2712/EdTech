@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const path = require("path");
 
 const userRoutes = require("./routes/User");
 const profileRoutes = require("./routes/Profile");
@@ -50,13 +51,22 @@ app.use("/api/v1/payments", paymentRoutes);
 app.use("/api/v1/course", courseRoutes);
 
 // def route
-app.get("/", (req, res) => {
-  return res.json({
-    success: true,
-    message: "You server is up and running...",
-  });
-});
+// app.get("/", (req, res) => {
+//   return res.json({
+//     success: true,
+//     message: "You server is up and running...",
+//   });
+// });
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+});
+app.use(express.static(path.join(__dirname, "..", "client", "build")));
+
+app.get('/*', (req, res) => {
+	res.sendFile(path.join(__dirname, '../client/build/index.html'), (err) => {
+		if (err) {
+			console.error('Error sending file:', err);
+		}
+	});
 });
