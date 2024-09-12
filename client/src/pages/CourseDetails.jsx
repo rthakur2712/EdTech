@@ -14,8 +14,6 @@ import { GrCertificate } from "react-icons/gr";
 import Footer from "../components/common/Footer";
 import CourseAccordion from "../components/core/catalog/CourseAccordion";
 
-
-
 export default function CourseDetails() {
   const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
@@ -109,7 +107,9 @@ export default function CourseDetails() {
             className="h-[210px] w-[370px] object-cover rounded-t-lg"
           />
           <div className="p-6 flex flex-col gap-4">
-            <div className="text-3xl text-richblack-5 font-bold">Rs. {course.price}</div>
+            <div className="text-3xl text-richblack-5 font-bold">
+              Rs. {course.price}
+            </div>
             <div className="flex flex-col gap-3">
               <button
                 className="bg-yellow-50 p-3 rounded-lg text-richblack-900"
@@ -121,49 +121,60 @@ export default function CourseDetails() {
                 Add to Cart
               </button>
               <div className="text-sm text-richblack-25 mx-auto font-thin">
-              30-Day Money-Back Guarantee
+                30-Day Money-Back Guarantee
               </div>
             </div>
             <div className="">
               <p className="text-richblack-5 mb-2">This course includes:</p>
               <ul className="text-caribbeangreen-100 text-sm flex flex-col gap-2">
-                <li className="flex gap-2 items-center"><IoIosTimer />8 hours on-demand video</li>
-                <li className="flex gap-2 items-center"><FaArrowPointer />
-                Full Lifetime access</li>
                 <li className="flex gap-2 items-center">
-                <CiMobile1 />
-                  Access on Mobile and TV</li>
+                  <IoIosTimer />8 hours on-demand video
+                </li>
                 <li className="flex gap-2 items-center">
-                <GrCertificate />
-
-                  Certificate of completion</li>
+                  <FaArrowPointer />
+                  Full Lifetime access
+                </li>
+                <li className="flex gap-2 items-center">
+                  <CiMobile1 />
+                  Access on Mobile and TV
+                </li>
+                <li className="flex gap-2 items-center">
+                  <GrCertificate />
+                  Certificate of completion
+                </li>
               </ul>
-            </div> 
+            </div>
             <div className="text-yellow-100 mx-auto mt-2">Share</div>
           </div>
         </div>
       </div>
       <div className="px-[120px] mt-8 w-[70%] flex flex-col gap-8">
         <div className="p-8 border border-richblack-700 flex flex-col gap-3">
-        <h1 className="text-3xl text-richblack-5">What you'll learn</h1>
-        <div className="text-sm text-richblack-50 w-[70%] leading-7">
-          {course.whatWillYouLearn}
-        </div>
+          <h1 className="text-3xl text-richblack-5">What you'll learn</h1>
+          <div className="text-sm text-richblack-50 w-[70%] leading-7">
+            {course.whatWillYouLearn}
+          </div>
         </div>
         <div>
           <div className="flex flex-col gap-2">
-          <h1 className="text-2xl text-richblack-5">Course Content</h1>
-          <div className="flex justify-between items-center">
-          <div className="text-richblack-50 text-sm">
-              {course.sections.length} Sections • {course.sections.reduce((total, section) => total + section.subSection.length, 0)} lectures 
+            <h1 className="text-2xl text-richblack-5">Course Content</h1>
+            <div className="flex justify-between items-center">
+              <div className="text-richblack-50 text-sm">
+                {course.sections.length} Sections •{" "}
+                {course.sections.reduce(
+                  (total, section) => total + section.subSection.length,
+                  0
+                )}{" "}
+                lectures
+              </div>
+              <div className="text-sm text-yellow-50">
+                Collapse all sections
+              </div>
             </div>
-            <div className="text-sm text-yellow-50">Collapse all sections</div>
-          </div>
-           
           </div>
         </div>
-            </div>
-            {/* <div className="py-4 ">
+      </div>
+      {/* <div className="py-4 ">
               {course.sections?.map((course, index) => (
                 <CourseAccordion
                   course={course}
@@ -173,8 +184,8 @@ export default function CourseDetails() {
                 />
               ))}
             </div> */}
- 
-            {/* <Footer/> */}
+
+      {/* <Footer/> */}
     </div>
   );
 }
