@@ -3,6 +3,7 @@ import { setLoading, setToken } from "../../slices/authSlice";
 import { setUser } from "../../slices/profileSlice";
 import { endpoints } from "../apis";
 import { apiConnector } from "../apiConnector";
+import { resetCart } from "../../slices/cartSlice";
 export function login(email, password, navigate) {
   return async (dispatch) => {
     const toastId = toast.loading("loading");
@@ -177,6 +178,10 @@ export function logout(navigate) {
     try {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
+      localStorage.removeItem("cart");
+      localStorage.removeItem("total");
+      localStorage.removeItem("totalItems");
+      dispatch(resetCart());
       localStorage.clear();
       dispatch(setToken(null));
       dispatch(setUser(null));

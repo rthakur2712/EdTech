@@ -13,15 +13,27 @@ import { CiMobile1 } from "react-icons/ci";
 import { GrCertificate } from "react-icons/gr";
 import Footer from "../components/common/Footer";
 import CourseAccordion from "../components/core/catalog/CourseAccordion";
+import { ACCOUNT_TYPE } from "../data/dashboard-links";
+import { addToCart } from "../slices/cartSlice";
 
 export default function CourseDetails() {
   const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
+  const { cart } = useSelector((state) => state.cart);
   const navigate = useNavigate();
   const { courseId } = useParams();
   const dispatch = useDispatch();
   const [course, setCourse] = useState(null);
   const [avgReviewCount, setAvgReviewCount] = useState(0);
+  const [isActive, setIsActive] = useState(Array(0));
+  const handleActive = (id) => {
+    // console.log("called", id)
+    setIsActive(
+      !isActive.includes(id)
+        ? isActive.concat([id])
+        : isActive.filter((e) => e !== id)
+    );
+  };
   const handleBuyCourse = () => {
     if (!token) {
       toast.error("Please login or signup to buy course");
@@ -31,11 +43,25 @@ export default function CourseDetails() {
     buyCourse(token, [courseId], user, navigate, dispatch);
     return;
   };
+  const handleAddToCart = () => {
+    if (user && user?.accountType === ACCOUNT_TYPE.INSTRUCTOR) {
+      toast.error("You are an Instructor. You can't buy a course.")
+      return
+    }
+    if(!token){
+      toast.error("Please login or signup to add course to cart");
+      navigate("/login");
+      return;
+    }
+    dispatch(addToCart(course));
+    console.log("cart",cart)
+    return;
+  }
   useEffect(() => {
     (async () => {
       try {
         const res = await getCourseDetails(courseId);
-        console.log(res);
+        // console.log("response", res);
         setCourse(res);
       } catch (err) {
         console.log(err);
@@ -53,14 +79,9 @@ export default function CourseDetails() {
         <div className="loader"></div>
       </div>
     );
+  // console.log("name",course.instructor.firstName)
   return (
     <div>
-      {/* <button
-        className="bg-yellow-50 p-3 rounded-lg text-richblack-900"
-        onClick={() => handleBuyCourse()}
-      >
-        Buy Now
-      </button> */}
       <div className="px-[120px] py-8 bg-richblack-800 relative">
         <div className="w-[60%] flex flex-col gap-3">
           <div className="text-richblack-300 text-sm">
@@ -117,7 +138,9 @@ export default function CourseDetails() {
               >
                 Buy Now
               </button>
-              <button className="bg-richblack-800 p-3 rounded-lg text-richblack-25">
+              <button className="bg-richblack-800 p-3 rounded-lg text-richblack-25"
+              onClick={()=>handleAddToCart()}
+              >
                 Add to Cart
               </button>
               <div className="text-sm text-richblack-25 mx-auto font-thin">
@@ -167,14 +190,14 @@ export default function CourseDetails() {
                 )}{" "}
                 lectures
               </div>
-              <div className="text-sm text-yellow-50">
+              <div
+                className="text-sm text-yellow-50 cursor-pointer"
+                onClick={() => setIsActive([])}
+              >
                 Collapse all sections
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      {/* <div className="py-4 ">
+            <div className="py-4 ">
               {course.sections?.map((course, index) => (
                 <CourseAccordion
                   course={course}
@@ -183,9 +206,27 @@ export default function CourseDetails() {
                   handleActive={handleActive}
                 />
               ))}
-            </div> */}
+            </div>
+          </div>
+          <div className="flex flex-col gap-2 my-5">
+            <h1 className="text-2xl text-richblack-5">Author</h1>
+            <div className="flex items-center gap-3">
+              <img
+                src={course.instructor.image}
+                className="h-10 w-10 rounded-full object-cover"
+              />
+              <span className="text-richblack-5">
+                {course.instructor.firstName} {course.instructor.lastName}
+              </span>
+            </div>
+            <span className="text-sm text-richblack-50">
+              {course.instructor.additionalDetails.about}
+            </span>
+          </div>
+        </div>
+      </div>
 
-      {/* <Footer/> */}
+      <Footer />
     </div>
   );
 }

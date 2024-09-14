@@ -13,7 +13,7 @@ export default function Navbar() {
   const [subLinks, setSubLinks] = useState([]);
   const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
-  // const { totalItems } = useSelector((state) => state.cart);
+  const { totalItems } = useSelector((state) => state.cart);
   const matchRoute = (route) => {
     return matchPath(route, location.pathname);
   };
@@ -110,7 +110,7 @@ export default function Navbar() {
           )}
           {user && user?.accountType !== "instructor" && (
             <Link to="/dashboard/cart" className="relative">
-              <FaCartShopping />
+              <FaCartShopping /><div className="absolute -top-2 -right-3 text-xs bg-pink-400 rounded-full h-4 w-4 flex items-center justify-center">{totalItems}</div>
             </Link>
           )}
         </div>
