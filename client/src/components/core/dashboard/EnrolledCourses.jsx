@@ -61,7 +61,7 @@ export default function EnrolledCourses() {
                 <div className="flex flex-col  ">
                   <p className="text-richblack-5">{course.courseName}</p>
                   <p className="text-richblack-300 text-sm">
-                    {course.courseDescription}
+                  {course.courseDescription.split(" ").slice(0, 20).join(" ")}...
                   </p>
                 </div>
               </div>
@@ -78,7 +78,7 @@ export default function EnrolledCourses() {
                   ) : (
                     <>
                       <ProgressBar
-                        completed={10}
+                        completed={30}
                         height="8px"
                         width="200px"
                         isLabelVisible={false}

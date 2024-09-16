@@ -110,7 +110,8 @@ export default function Navbar() {
           )}
           {user && user?.accountType !== "instructor" && (
             <Link to="/dashboard/cart" className="relative">
-              <FaCartShopping /><div className="absolute -top-2 -right-3 text-xs bg-pink-400 rounded-full h-4 w-4 flex items-center justify-center">{totalItems}</div>
+              <FaCartShopping /> 
+              <div className="absolute -top-2 -right-3 text-xs bg-pink-400 rounded-full h-4 w-4 flex items-center justify-center">{totalItems}</div>
             </Link>
           )}
         </div>

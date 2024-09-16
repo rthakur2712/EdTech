@@ -33,17 +33,21 @@ export const cartSlice = createSlice({
       }
     },
     removeFromCart: (state, action) => {
+      console.log("action", action.payload);
       const course = action.payload;
       const index = state.cart.findIndex((item) => item._id === course._id);
+      console.log("index", index);
       if (index >= 0) {
+        console.log("index", index);  
         state.cart.splice(index, 1);
         state.total -= course.price;
         state.totalItems -= 1;
-        toast.success("Course removed from cart");
+        toast.success("Course removed from cart"); 
         localStorage.setItem("cart", JSON.stringify(state.cart));
         localStorage.setItem("total", JSON.stringify(state.total));
         localStorage.setItem("totalItems", JSON.stringify(state.totalItems));
       }
+      // console.log("cart");
     },
     resetCart: (state) => {
       state.cart = [];
