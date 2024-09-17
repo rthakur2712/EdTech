@@ -47,4 +47,5 @@ export const courseEndpoints = {
   DELETE_SECTION_API: BASE_URL + "/course/deleteSection",
   DELETE_SUBSECTION_API: BASE_URL + "/course/deleteSubSection",
   CATALOG_PAGE_DETAILS_API: BASE_URL + "/course/categoryPageDetails",
+  CREATE_RATING_API: BASE_URL + "/course/createRating",
 };

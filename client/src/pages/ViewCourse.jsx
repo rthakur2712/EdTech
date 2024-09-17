@@ -17,35 +17,37 @@ export default function ViewCourse() {
     const courseId=useParams()
     const dispatch=useDispatch()
     const {token}=useSelector((state)=>state.auth)
-    const {courseSectionData,totalNoOfLectures}=useSelector((state)=>state.viewCourse)
+    // const {courseSectionData,totalNoOfLectures,courseEntireData,completedLectures}=useSelector((state)=>state.viewCourse)
     const [reviewModal, setReviewModal] = useState(false)
     useEffect(()=>{
         ; (async () => {
             const courseData = await getLectureDetails({courseId,token})
-            console.log("Course Data here... ", courseData)
-            // console.log("Course section here... ", courseData.sections)
+            // console.log("Course Data here... ", courseData)
             dispatch(setCourseSectionData(courseData.courseDetails.sections))
-            console.log("Course section here... ", courseSectionData)
+            
             dispatch(setEntireCourseData(courseData.courseDetails))
+        
             dispatch(setCompletedLectures(courseData.completedVideos))
+           
             let lectures = 0
-            courseData?.sections?.forEach((sec) => {
+            courseData?.courseDetails?.sections?.forEach((sec) => {
+    
               lectures += sec.subSection.length
+             
             })
+           
             dispatch(setTotalNoOfLectures(lectures))
-            // console.log("Total lectures", totalNoOfLectures)
+           
           })()
     },[])
-    console.log("hello")
- 
   return <div>
     <div>
-    <VideoDetailsSidebar reviewModal={setReviewModal} />
+    <VideoDetailsSidebar setReviewModal={setReviewModal} />
     </div>
     
      <div>
         <Outlet/>
      </div>
-    {reviewModal && <CourseReviewModal reviewModal={setReviewModal} />}   
+    {reviewModal && <CourseReviewModal setReviewModal={setReviewModal} />}   
   </div>;
 }

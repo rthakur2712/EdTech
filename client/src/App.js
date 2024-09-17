@@ -24,6 +24,7 @@ import Catalog from "./pages/Catalog";
 import CourseDetails from "./pages/CourseDetails";
 import ViewCourse from "./pages/ViewCourse";
 import { ACCOUNT_TYPE } from "./data/dashboard-links";
+import VideoDetails from "./components/core/viewCourse/VideoDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -62,7 +63,7 @@ function App() {
           <Route path="/dashboard/settings" element={<Settings />} />
           <Route path="/dashboard/cart" element={<Cart />} />
         </Route>
-        {/* <Route
+        <Route
           element={
               <ViewCourse />
           }
@@ -70,11 +71,11 @@ function App() {
           {user?.accountType === ACCOUNT_TYPE.STUDENT && (
             <Route
               path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
-              element={<VIdeoDetails />}
+              element={<VideoDetails />}
             />
           )}
-        </Route> */}
-        <Route path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId" element={<ViewCourse />} />
+        </Route>
+        {/* <Route path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId" element={<ViewCourse />} /> */}
 
       </Routes>
     </div>
