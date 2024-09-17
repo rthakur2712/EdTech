@@ -9,6 +9,7 @@ const {
   getAllInstructorCourses,
   editCourse,
   deleteCourse,
+  getLectureDetails,
 } = require("../controllers/Course");
 // category controllers
 const {
@@ -55,6 +56,7 @@ router.put("/updateSubSection", auth, isInstructor, updateSubSection);
 router.delete("/deleteSubSection", auth, isInstructor, deleteSubSection);
 router.get("/getAllCourses", auth, getAllCourses);
 router.post("/getCourseDetails", auth, getCourseDetails);
+router.post("/getLectureDetails", auth, getLectureDetails);
 router.get(
   "/getAllInstructorCourses",
   auth,

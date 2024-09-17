@@ -323,7 +323,7 @@ export const getCourseDetails = async (courseId) => {
       throw new Error("Could Not Fetch Course Details");
     }
 
-    result = response?.data?.course;
+    result = response?.data?.data;
   } catch (error) {
     console.log("GET COURSE DETAILS API ERROR............", error);
     toast.error(error.message);
@@ -331,3 +331,30 @@ export const getCourseDetails = async (courseId) => {
   // toast.dismiss(toastId);
   return result;
 };
+export const getLectureDetails = async ({courseId,token})=>{
+  let result = null;
+  // const toastId = toast.loading("Loading...");
+
+  try {
+    const response = await apiConnector(
+      "POST",
+      courseEndpoints.GET_LECTURE_DETAILS_API,
+      { courseId: courseId },
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
+    console.log("GET LECTURE DETAILS API RESPONSE............", response);
+
+    if (!response?.data?.success) {
+      throw new Error("Could Not Fetch Lecture Details");
+    }
+
+    result = response?.data?.data;
+  } catch (error) {
+    console.log("GET LECTURE DETAILS API ERROR............", error);
+    toast.error(error.message);
+  }
+  // toast.dismiss(toastId);
+  return result;
+}

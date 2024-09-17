@@ -11,7 +11,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Dashboard from "./pages/Dashboard";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { tokenLogin } from "./services/operationa/auth";
 import MyProfile from "./components/core/dashboard/MyProfile";
 import EnrolledCourses from "./components/core/dashboard/EnrolledCourses";
@@ -22,9 +22,12 @@ import MyCourses from "./components/core/dashboard/instructor/MyCourses";
 import AddCourse from "./components/core/dashboard/instructor/AddCourse/AddCourse";
 import Catalog from "./pages/Catalog";
 import CourseDetails from "./pages/CourseDetails";
+import ViewCourse from "./pages/ViewCourse";
+import { ACCOUNT_TYPE } from "./data/dashboard-links";
 
 function App() {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.profile);
   useEffect(() => {
     if (localStorage.getItem("token")) {
       dispatch(tokenLogin());
@@ -59,6 +62,20 @@ function App() {
           <Route path="/dashboard/settings" element={<Settings />} />
           <Route path="/dashboard/cart" element={<Cart />} />
         </Route>
+        {/* <Route
+          element={
+              <ViewCourse />
+          }
+        >
+          {user?.accountType === ACCOUNT_TYPE.STUDENT && (
+            <Route
+              path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
+              element={<VIdeoDetails />}
+            />
+          )}
+        </Route> */}
+        <Route path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId" element={<ViewCourse />} />
+
       </Routes>
     </div>
   );

@@ -62,7 +62,7 @@ export default function CourseDetails() {
       try {
         const res = await getCourseDetails(courseId);
         // console.log("response", res);
-        setCourse(res);
+        setCourse(res.courseDetails);
       } catch (err) {
         console.log(err);
       }

@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getAllEnrolledCourses } from "../../../services/operationa/profile";
 import ProgressBar from "@ramonak/react-progress-bar";
+import { useNavigate } from "react-router-dom";
 export default function EnrolledCourses() {
   const [enrolledCourses, setEnrolledCourses] = useState(null);
   const { token } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
   const getEnrolledCourses = async () => {
     try {
       const result = await getAllEnrolledCourses(token);
@@ -48,9 +50,13 @@ export default function EnrolledCourses() {
         </div>
         <div>
           {enrolledCourses.map((course, index) => (
+            // console.log("course", course),
             <div
               key={index}
               className="flex items-center border-t border-richblack-700"
+              onClick={()=>{
+                navigate(`/view-course/${course._id}/section/${course.sections?.[0]?._id}/sub-section/${course.sections?.[0]?.subSection?.[0]?._id}`)
+              }}
             >
               <div className="flex items-center p-4 w-[500px] gap-5">
                 <img
@@ -61,7 +67,8 @@ export default function EnrolledCourses() {
                 <div className="flex flex-col  ">
                   <p className="text-richblack-5">{course.courseName}</p>
                   <p className="text-richblack-300 text-sm">
-                  {course.courseDescription.split(" ").slice(0, 20).join(" ")}...
+                    {course.courseDescription.split(" ").slice(0, 20).join(" ")}
+                    ...
                   </p>
                 </div>
               </div>
