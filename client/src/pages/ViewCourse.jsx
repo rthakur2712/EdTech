@@ -40,8 +40,8 @@ export default function ViewCourse() {
            
           })()
     },[])
-  return <div>
-    <div>
+  return <div className="flex">
+    <div className="h-[100%]">
     <VideoDetailsSidebar setReviewModal={setReviewModal} />
     </div>
     
