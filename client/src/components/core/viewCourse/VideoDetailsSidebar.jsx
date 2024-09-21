@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import IconBtn from "../../common/IconBtn";
 
-import { BsChevronDown } from "react-icons/bs";
 import { IoIosArrowBack } from "react-icons/io";
 
-import { IoMdClose } from "react-icons/io";
-import { HiMenuAlt1 } from "react-icons/hi";
+import { FaDesktop } from "react-icons/fa";
 
 export default function VideoDetailsSidebar({ setReviewModal }) {
   const [activeStatus, setActiveStatus] = useState(""); // store curr section id
@@ -44,11 +41,11 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
 
   return (
     <>
-      <div className="h-[calc(100vh-3.5rem)] w-[320px] max-w-[350px] border-r-[1px] border-r-richblack-700  bg-richblack-800 flex flex-col gap-[10px] py-[30px]">
+      <div className="min-h-screen w-[320px] max-w-[350px] border-r-[1px] border-r-richblack-700  bg-richblack-800 flex flex-col gap-[10px] py-[30px]">
         {/* for buttons and headings */}
         <div className="flex flex-col gap-3 px-6">
         <div className="py-2 flex gap-2 items-center">
-            <p className="text-richblack-25 text-lg font-bold">{courseEntireData?.courseName}</p>
+            <p className="text-richblack-25 text-xl font-bold">{courseEntireData?.courseName}</p>
             <p className="text-caribbeangreen-100 font-bold ">
               {completedLectures?.length}/{totalNoOfLectures}
             </p>
@@ -71,15 +68,16 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
               <div className="py-4 px-6 bg-richblack-700 text-richblack-5 rounded-sm mt-1">
                 <div className="text-lg capitalize">{section?.sectionName}</div>
               </div>
-              <div>
+              <div className="flex flex-col mt-2">
                 {activeStatus === section._id &&
                   section.subSection.map((topic, index) => (
                     <div
+                    key={index}
                       className={`${
                         topic._id === videoBarActive
-                          ? "bg-yellow-300 text-richblack-900"
-                          : "bg-richblack-900 text-richblack-5"
-                      } px-4 py-2 capitalize flex items-center text-sm rounded-sm  gap-1`}
+                          ? "text-blue-100"
+                          : " text-richblack-5"
+                      } px-4 py-2 capitalize flex items-center text-sm rounded-sm  gap-1 ml-4 cursor-pointer`}
                       onClick={() => {
                         navigate(
                           `/view-course/${courseEntireData?._id}/section/${section?._id}/sub-section/${topic._id}`
@@ -90,9 +88,10 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
                       <input
                         type="checkbox"
                         checked={completedLectures.includes(topic._id)}
-                        // className="h-4 w-4 appearance-none  bg-blue-500 checked:bg-richblack-500 border-2 border-gray-300 rounded-md focus:outline-none "
+                        className="h-4 w-4  "
+                        onChange={() => {}}
                       />
-                      <span>{topic.title}</span>
+                      <span className=" flex gap-2 items-center">{topic.title} <FaDesktop /></span>
                     </div>
                   ))}
               </div>
