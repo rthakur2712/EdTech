@@ -39,7 +39,7 @@ export default function Login() {
   return (
     <div className="text-white flex items-center mx-auto justify-around mt-20">
       <form
-        className="flex flex-col w-[40%] p-8 gap-9"
+        className="flex flex-col lg:w-[40%] w-[90%] p-8 gap-9"
         onSubmit={submitHandler}
       >
         <div className="flex flex-col gap-3">
@@ -103,7 +103,7 @@ export default function Login() {
           Sign In
         </button>
       </form>
-      <div className="w-[40%] relative ">
+      <div className="w-[40%] relative lg:block hidden ">
         <img src={frameImg} alt="frame" />
         <img
           src={loginImg}

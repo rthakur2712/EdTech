@@ -38,14 +38,14 @@ export default function EnrolledCourses() {
   }
   return (
     <div className="text-white">
-      <h1 className="p-6 text-3xl">Enrolled Courses</h1>
+      <h1 className="py-6 lg:px-6 px-3 text-3xl">Enrolled Courses</h1>
       {/* heading bar */}
-      <div className="w-[1100px] ml-6 border rounded-lg border-richblack-700">
+      <div className="lg:w-[1100px] md:w-[780px] w-[400px] lg:ml-6 ml-3  border rounded-lg border-richblack-700">
         <div className="flex  bg-richblack-700 rounded-t-lg text-richblack-50 text-sm">
           <div className="p-4 w-[500px]">Course Name</div>
           <div className="flex w-[600px] justify-center">
             {/* <div className='p-4 w-[300px]'>Duration</div> */}
-            <div className="p-4">Progress</div>
+            <div className="p-4 lg:flex md:flex hidden">Progress</div>
           </div>
         </div>
         <div>
@@ -58,7 +58,7 @@ export default function EnrolledCourses() {
                 navigate(`/view-course/${course._id}/section/${course.sections?.[0]?._id}/sub-section/${course.sections?.[0]?.subSection?.[0]?._id}`)
               }}
             >
-              <div className="flex items-center p-4 w-[500px] gap-5">
+              <div className="flex items-center p-4 lg:w-[500px] w-[100%] gap-5">
                 <img
                   src={course.thumbnail}
                   alt="thumbnail"
@@ -66,13 +66,17 @@ export default function EnrolledCourses() {
                 />
                 <div className="flex flex-col  ">
                   <p className="text-richblack-5">{course.courseName}</p>
-                  <p className="text-richblack-300 text-sm">
+                  <p className="text-richblack-300 text-sm lg:block hidden">
                     {course.courseDescription.split(" ").slice(0, 20).join(" ")}
+                    ...
+                  </p>
+                  <p className="text-richblack-300 text-sm ">
+                    {course.courseDescription.split(" ").slice(0, 10).join(" ")}
                     ...
                   </p>
                 </div>
               </div>
-              <div className="w-[600px] flex items-center justify-center">
+              <div className="w-[600px] lg:flex items-center justify-center md:flex hidden">
                 {/* <div className='p-4 w-[300px] text-richblack-50'>{course.duration}</div> */}
                 <div className="py-4 px-10 w-[300px]">
                   {course.progress ? (

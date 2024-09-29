@@ -68,7 +68,7 @@ export default function Signup() {
         <div className="loader"></div>
       ) : (
         <div className="flex mx-auto mt-20 items-center justify-around ">
-          <div className="flex flex-col gap-9 text-white w-[30%] ">
+          <div className="flex flex-col gap-9 text-white lg:w-[30%] w-[90%] ">
             <div className="flex flex-col gap-3">
               <h2 className="text-3xl font-semibold text-white">
                 Join the millions learning to code with StudyNotion for free
@@ -223,7 +223,7 @@ export default function Signup() {
             </form>
           </div>
 
-          <div className="w-[30%] relative">
+          <div className="w-[30%] relative lg:block hidden">
             <img
               src={signupImage}
               alt="sinupImg"
