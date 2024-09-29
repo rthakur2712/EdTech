@@ -17,7 +17,7 @@ export default function CodeBlock({
     <div
       className={`flex my-20 ${
         reverse ? "flex-row-reverse" : "flex-row"
-      } justify-around`}
+      } justify-around flex-wrap gap-5`}
     >
       {/* section 1 */}
       <div className="flex flex-col w-[100%] lg:w-[40%] gap-4">

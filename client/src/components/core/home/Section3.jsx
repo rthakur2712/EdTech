@@ -7,19 +7,19 @@ import { scaleUp } from "../../common/motionFrameVariants";
 
 export default function Section3() {
   return (
-    <div className="w-[11/12] flex px-[90px] py-[120px] gap-[98px]">
+    <div className="lg:w-[11/12] flex lg:px-[90px] px-[10px] py-[120px] gap-[98px] flex-wrap w-[100%] ">
       <motion.div
         variants={scaleUp}
         initial="hidden"
         whileInView={"show"}
         viewport={{ once: false, amount: 0.1 }}
-        className="w-[50%]"
+        className="lg:w-[50%] w-[100%]"
       >
         <div className=" customDropShadow">
           <img src={instructor_image} alt="instructor_image" />
         </div>
       </motion.div>
-      <div className="text-white flex flex-col items-start w-[50%] justify-center gap-3">
+      <div className="text-white flex flex-col items-start lg:w-[50%] w-[100%] justify-center gap-3">
         <div className="font-semibold text-4xl w-[50%]">
           Become an <HighlightText text={"Instructor"} />
         </div>
