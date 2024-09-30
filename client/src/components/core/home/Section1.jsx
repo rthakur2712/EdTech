@@ -382,7 +382,7 @@ export default function Section1() {
             </div>
 
             {/* Course Cards */}
-            <div className="flex flex-col sm:flex-row px-3 sm:px-[52px] gap-6 sm:gap-9  lg:absolute bottom-[-165px]  left-6">
+            <div className="flex flex-col sm:flex-row px-3 sm:px-[52px] gap-6 sm:gap-9   bottom-[-165px]  left-6">
               {course.map((item, index) => {
                 return (
                   <div

@@ -7,7 +7,7 @@ import { scaleUp } from "../../common/motionFrameVariants";
 
 export default function Section3() {
   return (
-    <div className="lg:w-[11/12] flex lg:px-[90px] px-[10px] py-[120px] gap-[98px] flex-wrap w-[100%] ">
+    <div className="lg:w-[11/12] flex lg:flex-row flex-col lg:px-[90px] px-[10px] py-[120px] gap-[98px] w-[100%] ">
       <motion.div
         variants={scaleUp}
         initial="hidden"
