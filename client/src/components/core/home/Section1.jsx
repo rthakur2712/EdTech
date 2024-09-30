@@ -34,7 +34,7 @@
 //         >
 //           <Link to={"/signup"}>
 //             <div
-//               className="flex items-center px-6 py-[5px] gap-2 
+//               className="flex items-center px-6 py-[5px] gap-2
 //                 transition-all duration-200"
 //             >
 //               <p>Become an Instructor</p>
@@ -265,8 +265,7 @@ export default function Section1() {
             viewport={{ once: false, amount: 0.1 }}
           >
             <div className="text-lg sm:text-3xl lg:text-4xl">
-              Empower Your Future With{" "}
-              <HighlightText text={"Coding Skills"} />
+              Empower Your Future With <HighlightText text={"Coding Skills"} />
             </div>
           </motion.div>
           <motion.div
@@ -276,9 +275,9 @@ export default function Section1() {
             viewport={{ once: false, amount: 0.1 }}
           >
             <div className="text-sm sm:text-base lg:text-lg text-richblack-300 leading-[24px] mt-4  px-2">
-              With our online coding courses, you can learn at your own pace, 
-              from anywhere in the world, and get access to a wealth of 
-              resources, including hands-on projects, quizzes, and personalized 
+              With our online coding courses, you can learn at your own pace,
+              from anywhere in the world, and get access to a wealth of
+              resources, including hands-on projects, quizzes, and personalized
               feedback from instructors.
             </div>
           </motion.div>

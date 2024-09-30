@@ -31,7 +31,7 @@ exports.resetPasswordToken = async (req, res) => {
       { new: true }
     );
     // create a link
-    const url = `https://learnyverse.onrender.com/update-password${token}`;
+    const url = `https://learnyverse.onrender.com/update-password/${token}`;
     // send mail
     await mailSender(
       email,
