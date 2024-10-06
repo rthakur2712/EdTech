@@ -5,6 +5,7 @@ const User = require("../models/User");
 const mailSender = require("../utils/mailSender");
 const mongoose = require("mongoose");
 const crypto = require("crypto");
+const CourseProgress = require("../models/CourseProgress");
 // // capture payment and initiate razorpay order
 // exports.capturePayment = async (req, res) => {
 //   try {
@@ -29,7 +30,7 @@ const crypto = require("crypto");
 //     // create order
 //     const amount = course.price;
 //     const currency = "INR";
-//     const options = { 
+//     const options = {
 //       amount: amount * 100,
 //       currency,
 //       receipt: `receipt_${userId}_${courseId}`,
@@ -207,7 +208,9 @@ exports.verifySignature = async (req, res) => {
 };
 const enrolledStudents = async (coursesId, userId, res) => {
   if (!coursesId || !userId) {
-    return res.status(400).json({ message: "Please provide coursesId and userId" });
+    return res
+      .status(400)
+      .json({ message: "Please provide coursesId and userId" });
   }
   for (const course_id of coursesId) {
     try {
@@ -220,11 +223,18 @@ const enrolledStudents = async (coursesId, userId, res) => {
       if (!enrolledCourse) {
         return res.status(400).json({ message: "Invalid Course ID" });
       }
+      const courseProgress = new CourseProgress({
+        courseId: course_id,
+        userId: userId,
+        completedVideos: [],
+      });
+      await courseProgress.save();
       const enrolledUser = await User.findByIdAndUpdate(
         userId,
         {
           $push: {
             courses: course_id,
+            courseProgress: courseProgress._id,
           },
         },
         { new: true }
@@ -239,7 +249,7 @@ const enrolledStudents = async (coursesId, userId, res) => {
       );
     } catch (error) {
       console.log(error);
-      return res.status(500).json({message: "Internal Server Error" });
+      return res.status(500).json({ message: "Internal Server Error" });
     }
   }
 };

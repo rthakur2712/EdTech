@@ -54,8 +54,10 @@ export default function EnrolledCourses() {
             <div
               key={index}
               className="flex items-center border-t border-richblack-700"
-              onClick={()=>{
-                navigate(`/view-course/${course._id}/section/${course.sections?.[0]?._id}/sub-section/${course.sections?.[0]?.subSection?.[0]?._id}`)
+              onClick={() => {
+                navigate(
+                  `/view-course/${course._id}/section/${course.sections?.[0]?._id}/sub-section/${course.sections?.[0]?.subSection?.[0]?._id}`
+                );
               }}
             >
               <div className="flex items-center p-4 lg:w-[500px] w-[100%] gap-5">
@@ -79,9 +81,9 @@ export default function EnrolledCourses() {
               <div className="w-[600px] lg:flex items-center justify-center md:flex hidden">
                 {/* <div className='p-4 w-[300px] text-richblack-50'>{course.duration}</div> */}
                 <div className="py-4 px-10 w-[300px]">
-                  {course.progress ? (
+                  {course.progressPercentage ? (
                     <ProgressBar
-                      completed={course.progress}
+                      completed={course.progressPercentage}
                       height="8px"
                       width="200px"
                       isLabelVisible={false}
@@ -89,7 +91,7 @@ export default function EnrolledCourses() {
                   ) : (
                     <>
                       <ProgressBar
-                        completed={30}
+                        completed={0}
                         height="8px"
                         width="200px"
                         isLabelVisible={false}

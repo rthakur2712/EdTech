@@ -1,12 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 // import { Player } from "video-react";
 // import "video-react/dist/video-react.css";
 import ReactPlayer from "react-player";
+import { updateCourseProgress } from "../../../services/operationa/course";
+import { updateCompletedLectures } from "../../../slices/viewCourseSlice";
 
 export default function VideoDetails() {
   const { courseId, sectionId, subSectionId } = useParams();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const playerRef = useRef(null);
@@ -121,7 +124,15 @@ export default function VideoDetails() {
     }
   };
   const handleLectureCompletion = async () => {
-    // dummy
+    const res = await updateCourseProgress(
+      { courseId: courseId, subSectionId: subSectionId },
+      token
+    );
+    // console.log("res", res);
+    if (res) {
+      console.log("hello from if res");
+      dispatch(updateCompletedLectures(subSectionId));
+    }
   };
   if (!videoData) {
     return <div className="text-white">No data found</div>;
@@ -152,7 +163,7 @@ export default function VideoDetails() {
               {!completedLectures.includes(subSectionId) && (
                 <button
                   // disabled={loading}
-                  onclick={() => handleLectureCompletion()}
+                  onClick={() => handleLectureCompletion()}
                   className="text-xl max-w-max px-4 mx-auto py-1  bg-richblack-100 text-richblack-900 rounded-lg mb-2 "
                 >
                   Mark As Completed
@@ -163,17 +174,17 @@ export default function VideoDetails() {
                 // disabled={loading}
                 onClick={() => {
                   if (playerRef?.current) {
-                  // set the current time of the video to 0
-                  playerRef?.current?.seekTo(0);
-                  setVideoEnded(false);
+                    // set the current time of the video to 0
+                    playerRef?.current?.seekTo(0);
+                    setVideoEnded(false);
                   }
                 }}
                 className="text-xl max-w-max px-4 py-1 mx-auto mt-2  bg-richblack-100 text-richblack-900 rounded-lg"
-                >
+              >
                 Rewatch
-                </button>
+              </button>
 
-                <div className="mt-5 flex min-w-[250px] justify-center gap-x-4 text-xl">
+              <div className="mt-5 flex min-w-[250px] justify-center gap-x-4 text-xl">
                 {!isFirstVideo() && (
                   <button
                     // disabled={loading}

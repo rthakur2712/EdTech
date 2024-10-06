@@ -20,6 +20,7 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
     totalNoOfLectures,
     completedLectures,
   } = useSelector((state) => state.viewCourse);
+  console.log("completed lectures", completedLectures);
   useEffect(() => {
     (() => {
       if (!courseSectionData.length) return;
@@ -44,19 +45,26 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
       <div className="min-h-screen w-[320px] max-w-[350px] border-r-[1px] border-r-richblack-700  bg-richblack-800 flex flex-col gap-[10px] py-[30px]">
         {/* for buttons and headings */}
         <div className="flex flex-col gap-3 px-6">
-        <div className="py-2 flex gap-2 items-center">
-            <p className="text-richblack-25 text-xl font-bold">{courseEntireData?.courseName}</p>
+          <div className="py-2 flex gap-2 items-center">
+            <p className="text-richblack-25 text-xl font-bold">
+              {courseEntireData?.courseName}
+            </p>
             <p className="text-caribbeangreen-100 font-bold ">
               {completedLectures?.length}/{totalNoOfLectures}
             </p>
           </div>
           <div className="border-b border-richblack-600 pb-4">
-            <div onClick={() => navigate("/dashboard/enrolled-courses")} className="text-richblack-300 underline cursor-pointer flex text-xs items-center absolute  left-0 top-[70px]">
-            <IoIosArrowBack size={20} />
+            <div
+              onClick={() => navigate("/dashboard/enrolled-courses")}
+              className="text-richblack-300 underline cursor-pointer flex text-xs items-center absolute  left-0 top-[70px]"
+            >
+              <IoIosArrowBack size={20} />
               Back
             </div>
-            <div className=" bg-yellow-50 py-3 px-6 w-fit rounded-lg cursor-pointer ml-2" 
-            onClick={() => setReviewModal(true)}>
+            <div
+              className=" bg-yellow-50 py-3 px-6 w-fit rounded-lg cursor-pointer ml-2"
+              onClick={() => setReviewModal(true)}
+            >
               Add Review
             </div>
           </div>
@@ -72,7 +80,7 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
                 {activeStatus === section._id &&
                   section.subSection.map((topic, index) => (
                     <div
-                    key={index}
+                      key={index}
                       className={`${
                         topic._id === videoBarActive
                           ? "text-blue-100"
@@ -91,7 +99,9 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
                         className="h-4 w-4  "
                         onChange={() => {}}
                       />
-                      <span className=" flex gap-2 items-center">{topic.title} <FaDesktop /></span>
+                      <span className=" flex gap-2 items-center">
+                        {topic.title} <FaDesktop />
+                      </span>
                     </div>
                   ))}
               </div>

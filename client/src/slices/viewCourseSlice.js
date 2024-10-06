@@ -1,33 +1,41 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   courseSectionData: [],
   courseEntireData: [],
   completedLectures: [],
   totalNoOfLectures: 0,
-}
-
+};
+console.log("completed lectures", localStorage.getItem("completedLectures"));
+console.log(
+  "completed lectures",
+  JSON.parse(localStorage.getItem("completedLectures"))
+);
 const viewCourseSlice = createSlice({
   name: "viewCourse",
   initialState,
   reducers: {
     setCourseSectionData: (state, action) => {
-      state.courseSectionData = action.payload
+      console.log("action.payload", action.payload);
+      state.courseSectionData = action.payload;
     },
     setEntireCourseData: (state, action) => {
-      state.courseEntireData = action.payload
+      console.log("action.payload", action.payload);
+      state.courseEntireData = action.payload;
     },
     setTotalNoOfLectures: (state, action) => {
-      state.totalNoOfLectures = action.payload
+      console.log("action.payload", action.payload);
+      state.totalNoOfLectures = action.payload;
     },
     setCompletedLectures: (state, action) => {
-      state.completedLectures = action.payload
+      // console.log("action.payload", action.payload);
+      state.completedLectures = action.payload;
     },
     updateCompletedLectures: (state, action) => {
-      state.completedLectures = [...state.completedLectures, action.payload]
+      state.completedLectures = [...state.completedLectures, action.payload];
     },
   },
-})
+});
 
 export const {
   setCourseSectionData,
@@ -35,6 +43,6 @@ export const {
   setTotalNoOfLectures,
   setCompletedLectures,
   updateCompletedLectures,
-} = viewCourseSlice.actions
+} = viewCourseSlice.actions;
 
-export default viewCourseSlice.reducer
+export default viewCourseSlice.reducer;

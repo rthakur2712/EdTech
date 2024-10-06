@@ -42,6 +42,8 @@ const {
   isInstructor,
   isAdmin,
 } = require("../middlewares/auth");
+// course progress
+const { updateCourseProgress } = require("../controllers/courseProgress");
 
 // course routes
 // course can only be created by instructors
@@ -63,6 +65,7 @@ router.get(
   isInstructor,
   getAllInstructorCourses
 );
+router.post("/updateCourseProgress", auth, isStudent, updateCourseProgress);
 
 // category routes
 router.post("/createCategory", auth, isAdmin, createCategory);

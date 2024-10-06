@@ -33,8 +33,8 @@ export const profileEndpoints = {
 };
 
 export const courseEndpoints = {
-    GET_COURSE_DETAILS_API: `${BASE_URL}/course/getCourseDetails`,
-    GET_LECTURE_DETAILS_API: `${BASE_URL}/course/getLectureDetails`,
+  GET_COURSE_DETAILS_API: `${BASE_URL}/course/getCourseDetails`,
+  GET_LECTURE_DETAILS_API: `${BASE_URL}/course/getLectureDetails`,
   GET_ALL_COURSE_DETAILS_API: `${BASE_URL}/course/getAllCourses`,
   GET_ALL_INSTRUCTOR_COURSE_DETAILS_API: `${BASE_URL}/course/getAllInstructorCourses`,
   EDIT_COURSE_API: BASE_URL + "/course/editCourse",
@@ -48,4 +48,5 @@ export const courseEndpoints = {
   DELETE_SUBSECTION_API: BASE_URL + "/course/deleteSubSection",
   CATALOG_PAGE_DETAILS_API: BASE_URL + "/course/categoryPageDetails",
   CREATE_RATING_API: BASE_URL + "/course/createRating",
+  UPDATE_COURSE_PROGRESS_API: BASE_URL + "/course/updateCourseProgress",
 };

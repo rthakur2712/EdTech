@@ -331,7 +331,7 @@ export const getCourseDetails = async (courseId) => {
   // toast.dismiss(toastId);
   return result;
 };
-export const getLectureDetails = async ({courseId,token})=>{
+export const getLectureDetails = async ({ courseId, token }) => {
   let result = null;
   // const toastId = toast.loading("Loading...");
 
@@ -357,7 +357,7 @@ export const getLectureDetails = async ({courseId,token})=>{
   }
   // toast.dismiss(toastId);
   return result;
-}
+};
 
 export const createRating = async (data, token) => {
   let result = null;
@@ -383,6 +383,32 @@ export const createRating = async (data, token) => {
   } catch (error) {
     console.log("CREATE RATING API ERROR............", error);
     toast.error(error.message);
+  }
+  toast.dismiss(toastId);
+  return result;
+};
+
+export const updateCourseProgress = async (data, token) => {
+  let result = null;
+  const toastId = toast.loading("Loading...");
+
+  try {
+    const response = await apiConnector(
+      "POST",
+      courseEndpoints.UPDATE_COURSE_PROGRESS_API,
+      data,
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
+    console.log("UPDATE COURSE PROGRESS API RESPONSE............", response);
+
+    result = response.data.success;
+    // console.log("response", result);
+    toast.success("Course Progress Updated");
+  } catch (error) {
+    console.log("UPDATE COURSE PROGRESS API ERROR............", error);
+    toast.error(error.response.data.message);
   }
   toast.dismiss(toastId);
   return result;

@@ -149,8 +149,8 @@ exports.getCourseDetails = async (req, res) => {
     console.log("courseId", req.body);
     const { courseId } = req.body;
     // console.log("courseId", courseId);
-    const {userId}=req.user.user.id;
-// console.log("userId",userId);
+    const { userId } = req.user.user.id;
+    // console.log("userId",userId);
     // console.log("courseId", courseId);
     // validation
     if (!courseId) {
@@ -175,10 +175,10 @@ exports.getCourseDetails = async (req, res) => {
         },
       })
       .exec();
-      let courseProgressCount = await CourseProgress.findOne({
-        courseID: courseId,
-        userId: userId,
-    })
+    let courseProgressCount = await CourseProgress.findOne({
+      courseID: courseId,
+      userId: userId,
+    });
     if (!courseDetails) {
       return res.status(400).json({
         success: false,
@@ -187,8 +187,11 @@ exports.getCourseDetails = async (req, res) => {
     }
     return res.status(200).json({
       success: true,
-      data: {courseDetails,
-        completedVideos: courseProgressCount?.completedVideos ? courseProgressCount?.completedVideos : [],
+      data: {
+        courseDetails,
+        completedVideos: courseProgressCount?.completedVideos
+          ? courseProgressCount?.completedVideos
+          : [],
       },
       message: "Course fetched successfully",
     });
@@ -339,8 +342,11 @@ exports.getLectureDetails = async (req, res) => {
     // console.log("courseId", req.body);
     const { courseId } = req.body.courseId;
     // console.log("courseId", courseId);
-    const {userId}=req.user.user.id;
-// console.log("userId",userId);
+
+    const userId = req.user.user.id;
+    // console.log("req.user", req.user.user.id);
+    console.log("userId", userId);
+    // console.log("userId",userId);
     // console.log("courseId", courseId);
     // validation
     if (!courseId) {
@@ -365,10 +371,13 @@ exports.getLectureDetails = async (req, res) => {
         },
       })
       .exec();
-      let courseProgressCount = await CourseProgress.findOne({
-        courseID: courseId,
-        userId: userId,
-    })
+    // console.log("courseId", courseId);
+    // console.log("userId", userId);
+    let courseProgressCount = await CourseProgress.findOne({
+      courseId: courseId,
+      userId: userId,
+    });
+    console.log("course progress count", courseProgressCount.completedVideos);
     if (!courseDetails) {
       return res.status(400).json({
         success: false,
@@ -377,8 +386,11 @@ exports.getLectureDetails = async (req, res) => {
     }
     return res.status(200).json({
       success: true,
-      data: {courseDetails,
-        completedVideos: courseProgressCount?.completedVideos ? courseProgressCount?.completedVideos : [],
+      data: {
+        courseDetails,
+        completedVideos: courseProgressCount?.completedVideos
+          ? courseProgressCount?.completedVideos
+          : [],
       },
       message: "Course fetched successfully",
     });
